@@ -19,6 +19,7 @@ export default class App extends Component {
     this.handleValueChange = this.handleValueChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleOverlay = this.toggleOverlay.bind(this);
+    this.clearHistory = this.clearHistory.bind(this);
   }
 
   handleValueChange(id, value) {
@@ -38,6 +39,10 @@ export default class App extends Component {
     this.setState({rows: _.cloneDeep(defaultRows), prevTotals: scores.sort((a, b) => a < b)});
   }
 
+  clearHistory() {
+    this.setState({prevTotals: []});
+  }
+
   toggleOverlay() {
     this.setState({overlayVisible: !this.state.overlayVisible})
   }
@@ -49,6 +54,9 @@ export default class App extends Component {
     var overlayVisibility = this.state.overlayVisible ? "overlay-visible" : "";
     return (
       <div>
+        <div>
+          Team number {this.state.prevTotals.length + 1}
+        </div>
         <div className="container-fluid">
         {rows}
         </div>
@@ -63,7 +71,13 @@ export default class App extends Component {
             Show
           </button>
           <button
-            onClick={this.handleSubmit}>Submit</button>
+            onClick={this.handleSubmit}>
+            Submit
+          </button>
+          <button
+            onClick={this.clearHistory}>
+            Clear history
+          </button>
         </div>
         <div id="myNav" className={"overlay "+overlayVisibility}>
           <a href="#" className="closebtn" onClick={this.toggleOverlay}>&times;</a>
