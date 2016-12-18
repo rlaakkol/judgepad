@@ -50,7 +50,8 @@ export default class App extends Component {
   render() {
     var rows = this.state.rows.map(props => <ScorePicker {...props} handleValueChange={this.handleValueChange} />);
     var total = this.calcTotal();
-    var standing = this.state.prevTotals.findIndex((e) => e < total) > -1 ? this.state.prevTotals.findIndex((e) => e < total) + 1 : this.state.prevTotals.length + 1;
+    var standing = this.state.prevTotals.findIndex((e) => e < total) + 1;
+    standing = standing > 0 ? standing : this.state.prevTotals.length + 1;
     var overlayVisibility = this.state.overlayVisible ? "overlay-visible" : "";
     return (
       <div>
