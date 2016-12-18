@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 
 import ScorePicker from './scorepicker'
+import Overlay from './overlay'
 
 const defaultRows = [
   {key: 0, id: 0, label: "Format & sync", value: 0},
@@ -80,12 +81,7 @@ export default class App extends Component {
             Clear history
           </button>
         </div>
-        <div id="myNav" className={"overlay "+overlayVisibility}>
-          <a href="#" className="closebtn" onClick={this.toggleOverlay}>&times;</a>
-          <div id="overlay-content" className="overlay-content">
-            {Math.round(total*10)/10}
-          </div>
-        </div>
+        <Overlay total={total} onClose={this.toggleOverlay} visibility={overlayVisibility} />
       </div>
     );
   }
