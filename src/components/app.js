@@ -15,7 +15,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {rows: _.cloneDeep(defaultRows), prevTotals: [], overlayVisible: false};
+    this.state = {rows: _.cloneDeep(defaultRows), history: [], overlayVisible: false};
 
     this.handleValueChange = this.handleValueChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,13 +35,13 @@ export default class App extends Component {
   }
 
   handleSubmit() {
-    var scores = this.state.prevTotals;
+    var scores = this.state.history;
     scores.push(this.calcTotal());
-    this.setState({rows: _.cloneDeep(defaultRows), prevTotals: scores.sort((a, b) => a < b)});
+    this.setState({rows: _.cloneDeep(defaultRows), history: scores.sort((a, b) => a < b)});
   }
 
   clearHistory() {
-    this.setState({prevTotals: []});
+    this.setState({history: []});
   }
 
   toggleOverlay() {
@@ -51,13 +51,13 @@ export default class App extends Component {
   render() {
     var rows = this.state.rows.map(props => <ScorePicker {...props} handleValueChange={this.handleValueChange} />);
     var total = this.calcTotal();
-    var standing = this.state.prevTotals.findIndex((e) => e < total) + 1;
-    standing = standing > 0 ? standing : this.state.prevTotals.length + 1;
+    var standing = this.state.history.findIndex((e) => e < total) + 1;
+    standing = standing > 0 ? standing : this.state.history.length + 1;
     var overlayVisibility = this.state.overlayVisible ? "overlay-visible" : "";
     return (
       <div>
         <div>
-          Team number {this.state.prevTotals.length + 1}
+          Team number {this.state.history.length + 1}
         </div>
         <div className="container-fluid">
         {rows}
