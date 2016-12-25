@@ -15,6 +15,10 @@
   border: 2px;
 }
 
+.table-nonfluid {
+   width: auto !important;
+}
+
 /* The Overlay (background) */
 .overlay {
     /* Height & width depends on how you want to reveal the overlay (see JS below) */

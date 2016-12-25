@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-import ScorePicker from './scorepicker'
-import Overlay from './overlay'
+import ScorePicker from './scorepicker';
+import Overlay from './overlay';
+import HistoryTable from './historytable';
 
 const defaultRows = [
   {key: 0, id: 0, label: "Format & sync", value: 0},
@@ -30,14 +31,22 @@ export default class App extends Component {
     this.setState({rows: rows});
   }
 
-  calcTotal() {
-    return this.state.rows.map(item => item.value).reduce((a, b) => Number.parseInt(a) + Number.parseInt(b))/this.state.rows.length
+  calcTotal(rows) {
+    return rows.map(item => item.value).reduce((a, b) =>
+      Number.parseInt(a) + Number.parseInt(b)
+      )/rows.length
+  }
+
+  getStanding(history) {
+    return history.reduce((a, b) =>
+      this.calcTotal(b) > this.calcTotal(this.state.rows) ? a + 1 : a,
+      1)
   }
 
   handleSubmit() {
     var scores = this.state.history;
-    scores.push(this.calcTotal());
-    this.setState({rows: _.cloneDeep(defaultRows), history: scores.sort((a, b) => a < b)});
+    scores.push(this.state.rows);
+    this.setState({rows: _.cloneDeep(defaultRows), history: scores});
   }
 
   clearHistory() {
@@ -50,9 +59,8 @@ export default class App extends Component {
 
   render() {
     var rows = this.state.rows.map(props => <ScorePicker {...props} handleValueChange={this.handleValueChange} />);
-    var total = this.calcTotal();
-    var standing = this.state.history.findIndex((e) => e < total) + 1;
-    standing = standing > 0 ? standing : this.state.history.length + 1;
+    var total = this.calcTotal(this.state.rows);
+    var standing = this.getStanding(this.state.history);
     var overlayVisibility = this.state.overlayVisible ? "overlay-visible" : "";
     return (
       <div>
@@ -82,6 +90,7 @@ export default class App extends Component {
           </button>
         </div>
         <Overlay total={total} onClose={this.toggleOverlay} visibility={overlayVisibility} />
+        <HistoryTable scores={this.state.history}/> 
       </div>
     );
   }
