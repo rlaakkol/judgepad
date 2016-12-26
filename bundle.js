@@ -71,7 +71,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_reactDom2.default.render(_react2.default.createElement(_app2.default, null), document.querySelector('.container'));
+	_reactDom2.default.render(_react2.default.createElement(_app2.default, null), document.querySelector('.main'));
 
 /***/ },
 /* 2 */
@@ -21918,7 +21918,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'container-fluid' },
+	          { className: 'container' },
 	          rows
 	        ),
 	        _react2.default.createElement(
@@ -34377,15 +34377,20 @@
 
 	      var buttons = [].concat(_toConsumableArray(Array(11).keys())).map(function (i) {
 	        return _react2.default.createElement(
-	          _reactBootstrap.Button,
-	          {
-	            key: "row" + _this2.props.id.toString() + "btn" + i.toString(), bsSize: 'large',
-	            bsStyle: "primary",
-	            active: _this2.props.value == i,
-	            onClick: function onClick(event) {
-	              return _this2.handleChange(i);
-	            } },
-	          i
+	          _reactBootstrap.ButtonGroup,
+	          null,
+	          _react2.default.createElement(
+	            _reactBootstrap.Button,
+	            {
+	              key: "row" + _this2.props.id.toString() + "btn" + i.toString(),
+	              bsSize: "large",
+	              bsStyle: "primary",
+	              active: _this2.props.value == i,
+	              onClick: function onClick(event) {
+	                return _this2.handleChange(i);
+	              } },
+	            i
+	          )
 	        );
 	      });
 	      return _react2.default.createElement(
@@ -34393,22 +34398,17 @@
 	        { className: 'row equal' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'col-xs-2 col-sm-2 col-md-2 col-lg-2 rowlabel' },
+	          { className: 'col-sm-2 rowlabel' },
 	          this.props.label
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'col-xs-9 col-sm-9 col-md-9 col-lg-9' },
+	          { className: 'col-sm-10 text-center' },
 	          _react2.default.createElement(
 	            _reactBootstrap.ButtonGroup,
-	            null,
+	            { justified: true },
 	            buttons
 	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-xs-1 col-sm-1 col-md-1 col-lg-1' },
-	          this.props.value
 	        )
 	      );
 	    }
@@ -53306,14 +53306,22 @@
 	    return _react2.default.createElement(
 	      'td',
 	      { key: "total" + i },
-	      _score2.default.calcTotal(team)
+	      _react2.default.createElement(
+	        'em',
+	        null,
+	        _score2.default.calcTotal(team)
+	      )
 	    );
 	  });
 	  var standings = props.scores.map(function (team, i) {
 	    return _react2.default.createElement(
 	      'td',
 	      { key: "standing" + i },
-	      _score2.default.getStanding(props.scores, team)
+	      _react2.default.createElement(
+	        'strong',
+	        null,
+	        _score2.default.getStanding(props.scores, team)
+	      )
 	    );
 	  });
 
