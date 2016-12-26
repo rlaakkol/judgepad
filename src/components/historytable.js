@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import Score from '../utils/score.js';
 
 const HistoryTable = (props) => {
   var header = _.range(0, props.scores.length).map(i =>
@@ -12,15 +13,29 @@ const HistoryTable = (props) => {
   } else {
     var rows = [];
   }
-  var rowDivs = rows.map((row, i) => <tr key={i}>{row}</tr>);
+  var rowDivs = rows.map((row, i) => <tr key={i}><th>{props.scores[0][i].label}</th>{row}</tr>);
+  var totals = props.scores.map((team, i) =>
+    <td key={"total"+i}>{Score.calcTotal(team)}</td>
+  );
+  var standings = props.scores.map((team, i) =>
+    <td key={"standing"+i}>{Score.getStanding(props.scores, team)}</td>
+  );
 
   return (
     <div className="table-responsive">
       <table className="table table-sm table-nonfluid">
         <thead>
-          <tr>{header}</tr>
+          <tr><th>Category/Team</th>{header}</tr>
         </thead>
-        <tbody>{rowDivs}</tbody>
+        <tbody>
+          {rowDivs}
+          <tr>
+            <th>Total</th>{totals}
+          </tr>
+          <tr>
+            <th>Standing</th>{standings}
+          </tr>
+        </tbody>
       </table>
     </div>);
 };

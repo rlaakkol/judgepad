@@ -4,6 +4,7 @@ import _ from 'lodash';
 import ScorePicker from './scorepicker';
 import Overlay from './overlay';
 import HistoryTable from './historytable';
+import Score from '../utils/score.js';
 
 const defaultRows = [
   {key: 0, id: 0, label: "Format & sync", value: 0},
@@ -31,18 +32,6 @@ export default class App extends Component {
     this.setState({rows: rows});
   }
 
-  calcTotal(rows) {
-    return rows.map(item => item.value).reduce((a, b) =>
-      Number.parseInt(a) + Number.parseInt(b)
-      )/rows.length
-  }
-
-  getStanding(history) {
-    return history.reduce((a, b) =>
-      this.calcTotal(b) > this.calcTotal(this.state.rows) ? a + 1 : a,
-      1)
-  }
-
   handleSubmit() {
     var scores = this.state.history;
     scores.push(this.state.rows);
@@ -59,8 +48,8 @@ export default class App extends Component {
 
   render() {
     var rows = this.state.rows.map(props => <ScorePicker {...props} handleValueChange={this.handleValueChange} />);
-    var total = this.calcTotal(this.state.rows);
-    var standing = this.getStanding(this.state.history);
+    var total = Score.calcTotal(this.state.rows);
+    var standing = Score.getStanding(this.state.history, this.state.rows);
     var overlayVisibility = this.state.overlayVisible ? "overlay-visible" : "";
     return (
       <div>
@@ -90,7 +79,7 @@ export default class App extends Component {
           </button>
         </div>
         <Overlay total={total} onClose={this.toggleOverlay} visibility={overlayVisibility} />
-        <HistoryTable scores={this.state.history}/> 
+        <HistoryTable scores={this.state.history}/>
       </div>
     );
   }
