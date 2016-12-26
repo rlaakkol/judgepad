@@ -15,10 +15,10 @@ const HistoryTable = (props) => {
   }
   var rowDivs = rows.map((row, i) => <tr key={i}><th>{props.scores[0][i].label}</th>{row}</tr>);
   var totals = props.scores.map((team, i) =>
-    <td key={"total"+i}>{Score.calcTotal(team)}</td>
+    <td key={"total"+i}><em>{Score.calcTotal(team)}</em></td>
   );
   var standings = props.scores.map((team, i) =>
-    <td key={"standing"+i}>{Score.getStanding(props.scores, team)}</td>
+    <td key={"standing"+i}><strong>{Score.getStanding(props.scores, team)}</strong></td>
   );
 
   return (
