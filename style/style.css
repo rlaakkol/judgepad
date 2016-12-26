@@ -4,15 +4,13 @@
   align-items: center;
 }
 
-.equal > div[class*='col-'] {
+.equal > .btn {
   display: flex;
   flex-direction: column;
 }
 
-.btn {
-  width: 9%;
-  padding: auto;
-  border: 2px;
+.btn-group {
+  display: flex;
 }
 
 .table-nonfluid {

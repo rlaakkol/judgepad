@@ -56,7 +56,7 @@ export default class App extends Component {
         <div>
           Team number {this.state.history.length + 1}
         </div>
-        <div className="container-fluid">
+        <div className="container">
         {rows}
         </div>
         <div>
