@@ -16,9 +16,9 @@ export default class ScorePicker extends Component {
 
   render() {
     const buttons = [...Array(11).keys()].map(i =>
-      <ButtonGroup>
+      <ButtonGroup
+        key={"row"+this.props.id.toString()+"btn"+i.toString()}>
         <Button
-          key={"row"+this.props.id.toString()+"btn"+i.toString()}
           bsSize={"large"}
           bsStyle={"primary"}
           active={this.props.value == i}
