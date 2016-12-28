@@ -21898,7 +21898,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var defaultRows = [{ key: 0, id: 0, label: "Format & sync", value: 0 }, { key: 1, id: 1, label: "Technique & unsoku", value: 0 }, { key: 2, id: 2, label: "Expression", value: 0 }, { key: 3, id: 3, label: "Power", value: 0 }, { key: 4, id: 4, label: "Use of tengi", value: 0 }];
+	var defaultRows = [{ key: 0, id: 0, value: 0 }, { key: 1, id: 1, value: 0 }, { key: 2, id: 2, value: 0 }, { key: 3, id: 3, value: 0 }, { key: 4, id: 4, value: 0 }];
 
 	var App = function (_Component) {
 	  _inherits(App, _Component);
@@ -21913,6 +21913,7 @@
 	    _this.handleValueChange = _this.handleValueChange.bind(_this);
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
 	    _this.toggleOverlay = _this.toggleOverlay.bind(_this);
+	    _this.handleLabelChange = _this.handleLabelChange.bind(_this);
 	    return _this;
 	  }
 
@@ -21938,12 +21939,22 @@
 	      this.setState({ overlayVisible: !this.state.overlayVisible });
 	    }
 	  }, {
+	    key: 'handleLabelChange',
+	    value: function handleLabelChange(value, i) {
+	      var labels = _lodash2.default.cloneDeep(this.props.labels);
+	      labels[i] = value;
+	      this.props.changeLabels(labels);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
 
-	      var rows = this.state.rows.map(function (props) {
-	        return _react2.default.createElement(_scorepicker2.default, _extends({}, props, { handleValueChange: _this2.handleValueChange }));
+	      var rows = this.state.rows.map(function (props, i) {
+	        return _react2.default.createElement(_scorepicker2.default, _extends({}, props, { label: _this2.props.labels[i],
+	          handleValueChange: _this2.handleValueChange,
+	          handleLabelChange: _this2.handleLabelChange
+	        }));
 	      });
 	      var total = _score2.default.calcTotal(this.state.rows);
 	      var standing = _score2.default.getStanding(this.props.history, this.state.rows);
@@ -21998,7 +22009,7 @@
 	          )
 	        ),
 	        _react2.default.createElement(_overlay2.default, { total: total, onClose: this.toggleOverlay, visibility: overlayVisibility }),
-	        _react2.default.createElement(_historytable2.default, { scores: this.props.history })
+	        _react2.default.createElement(_historytable2.default, { scores: this.props.history, labels: this.props.labels })
 	      );
 	    }
 	  }]);
@@ -22007,13 +22018,17 @@
 	}(_react.Component);
 
 	function mapStateToProps(state) {
-	  return { history: state.scores };
+	  return {
+	    history: state.scores,
+	    labels: state.labels
+	  };
 	}
 
 	function mapDispatchToProps(dispatch) {
 	  return (0, _redux.bindActionCreators)({
 	    addScore: Actions.addScore,
-	    clearScores: Actions.clearScores }, dispatch);
+	    clearScores: Actions.clearScores,
+	    changeLabels: Actions.changeLabels }, dispatch);
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
@@ -34452,7 +34467,10 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-sm-2 rowlabel' },
-	          this.props.label
+	          _react2.default.createElement('input', { value: this.props.label,
+	            onChange: function onChange(event) {
+	              return _this2.props.handleLabelChange(event.target.value, _this2.props.id);
+	            } })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -53332,29 +53350,35 @@
 	      i + 1
 	    );
 	  });
-	  if (props.scores.length > 0) {
-	    var rows = _lodash2.default.range(0, props.scores[0].length).map(function (i) {
-	      return props.scores.map(function (score, j) {
-	        return _react2.default.createElement(
-	          'td',
-	          { key: "score" + j + i },
-	          score[i].value
-	        );
-	      });
+	  var rows = props.scores.length > 0 ? _lodash2.default.range(0, props.scores[0].length).map(function (i) {
+	    return props.scores.map(function (score, j) {
+	      return _react2.default.createElement(
+	        'td',
+	        { key: "score" + j + i },
+	        score[i].value
+	      );
 	    });
-	  } else {
-	    var rows = [];
-	  }
-	  var rowDivs = rows.map(function (row, i) {
+	  }) : false;
+	  var rowDivs = rows ? rows.map(function (row, i) {
 	    return _react2.default.createElement(
 	      'tr',
 	      { key: i },
 	      _react2.default.createElement(
 	        'th',
 	        null,
-	        props.scores[0][i].label
+	        props.labels[i]
 	      ),
 	      row
+	    );
+	  }) : props.labels.map(function (label, i) {
+	    return _react2.default.createElement(
+	      'tr',
+	      { key: i },
+	      _react2.default.createElement(
+	        'th',
+	        null,
+	        label
+	      )
 	    );
 	  });
 	  var totals = props.scores.map(function (team, i) {
@@ -53467,8 +53491,10 @@
 	});
 	exports.addScore = addScore;
 	exports.clearScores = clearScores;
+	exports.changeLabels = changeLabels;
 	var ADD_SCORE = exports.ADD_SCORE = 'ADD_SCORE';
 	var CLEAR_SCORES = exports.CLEAR_SCORES = 'CLEAR_SCORES';
+	var CHANGE_LABELS = exports.CHANGE_LABELS = 'CHANGE_LABELS';
 
 	/*
 	 * action creators
@@ -53480,6 +53506,10 @@
 
 	function clearScores() {
 	  return { type: CLEAR_SCORES };
+	}
+
+	function changeLabels(labels) {
+	  return { type: CHANGE_LABELS, labels: labels };
 	}
 
 /***/ },
@@ -53496,12 +53526,9 @@
 
 	var _reducers = __webpack_require__(459);
 
-	var _reducers2 = _interopRequireDefault(_reducers);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	var rootReducer = (0, _redux.combineReducers)({
-	  scores: _reducers2.default
+	  scores: _reducers.scoreCards,
+	  labels: _reducers.labels
 	});
 
 	exports.default = rootReducer;
@@ -53510,15 +53537,18 @@
 /* 459 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.labels = exports.scoreCards = undefined;
 
 	var _actions = __webpack_require__(457);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	var defaultLabels = ["Format & sync", "Technique & unsoku", "Expression", "Power", "Use of tengi"];
 
 	var scoreCards = function scoreCards() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -53534,7 +53564,20 @@
 	  }
 	};
 
-	exports.default = scoreCards;
+	var labels = function labels() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultLabels;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _actions.CHANGE_LABELS:
+	      return action.labels;
+	    default:
+	      return state;
+	  }
+	};
+
+	exports.scoreCards = scoreCards;
+	exports.labels = labels;
 
 /***/ },
 /* 460 */
