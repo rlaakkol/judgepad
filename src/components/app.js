@@ -10,11 +10,19 @@ import Score from '../utils/score';
 import * as Actions from '../actions'
 
 const defaultRows = [
-  {key: 0, id: 0, label: "Format & sync", value: 0},
-  {key: 1, id: 1, label: "Technique & unsoku", value: 0},
-  {key: 2, id: 2, label: "Expression", value: 0},
-  {key: 3, id: 3, label: "Power", value: 0},
-  {key: 4, id: 4, label: "Use of tengi", value: 0}];
+  {key: 0, id: 0, value: 0},
+  {key: 1, id: 1, value: 0},
+  {key: 2, id: 2, value: 0},
+  {key: 3, id: 3, value: 0},
+  {key: 4, id: 4, value: 0}];
+
+  const defaultLabels = [
+    "Format & sync",
+    "Technique & unsoku",
+    "Expression",
+    "Power",
+    "Use of tengi"
+  ]
 
 class App extends Component {
   constructor(props) {
@@ -44,7 +52,7 @@ class App extends Component {
   }
 
   render() {
-    var rows = this.state.rows.map(props => <ScorePicker {...props} handleValueChange={this.handleValueChange} />);
+    var rows = this.state.rows.map((props, i) => <ScorePicker {...props} label={defaultLabels[i]} handleValueChange={this.handleValueChange} />);
     var total = Score.calcTotal(this.state.rows);
     var standing = Score.getStanding(this.props.history, this.state.rows);
     var overlayVisibility = this.state.overlayVisible ? "overlay-visible" : "";
@@ -76,7 +84,7 @@ class App extends Component {
           </button>
         </div>
         <Overlay total={total} onClose={this.toggleOverlay} visibility={overlayVisibility} />
-        <HistoryTable scores={this.props.history} />
+        <HistoryTable scores={this.props.history} labels={defaultLabels} />
       </div>
     );
   }
