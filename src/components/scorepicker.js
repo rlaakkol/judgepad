@@ -29,7 +29,8 @@ export default class ScorePicker extends Component {
     return (
       <div className="row equal">
         <div className="col-sm-2 rowlabel">
-          {this.props.label}
+          <input value={this.props.label}
+            onChange={(event) => this.props.handleLabelChange(event.target.value, this.props.id)} />
         </div>
         <div className="col-sm-10">
           <ButtonGroup justified>

@@ -16,14 +16,6 @@ const defaultRows = [
   {key: 3, id: 3, value: 0},
   {key: 4, id: 4, value: 0}];
 
-  const defaultLabels = [
-    "Format & sync",
-    "Technique & unsoku",
-    "Expression",
-    "Power",
-    "Use of tengi"
-  ]
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +25,7 @@ class App extends Component {
     this.handleValueChange = this.handleValueChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleOverlay = this.toggleOverlay.bind(this);
+    this.handleLabelChange = this.handleLabelChange.bind(this);
   }
 
   handleValueChange(id, value) {
@@ -51,8 +44,19 @@ class App extends Component {
     this.setState({overlayVisible: !this.state.overlayVisible})
   }
 
+  handleLabelChange(value, i) {
+    var labels = _.cloneDeep(this.props.labels);
+    labels[i] = value;
+    this.props.changeLabels(labels);
+  }
+
   render() {
-    var rows = this.state.rows.map((props, i) => <ScorePicker {...props} label={defaultLabels[i]} handleValueChange={this.handleValueChange} />);
+    var rows = this.state.rows.map((props, i) =>
+      <ScorePicker {...props} label={this.props.labels[i]}
+        handleValueChange={this.handleValueChange}
+        handleLabelChange={this.handleLabelChange}
+      />
+    );
     var total = Score.calcTotal(this.state.rows);
     var standing = Score.getStanding(this.props.history, this.state.rows);
     var overlayVisibility = this.state.overlayVisible ? "overlay-visible" : "";
@@ -84,20 +88,24 @@ class App extends Component {
           </button>
         </div>
         <Overlay total={total} onClose={this.toggleOverlay} visibility={overlayVisibility} />
-        <HistoryTable scores={this.props.history} labels={defaultLabels} />
+        <HistoryTable scores={this.props.history} labels={this.props.labels} />
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return {history: state.scores};
+  return {
+    history: state.scores,
+    labels: state.labels
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     addScore: Actions.addScore,
-    clearScores: Actions.clearScores}, dispatch);
+    clearScores: Actions.clearScores,
+    changeLabels: Actions.changeLabels}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
