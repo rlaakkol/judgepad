@@ -20,7 +20,7 @@ export default class ScorePicker extends Component {
         key={"row"+this.props.id.toString()+"btn"+i.toString()}>
         <Button
           bsSize={"large"}
-          bsStyle={"primary"}
+          bsStyle={"default"}
           active={this.props.value == i}
           onClick={event => this.handleChange(i)}>
           {i}
@@ -31,7 +31,7 @@ export default class ScorePicker extends Component {
         <div className="col-sm-2 rowlabel">
           {this.props.label}
         </div>
-        <div className="col-sm-10 text-center">
+        <div className="col-sm-10">
           <ButtonGroup justified>
             {buttons}
           </ButtonGroup>

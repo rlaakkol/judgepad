@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import scoreCards from './reducers';
 
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+  scores: scoreCards
 });
 
 export default rootReducer;
