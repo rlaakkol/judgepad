@@ -21914,6 +21914,7 @@
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
 	    _this.toggleOverlay = _this.toggleOverlay.bind(_this);
 	    _this.handleLabelChange = _this.handleLabelChange.bind(_this);
+	    _this.showPrevious = _this.showPrevious.bind(_this);
 	    return _this;
 	  }
 
@@ -21941,9 +21942,14 @@
 	  }, {
 	    key: 'handleLabelChange',
 	    value: function handleLabelChange(value, i) {
-	      var labels = _lodash2.default.cloneDeep(this.props.labels);
+	      var labels = _lodash2.default.clone(this.props.labels);
 	      labels[i] = value;
 	      this.props.changeLabels(labels);
+	    }
+	  }, {
+	    key: 'showPrevious',
+	    value: function showPrevious(i) {
+	      this.setState({ rows: _lodash2.default.cloneDeep(this.props.history[i]) });
 	    }
 	  }, {
 	    key: 'render',
@@ -22002,14 +22008,12 @@
 	          _react2.default.createElement(
 	            'button',
 	            { className: 'btn btn-primary',
-	              onClick: function onClick() {
-	                return _this2.props.clearScores();
-	              } },
+	              onClick: this.props.clearScores },
 	            'Clear history'
 	          )
 	        ),
 	        _react2.default.createElement(_overlay2.default, { total: total, onClose: this.toggleOverlay, visibility: overlayVisibility }),
-	        _react2.default.createElement(_historytable2.default, { scores: this.props.history, labels: this.props.labels })
+	        _react2.default.createElement(_historytable2.default, { scores: this.props.history, labels: this.props.labels, show: this.showPrevious })
 	      );
 	    }
 	  }]);
@@ -34467,7 +34471,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-sm-2 rowlabel' },
-	          _react2.default.createElement('input', { value: this.props.label,
+	          _react2.default.createElement('input', { type: 'text', value: this.props.label,
 	            onChange: function onChange(event) {
 	              return _this2.props.handleLabelChange(event.target.value, _this2.props.id);
 	            } })
@@ -53345,9 +53349,15 @@
 	  var header = _lodash2.default.range(0, props.scores.length).map(function (i) {
 	    return _react2.default.createElement(
 	      'th',
-	      { key: i },
-	      'Team ',
-	      i + 1
+	      { key: i, onClick: function onClick() {
+	          return props.show(i);
+	        } },
+	      _react2.default.createElement(
+	        'button',
+	        null,
+	        'Team ',
+	        i + 1
+	      )
 	    );
 	  });
 	  var rows = props.scores.length > 0 ? _lodash2.default.range(0, props.scores[0].length).map(function (i) {
