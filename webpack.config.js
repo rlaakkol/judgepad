@@ -1,5 +1,22 @@
 var webpack = require('webpack');
 
+var isProd = (process.env.NODE_ENV === 'production');
+
+// Conditionally return a list of plugins to use based on the current environment.
+// Repeat this pattern for any other config key (ie: loaders, etc).
+function getPlugins() {
+  var plugins = [];
+  plugins.push(new webpack.DefinePlugin({
+    'process.env': {
+      'NODE_ENV': process.env.NODE_ENV
+    }
+  }));
+  if (isProd) {
+    plugins.push(new webpack.optimize.UglifyJsPlugin());
+  }
+  return plugins;
+}
+
 module.exports = {
   entry: [
     './src/index.js'
@@ -9,9 +26,7 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js'
   },
-  plugins: [
-  new webpack.optimize.UglifyJsPlugin({minimize: true})
-  ],
+  plugins: getPlugins(),
   module: {
     loaders: [{
       exclude: /node_modules/,
