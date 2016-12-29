@@ -19,6 +19,7 @@ export default class ScorePicker extends Component {
       <ButtonGroup
         key={"row"+this.props.id.toString()+"btn"+i.toString()}>
         <Button
+          className={"button"+i.toString()}
           bsSize={"large"}
           bsStyle={"default"}
           active={this.props.value == i}
