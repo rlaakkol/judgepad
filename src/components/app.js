@@ -26,6 +26,7 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleOverlay = this.toggleOverlay.bind(this);
     this.handleLabelChange = this.handleLabelChange.bind(this);
+    this.showPrevious = this.showPrevious.bind(this);
   }
 
   handleValueChange(id, value) {
@@ -45,9 +46,13 @@ class App extends Component {
   }
 
   handleLabelChange(value, i) {
-    var labels = _.cloneDeep(this.props.labels);
+    var labels = _.clone(this.props.labels);
     labels[i] = value;
     this.props.changeLabels(labels);
+  }
+
+  showPrevious(i) {
+    this.setState({rows: _.cloneDeep(this.props.history[i])})
   }
 
   render() {
@@ -83,12 +88,12 @@ class App extends Component {
             Submit
           </button>
           <button className="btn btn-primary"
-            onClick={() => this.props.clearScores()}>
+            onClick={this.props.clearScores}>
             Clear history
           </button>
         </div>
         <Overlay total={total} onClose={this.toggleOverlay} visibility={overlayVisibility} />
-        <HistoryTable scores={this.props.history} labels={this.props.labels} />
+        <HistoryTable scores={this.props.history} labels={this.props.labels} show={this.showPrevious} />
       </div>
     );
   }

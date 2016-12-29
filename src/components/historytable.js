@@ -5,7 +5,7 @@ import Score from '../utils/score.js';
 
 const HistoryTable = (props) => {
   const header = _.range(0, props.scores.length).map(i =>
-    <th key={i}>Team {i+1}</th>
+    <th key={i} onClick={() => props.show(i)}><button>Team {i+1}</button></th>
   );
   const rows = props.scores.length > 0 ?
     _.range(0, props.scores[0].length).map(i =>

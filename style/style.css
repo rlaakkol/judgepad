@@ -17,6 +17,10 @@
    width: auto !important;
 }
 
+.table td {
+   text-align: center;
+}
+
 /* The Overlay (background) */
 .overlay {
     /* Height & width depends on how you want to reveal the overlay (see JS below) */
