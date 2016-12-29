@@ -6,11 +6,7 @@ var isProd = (process.env.NODE_ENV === 'production');
 // Repeat this pattern for any other config key (ie: loaders, etc).
 function getPlugins() {
   var plugins = [];
-  plugins.push(new webpack.DefinePlugin({
-    'process.env': {
-      'NODE_ENV': process.env.NODE_ENV
-    }
-  }));
+  plugins.push(new webpack.EnvironmentPlugin(['NODE_ENV']));
   if (isProd) {
     plugins.push(new webpack.optimize.UglifyJsPlugin());
   }
