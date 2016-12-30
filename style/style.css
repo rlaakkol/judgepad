@@ -12,136 +12,93 @@
    text-align: center;
 }
 
-.button0 {
+.btn-default.button0 {
   background-color: rgba(194, 25, 0, 0.5);
 }
 
-.button1 {
+.btn-default.button1 {
   background-color: rgba(236, 45, 0, 0.5);
 }
 
-.button2 {
+.btn-default.button2 {
   background-color: rgba(255, 104, 48, 0.5);
 }
 
-.button3 {
+.btn-default.button3 {
   background-color: rgba(255, 146, 60, 0.5);
 }
 
-.button4 {
+.btn-default.button4 {
   background-color: rgba(255, 201, 133, 0.5);
 }
 
-.button5 {
+.btn-default.button5 {
   background-color: rgba(176, 255, 72, 0.5);
 }
 
-.button6 {
+.btn-default.button6 {
   background-color: rgba(106, 187, 78, 0.5);
 }
 
-.button7 {
+.btn-default.button7 {
   background-color: rgba(67, 170, 51, 0.5);
 }
 
-.button8 {
+.btn-default.button8 {
   background-color: rgba(0, 146, 64, 0.5);
 }
 
-.button9 {
+.btn-default.button9 {
   background-color: rgba(0, 109, 57, 0.5);
 }
 
-.button10 {
+.btn-default.button10 {
   background-color: rgba(0, 90, 30, 0.5);
 }
 
-.button0.active {
+.btn-default.button0.active {
   background-color: rgba(194, 25, 0, 0.9);
 }
 
-.button1.active {
+.btn-default.button1.active {
   background-color: rgba(236, 45, 0, 0.9);
 }
 
-.button2.active {
+.btn-default.button2.active {
   background-color: rgba(255, 104, 48, 0.9);
 }
 
-.button3.active {
+
+.btn-default.button3.active {
   background-color: rgba(255, 146, 60, 0.9);
 }
 
-.button4.active {
+.btn-default.button4.active {
   background-color: rgba(255, 201, 133, 0.9);
 }
 
-.button5.active {
+.btn-default.button5.active {
   background-color: rgba(176, 255, 72, 0.9);
 }
 
-.button6.active {
+.btn-default.button6.active {
   background-color: rgba(106, 187, 78, 0.9);
 }
 
-.button7.active {
+.btn-default.button7.active {
   background-color: rgba(67, 170, 51, 0.9);
 }
 
-.button8.active {
+.btn-default.button8.active {
   background-color: rgba(0, 146, 64, 0.9);
 }
 
-.button9.active {
+.btn-default.button9.active {
   background-color: rgba(0, 109, 57, 0.9);
 }
 
-.button10.active {
+.btn-default.button10.active {
   background-color: rgba(0, 90, 30, 0.9);
-}
-
-.button0:active {
-  background-color: rgba(194, 25, 0, 1);
-}
-
-.button1:active {
-  background-color: rgba(236, 45, 0, 1);
-}
-
-.button2:active {
-  background-color: rgba(255, 104, 48, 1);
-}
-
-.button3:active {
-  background-color: rgba(255, 146, 60, 1);
-}
-
-.button4:active {
-  background-color: rgba(255, 201, 133, 1);
-}
-
-.button5:active {
-  background-color: rgba(176, 255, 72, 1);
-}
-
-.button6:active {
-  background-color: rgba(106, 187, 78, 1);
-}
-
-.button7:active {
-  background-color: rgba(67, 170, 51, 1);
-}
-
-.button8:active {
-  background-color: rgba(0, 146, 64, 1);
-}
-
-.button9:active {
-  background-color: rgba(0, 109, 57, 1);
-}
-
-.button10:active {
-  background-color: rgba(0, 90, 30, 1);
 }
 
 /* The Overlay (background) */
