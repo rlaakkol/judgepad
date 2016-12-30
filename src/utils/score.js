@@ -11,9 +11,7 @@ const getStanding = (history, current) => {
 }
 
 const isTie = (history, current) => {
-  return history.reduce((a, b) =>
-    calcTotal(b) == calcTotal(current) ? a + 1 : a,
-    0);
+  return !history.every((team) => calcTotal(current) != calcTotal(team));
 }
 
 export default {calcTotal, getStanding, isTie};
