@@ -8,6 +8,7 @@ import Overlay from './overlay';
 import HistoryTable from './historytable';
 import Score from '../utils/score';
 import * as Actions from '../actions';
+import ConfirmModal from './confirm';
 
 const defaultRows = [
   { key: 0, id: 0, value: 0 },
@@ -20,13 +21,20 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { rows: _.cloneDeep(defaultRows), overlayVisible: false };
+    this.state = {
+      rows: _.cloneDeep(defaultRows),
+      overlayVisible: false,
+      showSubmit: false,
+      showClear: false,
+    };
 
     this.handleValueChange = this.handleValueChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleOverlay = this.toggleOverlay.bind(this);
     this.handleLabelChange = this.handleLabelChange.bind(this);
     this.showPrevious = this.showPrevious.bind(this);
+    this.toggleSubmitConfirmation = this.toggleSubmitConfirmation.bind(this);
+    this.toggleClearConfirmation = this.toggleClearConfirmation.bind(this);
   }
 
   handleValueChange(id, value) {
@@ -54,6 +62,15 @@ class App extends Component {
   showPrevious(i) {
     this.setState({ rows: _.cloneDeep(this.props.history[i]) });
   }
+
+  toggleSubmitConfirmation() {
+    this.setState({ showSubmit: !this.state.showSubmit })
+  }
+
+  toggleClearConfirmation() {
+    this.setState({ showClear: !this.state.showClear })
+  }
+
 
   render() {
     const rows = this.state.rows.map((props, i) =>
@@ -88,13 +105,13 @@ class App extends Component {
           </button>
           <button
             className="btn btn-primary"
-            onClick={this.handleSubmit}
+            onClick={this.toggleSubmitConfirmation}
           >
             Submit
           </button>
           <button
             className="btn btn-primary"
-            onClick={this.props.clearScores}
+            onClick={this.toggleClearConfirmation}
           >
             Clear history
           </button>
@@ -108,6 +125,18 @@ class App extends Component {
           scores={this.props.history}
           labels={this.props.labels}
           show={this.showPrevious}
+        />
+        <ConfirmModal
+          text="Submit?"
+          stateVar={this.state.showSubmit}
+          onConfirm={this.handleSubmit}
+          toggle={this.toggleSubmitConfirmation}
+        />
+        <ConfirmModal
+          text="Clear?"
+          stateVar={this.state.showClear}
+          onConfirm={this.props.clearScores}
+          toggle={this.toggleClearConfirmation}
         />
       </div>
     );
