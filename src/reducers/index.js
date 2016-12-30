@@ -3,7 +3,7 @@ import { scoreCards, labels } from './reducers';
 
 const rootReducer = combineReducers({
   scores: scoreCards,
-  labels: labels
+  labels,
 });
 
 export default rootReducer;

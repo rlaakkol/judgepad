@@ -24,6 +24,11 @@ module.exports = {
   },
   plugins: getPlugins(),
   module: {
+    preLoaders: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: 'eslint-loader'
+    }],
     loaders: [{
       exclude: /node_modules/,
       loader: 'babel',

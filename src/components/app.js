@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import ScorePicker from './scorepicker';
 import Overlay from './overlay';
 import HistoryTable from './historytable';
 import Score from '../utils/score';
-import * as Actions from '../actions'
+import * as Actions from '../actions';
 
 const defaultRows = [
-  {key: 0, id: 0, value: 0},
-  {key: 1, id: 1, value: 0},
-  {key: 2, id: 2, value: 0},
-  {key: 3, id: 3, value: 0},
-  {key: 4, id: 4, value: 0}];
+  { key: 0, id: 0, value: 0 },
+  { key: 1, id: 1, value: 0 },
+  { key: 2, id: 2, value: 0 },
+  { key: 3, id: 3, value: 0 },
+  { key: 4, id: 4, value: 0 }];
 
 class App extends Component {
   constructor(props) {

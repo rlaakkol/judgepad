@@ -1,25 +1,26 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
 import _ from 'lodash';
-import Score from '../utils/score.js';
+import Score from '../utils/score';
 
 const HistoryTable = (props) => {
   const header = _.range(0, props.scores.length).map(i =>
-    <th key={i} onClick={() => props.show(i)}><button>Team {i+1}</button></th>
+    <th key={i}><button onClick={() => props.show(i)}>
+      Team {i + 1}
+    </button></th>,
   );
   const rows = props.scores.length > 0 ?
     _.range(0, props.scores[0].length).map(i =>
-      props.scores.map((score, j) => <td key={"score"+j+i}>{score[i].value}</td>)
+      props.scores.map((score, j) => <td key={`score${j}${i}`}>{score[i].value}</td>),
     ) :
     false;
   const rowDivs = rows ?
     rows.map((row, i) => <tr key={i}><th>{props.labels[i]}</th>{row}</tr>) :
     props.labels.map((label, i) => <tr key={i}><th>{label}</th></tr>);
   const totals = props.scores.map((team, i) =>
-    <td key={"total"+i}><em>{Score.calcTotal(team)}</em></td>
+    <td key={`total${i}`}><em>{Score.calcTotal(team)}</em></td>,
   );
   const standings = props.scores.map((team, i) =>
-    <td key={"standing"+i}><strong>{Score.getStanding(props.scores, team)}</strong></td>
+    <td key={`standing${i}`}><strong>{Score.getStanding(props.scores, team)}</strong></td>,
   );
 
   return (
@@ -39,6 +40,17 @@ const HistoryTable = (props) => {
         </tbody>
       </table>
     </div>);
+};
+
+HistoryTable.propTypes = {
+  scores: React.PropTypes.arrayOf(
+    React.PropTypes.arrayOf(
+      React.PropTypes.shape({
+        key: React.PropTypes.number,
+        id: React.PropTypes.number,
+        value: React.PropTypes.number,
+      }))).isRequired,
+  labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 };
 
 export default HistoryTable;

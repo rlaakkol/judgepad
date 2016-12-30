@@ -15,5 +15,5 @@ export function clearScores() {
 }
 
 export function changeLabels(labels) {
-  return { type: CHANGE_LABELS, labels: labels };
+  return { type: CHANGE_LABELS, labels };
 }
