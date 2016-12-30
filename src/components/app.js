@@ -56,15 +56,16 @@ class App extends Component {
   }
 
   render() {
-    var rows = this.state.rows.map((props, i) =>
+    const rows = this.state.rows.map((props, i) =>
       <ScorePicker {...props} label={this.props.labels[i]}
         handleValueChange={this.handleValueChange}
         handleLabelChange={this.handleLabelChange}
       />
     );
-    var total = Score.calcTotal(this.state.rows);
-    var standing = Score.getStanding(this.props.history, this.state.rows);
-    var overlayVisibility = this.state.overlayVisible ? "overlay-visible" : "";
+    const total = Score.calcTotal(this.state.rows);
+    const standing = Score.getStanding(this.props.history, this.state.rows);
+    const isTie = Score.isTie(this.props.history, this.state.rows);
+    const overlayVisibility = this.state.overlayVisible ? "overlay-visible" : "";
     return (
       <div>
         <div>
@@ -77,7 +78,7 @@ class App extends Component {
         Total: {Math.round(total*10)/10}
         </div>
         <div>
-          Current standing: {standing}
+          Current standing: {standing} {isTie ? "⚠" : ""}
         </div>
         <div>
           <button className="btn btn-primary" onClick={this.toggleOverlay}>
