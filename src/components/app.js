@@ -42,6 +42,7 @@ class App extends Component {
       showSubmit: false,
       showClear: false,
       visibleTab: 'scorecard',
+      mode: 'dantai',
     };
 
     this.handleValueChange = this.handleValueChange.bind(this);
@@ -75,9 +76,11 @@ class App extends Component {
   chooseLabelPreset(mode) {
     switch (mode) {
       case 'dantai':
+        this.setState({ mode: 'dantai' });
         this.props.changeLabels(dantaiLabels);
         break;
       case 'tenkai':
+        this.setState({ mode: 'tenkai' });
         this.props.changeLabels(tenkaiLabels);
         break;
       default:
@@ -101,7 +104,9 @@ class App extends Component {
   }
 
   handleNavigation(value) {
-    this.setState({ visibleTab: value });
+    if (['scorecard', 'show', 'history'].includes(value)) {
+      this.setState({ visibleTab: value });
+    }
   }
 
   render() {
@@ -173,12 +178,43 @@ class App extends Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
-              <NavItem eventKey={'scorecard'}>Scorecard</NavItem>
-              <NavItem eventKey={'show'}>Show</NavItem>
-              <NavItem eventKey={'history'}>History</NavItem>
-              <NavDropdown title="Mode" id="label-mode-dropdown" onSelect={this.chooseLabelPreset}>
-                <MenuItem eventKey={'dantai'}>Dantai Hokei</MenuItem>
-                <MenuItem eventKey={'tenkai'}>Tenkai</MenuItem>
+              <NavItem
+                eventKey={'scorecard'}
+                active={this.state.visibleTab === 'scorecard'}
+              >
+                Scorecard
+              </NavItem>
+              <NavItem
+                eventKey={'show'}
+                active={this.state.visibleTab === 'show'}
+              >
+                Show
+              </NavItem>
+              <NavItem
+                eventKey={'history'}
+                active={this.state.visibleTab === 'history'}
+              >
+                History
+              </NavItem>
+            </Nav>
+            <Nav pullRight>
+              <NavDropdown
+                title="Mode"
+                id="label-mode-dropdown"
+                onSelect={this.chooseLabelPreset}
+              >
+                <MenuItem
+                  eventKey={'dantai'}
+                  active={this.state.mode === 'dantai'}
+                >
+                  Dantai Hokei
+                </MenuItem>
+                <MenuItem
+                  eventKey={'tenkai'}
+                  active={this.state.mode === 'tenkai'}
+                >
+                  Tenkai
+                </MenuItem>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
