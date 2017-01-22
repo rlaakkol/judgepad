@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Navbar, Nav, NavItem, Jumbotron } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Jumbotron } from 'react-bootstrap';
 
 import Scorecard from './scorecard';
 import HistoryTable from './historytable';
@@ -16,6 +16,22 @@ const defaultRows = [
   { key: 2, id: 2, value: 0 },
   { key: 3, id: 3, value: 0 },
   { key: 4, id: 4, value: 0 }];
+
+const dantaiLabels = [
+  'Format & sync',
+  'Technique & unsoku',
+  'Expression',
+  'Power',
+  'Use of tengi',
+];
+
+const tenkaiLabels = [
+  'Technique & unsoku',
+  'Area & Space',
+  'Attack timing',
+  'Final technique & kimegi',
+  'Use of tengi',
+];
 
 class App extends Component {
   constructor(props) {
@@ -35,6 +51,7 @@ class App extends Component {
     this.toggleSubmitConfirmation = this.toggleSubmitConfirmation.bind(this);
     this.toggleClearConfirmation = this.toggleClearConfirmation.bind(this);
     this.handleNavigation = this.handleNavigation.bind(this);
+    this.chooseLabelPreset = this.chooseLabelPreset.bind(this);
   }
 
   handleValueChange(id, value) {
@@ -53,6 +70,19 @@ class App extends Component {
     const labels = _.clone(this.props.labels);
     labels[i] = value;
     this.props.changeLabels(labels);
+  }
+
+  chooseLabelPreset(mode) {
+    switch (mode) {
+      case 'dantai':
+        this.props.changeLabels(dantaiLabels);
+        break;
+      case 'tenkai':
+        this.props.changeLabels(tenkaiLabels);
+        break;
+      default:
+        break;
+    }
   }
 
   showPrevious(i) {
@@ -80,19 +110,6 @@ class App extends Component {
     const isTie = Score.isTie(this.props.history, this.state.rows);
     const visibleComponent = ((label) => {
       switch (label) {
-        case 'scorecard':
-          return (
-            <Scorecard
-              history={this.props.history}
-              rows={this.state.rows}
-              labels={this.props.labels}
-              handleValueChange={this.handleValueChange}
-              handleLabelChange={this.handleLabelChange}
-              total={total}
-              standing={standing}
-              isTie={isTie}
-            />
-          );
         case 'history':
           return (
             <HistoryTable
@@ -113,8 +130,20 @@ class App extends Component {
                 Submit
               </button>
             </Jumbotron>);
+        case 'scorecard':
         default:
-          return null;
+          return (
+            <Scorecard
+              history={this.props.history}
+              rows={this.state.rows}
+              labels={this.props.labels}
+              handleValueChange={this.handleValueChange}
+              handleLabelChange={this.handleLabelChange}
+              total={total}
+              standing={standing}
+              isTie={isTie}
+            />
+          );
       }
     })(this.state.visibleTab);
     return (
@@ -136,11 +165,23 @@ class App extends Component {
           fixedBottom
           onSelect={this.handleNavigation}
         >
-          <Nav expdanded={false}>
-            <NavItem eventKey={'scorecard'}>Scorecard</NavItem>
-            <NavItem eventKey={'show'}>Show</NavItem>
-            <NavItem eventKey={'history'}>History</NavItem>
-          </Nav>
+          <Navbar.Header>
+            <Navbar.Brand>
+              Taido
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav>
+              <NavItem eventKey={'scorecard'}>Scorecard</NavItem>
+              <NavItem eventKey={'show'}>Show</NavItem>
+              <NavItem eventKey={'history'}>History</NavItem>
+              <NavDropdown title="Mode" id="label-mode-dropdown" onSelect={this.chooseLabelPreset}>
+                <MenuItem eventKey={'dantai'}>Dantai Hokei</MenuItem>
+                <MenuItem eventKey={'tenkai'}>Tenkai</MenuItem>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
       </div>
     );
