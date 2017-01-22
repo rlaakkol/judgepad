@@ -8,18 +8,22 @@ const HistoryTable = (props) => {
       Team {i + 1}
     </button></th>,
   );
-  const rows = props.scores.length > 0 ?
-    _.range(0, props.scores[0].length).map(i =>
-      props.scores.map((score, j) => <td key={`score${j}${i}`}>{score[i].value}</td>),
-    ) :
-    false;
+  header.push(
+    <th key="current">
+      Current
+    </th>,
+  );
+  const scores = [...props.scores, props.current];
+  const rows = _.range(0, scores[0].length).map(i =>
+      scores.map((score, j) => <td key={`score${j}${i}`}>{score[i].value}</td>),
+    );
   const rowDivs = rows ?
     rows.map((row, i) => <tr key={i}><th>{props.labels[i]}</th>{row}</tr>) :
     props.labels.map((label, i) => <tr key={i}><th>{label}</th></tr>);
-  const totals = props.scores.map((team, i) =>
+  const totals = scores.map((team, i) =>
     <td key={`total${i}`}><em>{Score.calcTotal(team)}</em></td>,
   );
-  const standings = props.scores.map((team, i) =>
+  const standings = scores.map((team, i) =>
     <td key={`standing${i}`}><strong>{Score.getStanding(props.scores, team)}</strong></td>,
   );
 
@@ -39,6 +43,12 @@ const HistoryTable = (props) => {
           </tr>
         </tbody>
       </table>
+      <button
+        className="btn btn-primary"
+        onClick={props.toggleClearConfirmation}
+      >
+        Clear history
+      </button>
     </div>);
 };
 

@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Navbar, Nav, NavItem, Jumbotron } from 'react-bootstrap';
 
-import ScorePicker from './scorepicker';
-import Overlay from './overlay';
+import Scorecard from './scorecard';
 import HistoryTable from './historytable';
 import Score from '../utils/score';
 import * as Actions from '../actions';
 import ConfirmModal from './confirm';
+import ShowTotal from './show.js';
 
 const defaultRows = [
   { key: 0, id: 0, value: 0 },
@@ -26,6 +27,7 @@ class App extends Component {
       overlayVisible: false,
       showSubmit: false,
       showClear: false,
+      visibleTab: "scorecard",
     };
 
     this.handleValueChange = this.handleValueChange.bind(this);
@@ -35,6 +37,7 @@ class App extends Component {
     this.showPrevious = this.showPrevious.bind(this);
     this.toggleSubmitConfirmation = this.toggleSubmitConfirmation.bind(this);
     this.toggleClearConfirmation = this.toggleClearConfirmation.bind(this);
+    this.handleNavigation = this.handleNavigation.bind(this);
   }
 
   handleValueChange(id, value) {
@@ -60,72 +63,70 @@ class App extends Component {
   }
 
   showPrevious(i) {
-    this.setState({ rows: _.cloneDeep(this.props.history[i]) });
+    this.setState({
+      rows: _.cloneDeep(this.props.history[i]),
+      visibleTab: "scorecard",
+    });
   }
 
   toggleSubmitConfirmation() {
-    this.setState({ showSubmit: !this.state.showSubmit })
+    this.setState({ showSubmit: !this.state.showSubmit });
   }
 
   toggleClearConfirmation() {
-    this.setState({ showClear: !this.state.showClear })
+    this.setState({ showClear: !this.state.showClear });
   }
 
+  handleNavigation(value) {
+    this.setState({ visibleTab: value})
+  }
 
   render() {
-    const rows = this.state.rows.map((props, i) =>
-      <ScorePicker
-        {...props}
-        label={this.props.labels[i]}
-        handleValueChange={this.handleValueChange}
-        handleLabelChange={this.handleLabelChange}
-      />,
-    );
+
     const total = Score.calcTotal(this.state.rows);
     const standing = Score.getStanding(this.props.history, this.state.rows);
     const isTie = Score.isTie(this.props.history, this.state.rows);
     const overlayVisibility = this.state.overlayVisible ? 'overlay-visible' : '';
+    const visibleComponent = (label => {
+      switch (label) {
+        case "scorecard":
+          return (
+            <Scorecard
+              history={this.props.history}
+              rows={this.state.rows}
+              labels={this.props.labels}
+              handleValueChange={this.handleValueChange}
+              handleLabelChange={this.handleLabelChange}
+              total={total}
+              standing={standing}
+              isTie={isTie}
+            />
+          );
+        case "history":
+          return (
+            <HistoryTable
+              scores={this.props.history}
+              current={this.state.rows}
+              labels={this.props.labels}
+              show={this.showPrevious}
+              toggleClearConfirmation={this.toggleClearConfirmation}
+            />);
+        case "show":
+          return (
+            <Jumbotron>
+              <h1 className="totaldisp">{Math.round(total * 10) / 10}</h1>
+              <button
+                className="btn btn-primary"
+                onClick={this.toggleSubmitConfirmation}
+              >
+                Submit
+              </button>
+            </Jumbotron>);
+      }
+    })(this.state.visibleTab);
     return (
       <div>
-        <div>
-          Team number {this.props.history.length + 1}
-        </div>
-        <div className="container">
-          {rows}
-        </div>
-        <div>
-        Total: {Math.round(total * 10) / 10}
-        </div>
-        <div>
-          Current standing: {standing} {isTie ? '⚠' : ''}
-        </div>
-        <div>
-          <button className="btn btn-primary" onClick={this.toggleOverlay}>
-            Show
-          </button>
-          <button
-            className="btn btn-primary"
-            onClick={this.toggleSubmitConfirmation}
-          >
-            Submit
-          </button>
-          <button
-            className="btn btn-primary"
-            onClick={this.toggleClearConfirmation}
-          >
-            Clear history
-          </button>
-        </div>
-        <Overlay
-          total={total}
-          onClose={this.toggleOverlay}
-          visibility={overlayVisibility}
-        />
-        <HistoryTable
-          scores={this.props.history}
-          labels={this.props.labels}
-          show={this.showPrevious}
-        />
+        {visibleComponent}
         <ConfirmModal
           text="Submit?"
           stateVar={this.state.showSubmit}
@@ -138,6 +139,15 @@ class App extends Component {
           onConfirm={this.props.clearScores}
           toggle={this.toggleClearConfirmation}
         />
+        <Navbar
+          fixedBottom
+          onSelect={this.handleNavigation}>
+          <Nav expdanded={false}>
+            <NavItem eventKey={"scorecard"}>Scorecard</NavItem>
+            <NavItem eventKey={"show"}>Show</NavItem>
+            <NavItem eventKey={"history"}>History</NavItem>
+          </Nav>
+        </Navbar>
       </div>
     );
   }
