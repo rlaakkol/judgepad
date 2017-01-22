@@ -9,7 +9,6 @@ import HistoryTable from './historytable';
 import Score from '../utils/score';
 import * as Actions from '../actions';
 import ConfirmModal from './confirm';
-import ShowTotal from './show.js';
 
 const defaultRows = [
   { key: 0, id: 0, value: 0 },
@@ -24,15 +23,13 @@ class App extends Component {
 
     this.state = {
       rows: _.cloneDeep(defaultRows),
-      overlayVisible: false,
       showSubmit: false,
       showClear: false,
-      visibleTab: "scorecard",
+      visibleTab: 'scorecard',
     };
 
     this.handleValueChange = this.handleValueChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.toggleOverlay = this.toggleOverlay.bind(this);
     this.handleLabelChange = this.handleLabelChange.bind(this);
     this.showPrevious = this.showPrevious.bind(this);
     this.toggleSubmitConfirmation = this.toggleSubmitConfirmation.bind(this);
@@ -52,10 +49,6 @@ class App extends Component {
     this.setState({ rows: _.cloneDeep(defaultRows) });
   }
 
-  toggleOverlay() {
-    this.setState({ overlayVisible: !this.state.overlayVisible });
-  }
-
   handleLabelChange(value, i) {
     const labels = _.clone(this.props.labels);
     labels[i] = value;
@@ -65,7 +58,7 @@ class App extends Component {
   showPrevious(i) {
     this.setState({
       rows: _.cloneDeep(this.props.history[i]),
-      visibleTab: "scorecard",
+      visibleTab: 'scorecard',
     });
   }
 
@@ -78,18 +71,16 @@ class App extends Component {
   }
 
   handleNavigation(value) {
-    this.setState({ visibleTab: value})
+    this.setState({ visibleTab: value });
   }
 
   render() {
-
     const total = Score.calcTotal(this.state.rows);
     const standing = Score.getStanding(this.props.history, this.state.rows);
     const isTie = Score.isTie(this.props.history, this.state.rows);
-    const overlayVisibility = this.state.overlayVisible ? 'overlay-visible' : '';
-    const visibleComponent = (label => {
+    const visibleComponent = ((label) => {
       switch (label) {
-        case "scorecard":
+        case 'scorecard':
           return (
             <Scorecard
               history={this.props.history}
@@ -102,7 +93,7 @@ class App extends Component {
               isTie={isTie}
             />
           );
-        case "history":
+        case 'history':
           return (
             <HistoryTable
               scores={this.props.history}
@@ -111,7 +102,7 @@ class App extends Component {
               show={this.showPrevious}
               toggleClearConfirmation={this.toggleClearConfirmation}
             />);
-        case "show":
+        case 'show':
           return (
             <Jumbotron>
               <h1 className="totaldisp">{Math.round(total * 10) / 10}</h1>
@@ -122,6 +113,8 @@ class App extends Component {
                 Submit
               </button>
             </Jumbotron>);
+        default:
+          return null;
       }
     })(this.state.visibleTab);
     return (
@@ -141,11 +134,12 @@ class App extends Component {
         />
         <Navbar
           fixedBottom
-          onSelect={this.handleNavigation}>
+          onSelect={this.handleNavigation}
+        >
           <Nav expdanded={false}>
-            <NavItem eventKey={"scorecard"}>Scorecard</NavItem>
-            <NavItem eventKey={"show"}>Show</NavItem>
-            <NavItem eventKey={"history"}>History</NavItem>
+            <NavItem eventKey={'scorecard'}>Scorecard</NavItem>
+            <NavItem eventKey={'show'}>Show</NavItem>
+            <NavItem eventKey={'history'}>History</NavItem>
           </Nav>
         </Navbar>
       </div>
