@@ -1,12 +1,32 @@
-import { ADD_SCORE, CLEAR_SCORES, CHANGE_LABELS, UNDO_LAST_SCORE } from '../actions';
+import _ from 'lodash';
+
+import { UPDATE_CURRENT, CLEAR_CURRENT, ADD_SCORE, CLEAR_SCORES, CHANGE_LABELS, UNDO_LAST_SCORE } from '../actions';
+
+const defaultRows = [
+  { key: 0, id: 0, value: 0 },
+  { key: 1, id: 1, value: 0 },
+  { key: 2, id: 2, value: 0 },
+  { key: 3, id: 3, value: 0 },
+  { key: 4, id: 4, value: 0 }];
 
 const defaultLabels = [
   'Format & sync',
-  'Technique & unsoku',
   'Expression',
+  'Technique & unsoku',
   'Power',
   'Use of tengi',
 ];
+
+const currentCard = (state = _.cloneDeep(defaultRows), action) => {
+  switch (action.type) {
+    case UPDATE_CURRENT:
+      return action.rows;
+    case CLEAR_CURRENT:
+      return _.cloneDeep(defaultRows);
+    default:
+      return state;
+  }
+};
 
 const scoreCards = (state = [], action) => {
   switch (action.type) {
@@ -33,4 +53,4 @@ const labels = (state = defaultLabels, action) => {
   }
 };
 
-export { scoreCards, labels };
+export { currentCard, scoreCards, labels };

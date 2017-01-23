@@ -1,4 +1,6 @@
 export const ADD_SCORE = 'ADD_SCORE';
+export const UPDATE_CURRENT = 'UPDATE_CURRENT';
+export const CLEAR_CURRENT = 'CLEAR_CURRENT';
 export const CLEAR_SCORES = 'CLEAR_SCORES';
 export const UNDO_LAST_SCORE = 'UNDO_LAST_SCORE';
 export const CHANGE_LABELS = 'CHANGE_LABELS';
@@ -6,6 +8,13 @@ export const CHANGE_LABELS = 'CHANGE_LABELS';
 /*
  * action creators
  */
+export function updateCurrent(rows) {
+  return { type: UPDATE_CURRENT, rows };
+}
+
+export function clearCurrent() {
+  return { type: CLEAR_CURRENT };
+}
 
 export function addScore(scoreCard) {
   return { type: ADD_SCORE, scores: scoreCard };

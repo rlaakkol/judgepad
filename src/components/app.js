@@ -56,15 +56,14 @@ class App extends Component {
   }
 
   handleValueChange(id, value) {
-    const rows = this.state.rows;
+    const rows = _.cloneDeep(this.props.rows);
     const i = rows.findIndex(e => e.id === id);
     rows[i].value = value;
-    this.setState({ rows });
+    this.props.updateCurrent(rows);
   }
 
   handleSubmit() {
-    this.props.addScore(this.state.rows);
-    this.setState({ rows: _.cloneDeep(defaultRows) });
+    this.props.addScore(this.props.rows);
   }
 
   handleLabelChange(value, i) {
@@ -110,14 +109,14 @@ class App extends Component {
   }
 
   render() {
-    const total = Score.calcTotal(this.state.rows);
+    const total = Score.calcTotal(this.props.rows);
     const visibleComponent = ((label) => {
       switch (label) {
         case 'history':
           return (
             <HistoryTable
               scores={this.props.history}
-              current={this.state.rows}
+              current={this.props.rows}
               labels={this.props.labels}
               show={this.showPrevious}
               toggleClearConfirmation={this.toggleClearConfirmation}
@@ -127,22 +126,25 @@ class App extends Component {
           return (
             <div>
               <h1 className="totaldisp">{Math.round(total * 10) / 10}</h1>
-              <button
-                className="btn btn-primary"
-                onClick={this.toggleSubmitConfirmation}
-              >
-                Submit
-              </button>
+              <div className="center">
+                <button
+                  className="btn btn-primary"
+                  onClick={this.toggleSubmitConfirmation}
+                >
+                  Submit
+                </button>
+              </div>
             </div>);
         case 'scorecard':
         default:
           return (
             <Scorecard
               history={this.props.history}
-              rows={this.state.rows}
+              rows={this.props.rows}
               labels={this.props.labels}
               handleValueChange={this.handleValueChange}
               handleLabelChange={this.handleLabelChange}
+              clear={this.props.clearCurrent}
             />
           );
       }
@@ -237,6 +239,7 @@ App.propTypes = {
 
 function mapStateToProps(state) {
   return {
+    rows: state.current,
     history: state.scores,
     labels: state.labels,
   };
@@ -244,6 +247,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+    updateCurrent: Actions.updateCurrent,
+    clearCurrent: Actions.clearCurrent,
     addScore: Actions.addScore,
     clearScores: Actions.clearScores,
     undoLastScore: Actions.undoLastScore,

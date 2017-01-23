@@ -2,6 +2,11 @@ body {
     padding-bottom: 65px;
 }
 
+.center {
+  margin: auto;
+  text-align: center;
+}
+
 .h-divider{
  margin-top:5px;
  margin-bottom:5px;

@@ -34,6 +34,11 @@ const Scorecard = (props) => {
             <strong>Current standing:</strong> {standing} {isTie ? '⚠' : ''}
           </div>
         </div>
+        <div className="row equal">
+          <div className="col-md-12">
+            <button onClick={props.clear}>Clear</button>
+          </div>
+        </div>
       </div>
     </div>);
 };
