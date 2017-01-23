@@ -49,6 +49,12 @@ const HistoryTable = (props) => {
       >
         Clear history
       </button>
+      <button
+        className="btn btn-primary"
+        onClick={props.undoLastScore}
+      >
+        Remove latest
+      </button>
     </div>);
 };
 
@@ -68,6 +74,7 @@ HistoryTable.propTypes = {
     })).isRequired,
   labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   toggleClearConfirmation: React.PropTypes.func.isRequired,
+  undoLastScore: React.PropTypes.func.isRequired,
 };
 
 export default HistoryTable;

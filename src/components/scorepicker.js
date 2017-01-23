@@ -32,14 +32,14 @@ export default class ScorePicker extends Component {
 
     return (
       <div className="row equal">
-        <div className="col-sm-2 rowlabel">
+        <div className="col-md-2 rowlabel">
           <input
             type="text"
             value={this.props.label}
             onChange={event => this.props.handleLabelChange(event.target.value, this.props.id)}
           />
         </div>
-        <div className="col-sm-10">
+        <div className="col-md-10">
           <ButtonGroup justified>
             {buttons}
           </ButtonGroup>

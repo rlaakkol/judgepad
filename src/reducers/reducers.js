@@ -1,4 +1,4 @@
-import { ADD_SCORE, CLEAR_SCORES, CHANGE_LABELS } from '../actions';
+import { ADD_SCORE, CLEAR_SCORES, CHANGE_LABELS, UNDO_LAST_SCORE } from '../actions';
 
 const defaultLabels = [
   'Format & sync',
@@ -17,6 +17,8 @@ const scoreCards = (state = [], action) => {
       ];
     case CLEAR_SCORES:
       return [];
+    case UNDO_LAST_SCORE:
+      return state.slice(0, -1);
     default:
       return state;
   }

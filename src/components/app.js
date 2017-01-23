@@ -121,6 +121,7 @@ class App extends Component {
               labels={this.props.labels}
               show={this.showPrevious}
               toggleClearConfirmation={this.toggleClearConfirmation}
+              undoLastScore={this.props.undoLastScore}
             />);
         case 'show':
           return (
@@ -231,6 +232,7 @@ App.propTypes = {
   clearScores: React.PropTypes.func.isRequired,
   addScore: React.PropTypes.func.isRequired,
   changeLabels: React.PropTypes.func.isRequired,
+  undoLastScore: React.PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -244,6 +246,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     addScore: Actions.addScore,
     clearScores: Actions.clearScores,
+    undoLastScore: Actions.undoLastScore,
     changeLabels: Actions.changeLabels,
   }, dispatch);
 }
