@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Jumbotron } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
 import Scorecard from './scorecard';
 import HistoryTable from './historytable';
@@ -111,8 +111,6 @@ class App extends Component {
 
   render() {
     const total = Score.calcTotal(this.state.rows);
-    const standing = Score.getStanding(this.props.history, this.state.rows);
-    const isTie = Score.isTie(this.props.history, this.state.rows);
     const visibleComponent = ((label) => {
       switch (label) {
         case 'history':
@@ -126,7 +124,7 @@ class App extends Component {
             />);
         case 'show':
           return (
-            <Jumbotron>
+            <div>
               <h1 className="totaldisp">{Math.round(total * 10) / 10}</h1>
               <button
                 className="btn btn-primary"
@@ -134,7 +132,7 @@ class App extends Component {
               >
                 Submit
               </button>
-            </Jumbotron>);
+            </div>);
         case 'scorecard':
         default:
           return (
@@ -144,9 +142,6 @@ class App extends Component {
               labels={this.props.labels}
               handleValueChange={this.handleValueChange}
               handleLabelChange={this.handleLabelChange}
-              total={total}
-              standing={standing}
-              isTie={isTie}
             />
           );
       }

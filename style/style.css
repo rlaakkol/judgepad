@@ -1,3 +1,7 @@
+body {
+    padding-bottom: 65px;
+}
+
 .equal {
   display: flex;
   flex-wrap: wrap;

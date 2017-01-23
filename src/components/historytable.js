@@ -60,7 +60,14 @@ HistoryTable.propTypes = {
         id: React.PropTypes.number,
         value: React.PropTypes.number,
       }))).isRequired,
+  current: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      key: React.PropTypes.number,
+      id: React.PropTypes.number,
+      value: React.PropTypes.number,
+    })).isRequired,
   labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  toggleClearConfirmation: React.PropTypes.func.isRequired,
 };
 
 export default HistoryTable;
