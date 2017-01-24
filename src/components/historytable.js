@@ -24,7 +24,7 @@ const HistoryTable = (props) => {
     <td key={`total${i}`}><em>{Score.calcTotal(team)}</em></td>,
   );
   const standings = scores.map((team, i) =>
-    <td key={`standing${i}`}><strong>{Score.getStanding(props.scores, team)}</strong></td>,
+    <td key={`standing${i}`}><strong>{Score.getStanding(scores, team)}</strong></td>,
   );
 
   return (

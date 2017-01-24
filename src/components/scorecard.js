@@ -60,6 +60,7 @@ Scorecard.propTypes = {
   labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   handleValueChange: React.PropTypes.func.isRequired,
   handleLabelChange: React.PropTypes.func.isRequired,
+  clear: React.PropTypes.func.isRequired,
 };
 
 export default Scorecard;
