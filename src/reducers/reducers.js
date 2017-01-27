@@ -1,6 +1,15 @@
 import _ from 'lodash';
+import uuid from 'node-uuid';
 
-import { UPDATE_CURRENT, CLEAR_CURRENT, ADD_SCORE, CLEAR_SCORES, CHANGE_LABELS, UNDO_LAST_SCORE } from '../actions';
+import {
+  UPDATE_CURRENT,
+  CLEAR_CURRENT,
+  ADD_SCORE,
+  CLEAR_SCORES,
+  CHANGE_LABELS,
+  UNDO_LAST_SCORE,
+  ADD_ALERT,
+  REMOVE_ALERT } from '../actions';
 
 const defaultRows = [
   { key: 0, id: 0, value: 0 },
@@ -53,4 +62,27 @@ const labels = (state = defaultLabels, action) => {
   }
 };
 
-export { currentCard, scoreCards, labels };
+const alerts = (state = [], action) => {
+  switch (action.type) {
+    case ADD_ALERT:
+      return [
+        ...state,
+        {
+          text: action.text,
+          style: action.style,
+          id: uuid(),
+        },
+      ];
+    case REMOVE_ALERT:
+      return state.filter((alert) => {
+        if (alert.id === action.id) {
+          return false;
+        }
+        return true;
+      });
+    default:
+      return state;
+  }
+};
+
+export { currentCard, scoreCards, labels, alerts };

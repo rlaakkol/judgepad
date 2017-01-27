@@ -6,6 +6,8 @@ import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import * as Actions from '../actions';
+import Alerts from './alerts';
+import Alert from './alert';
 
 const defaultRows = [
   { key: 0, id: 0, value: 0 },
@@ -71,6 +73,9 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Alerts alerts={this.props.alerts}>
+          <Alert />
+        </Alerts>
         {this.props.children}
         <Navbar
           fixedBottom
@@ -141,6 +146,7 @@ App.propTypes = {
 function mapStateToProps(state) {
   return {
     labels: state.labels,
+    alerts: state.alerts,
   };
 }
 

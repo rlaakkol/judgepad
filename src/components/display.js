@@ -5,18 +5,24 @@ import { bindActionCreators } from 'redux';
 import Score from '../utils/score';
 import * as Actions from '../actions';
 
-const ScoreDisplay = props =>
-  <div>
-    <h1 className="totaldisp">{Math.round(Score.calcTotal(props.rows) * 10) / 10}</h1>
-    <div className="center">
-      <button
-        className="btn btn-primary"
-        onClick={() => props.addScore(props.rows)}
-      >
-        Submit
-      </button>
-    </div>
-  </div>;
+const ScoreDisplay = (props) => {
+  const handleClick = () => {
+    props.addScore(props.rows);
+    props.addAlert('Submitted', 'alert alert-success');
+  }
+  return (
+    <div>
+      <h1 className="totaldisp">{Math.round(Score.calcTotal(props.rows) * 10) / 10}</h1>
+      <div className="center">
+        <button
+          className="btn btn-primary"
+          onClick={handleClick}
+        >
+          Submit
+        </button>
+      </div>
+    </div>)
+};
 
 function mapStateToProps(state) {
   return {
@@ -27,6 +33,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     addScore: Actions.addScore,
+    addAlert: Actions.addAlert,
   }, dispatch);
 }
 
