@@ -3,7 +3,6 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
-import { Notification } from 'react-notification';
 
 import Scorecard from './scorecard';
 import HistoryTable from './historytable';
@@ -145,26 +144,8 @@ class App extends Component {
 }
 
 App.propTypes = {
-  rows: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      key: React.PropTypes.number,
-      id: React.PropTypes.number,
-      value: React.PropTypes.number,
-    })).isRequired,
-  history: React.PropTypes.arrayOf(
-    React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        key: React.PropTypes.number,
-        id: React.PropTypes.number,
-        value: React.PropTypes.number,
-      }))).isRequired,
   labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-  updateCurrent: React.PropTypes.func.isRequired,
-  clearCurrent: React.PropTypes.func.isRequired,
-  clearScores: React.PropTypes.func.isRequired,
-  addScore: React.PropTypes.func.isRequired,
   changeLabels: React.PropTypes.func.isRequired,
-  undoLastScore: React.PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {

@@ -77,7 +77,7 @@ HistoryTable.propTypes = {
       value: React.PropTypes.number,
     })).isRequired,
   labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-  toggleClearConfirmation: React.PropTypes.func.isRequired,
+  clearScores: React.PropTypes.func.isRequired,
   undoLastScore: React.PropTypes.func.isRequired,
 };
 
