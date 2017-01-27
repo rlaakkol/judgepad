@@ -3,10 +3,8 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
-import Scorecard from './scorecard';
-import HistoryTable from './historytable';
-import ScoreDisplay from './display';
 import * as Actions from '../actions';
 
 const defaultRows = [
@@ -71,23 +69,11 @@ class App extends Component {
   }
 
   render() {
-    const visibleComponent = ((label) => {
-      switch (label) {
-        case 'history':
-          return <HistoryTable />;
-        case 'show':
-          return <ScoreDisplay />;
-        case 'scorecard':
-        default:
-          return <Scorecard />;
-      }
-    })(this.state.visibleTab);
     return (
       <div>
-        {visibleComponent}
+        {this.props.children}
         <Navbar
           fixedBottom
-          onSelect={this.handleNavigation}
         >
           <Navbar.Header>
             <Navbar.Brand>
@@ -97,24 +83,27 @@ class App extends Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
-              <NavItem
-                eventKey={'scorecard'}
-                active={this.state.visibleTab === 'scorecard'}
-              >
-                Scorecard
-              </NavItem>
-              <NavItem
-                eventKey={'show'}
-                active={this.state.visibleTab === 'show'}
-              >
-                Show
-              </NavItem>
-              <NavItem
-                eventKey={'history'}
-                active={this.state.visibleTab === 'history'}
-              >
-                History
-              </NavItem>
+              <LinkContainer to="/scorecard">
+                <NavItem
+                  eventKey={1}
+                >
+                  Scorecard
+                </NavItem>
+              </LinkContainer>
+              <LinkContainer to="/display">
+                <NavItem
+                  eventKey={2}
+                >
+                  Show
+                </NavItem>
+              </LinkContainer>
+              <LinkContainer to="/history">
+                <NavItem
+                  eventKey={3}
+                >
+                  History
+                </NavItem>
+              </LinkContainer>
             </Nav>
             <Nav pullRight>
               <NavDropdown
@@ -146,6 +135,7 @@ class App extends Component {
 App.propTypes = {
   labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   changeLabels: React.PropTypes.func.isRequired,
+  children: React.PropTypes.element.isRequired,
 };
 
 function mapStateToProps(state) {

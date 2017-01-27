@@ -4,8 +4,12 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import * as storage from 'redux-storage';
 import createEngine from 'redux-storage-engine-localstorage';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import App from './components/app';
+import Scorecard from './components/scorecard';
+import ScoreDisplay from './components/display';
+import HistoryTable from './components/historytable';
 import rootReducer from './reducers';
 
 
@@ -20,6 +24,13 @@ load(store);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Scorecard} />
+        <Route path="/scorecard" component={Scorecard} />
+        <Route path="/display" component={ScoreDisplay} />
+        <Route path="/history" component={HistoryTable} />
+      </Route>
+    </Router>
   </Provider>
   , document.querySelector('.main'));
