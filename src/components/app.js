@@ -3,12 +3,12 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Notification } from 'react-notification';
 
 import Scorecard from './scorecard';
 import HistoryTable from './historytable';
-import Score from '../utils/score';
+import ScoreDisplay from './display';
 import * as Actions from '../actions';
-import ConfirmModal from './confirm';
 
 const defaultRows = [
   { key: 0, id: 0, value: 0 },
@@ -43,33 +43,11 @@ class App extends Component {
       showClear: false,
       visibleTab: 'scorecard',
       mode: 'dantai',
+      notificationActive: false,
     };
 
-    this.handleValueChange = this.handleValueChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleLabelChange = this.handleLabelChange.bind(this);
-    this.showPrevious = this.showPrevious.bind(this);
-    this.toggleSubmitConfirmation = this.toggleSubmitConfirmation.bind(this);
-    this.toggleClearConfirmation = this.toggleClearConfirmation.bind(this);
     this.handleNavigation = this.handleNavigation.bind(this);
     this.chooseLabelPreset = this.chooseLabelPreset.bind(this);
-  }
-
-  handleValueChange(id, value) {
-    const rows = _.cloneDeep(this.props.rows);
-    const i = rows.findIndex(e => e.id === id);
-    rows[i].value = value;
-    this.props.updateCurrent(rows);
-  }
-
-  handleSubmit() {
-    this.props.addScore(this.props.rows);
-  }
-
-  handleLabelChange(value, i) {
-    const labels = _.clone(this.props.labels);
-    labels[i] = value;
-    this.props.changeLabels(labels);
   }
 
   chooseLabelPreset(mode) {
@@ -87,21 +65,6 @@ class App extends Component {
     }
   }
 
-  showPrevious(i) {
-    this.setState({
-      rows: _.cloneDeep(this.props.history[i]),
-      visibleTab: 'scorecard',
-    });
-  }
-
-  toggleSubmitConfirmation() {
-    this.setState({ showSubmit: !this.state.showSubmit });
-  }
-
-  toggleClearConfirmation() {
-    this.setState({ showClear: !this.state.showClear });
-  }
-
   handleNavigation(value) {
     if (['scorecard', 'show', 'history'].includes(value)) {
       this.setState({ visibleTab: value });
@@ -109,61 +72,20 @@ class App extends Component {
   }
 
   render() {
-    const total = Score.calcTotal(this.props.rows);
     const visibleComponent = ((label) => {
       switch (label) {
         case 'history':
-          return (
-            <HistoryTable
-              scores={this.props.history}
-              current={this.props.rows}
-              labels={this.props.labels}
-              show={this.showPrevious}
-              toggleClearConfirmation={this.toggleClearConfirmation}
-              undoLastScore={this.props.undoLastScore}
-            />);
+          return <HistoryTable />;
         case 'show':
-          return (
-            <div>
-              <h1 className="totaldisp">{Math.round(total * 10) / 10}</h1>
-              <div className="center">
-                <button
-                  className="btn btn-primary"
-                  onClick={this.toggleSubmitConfirmation}
-                >
-                  Submit
-                </button>
-              </div>
-            </div>);
+          return <ScoreDisplay />;
         case 'scorecard':
         default:
-          return (
-            <Scorecard
-              history={this.props.history}
-              rows={this.props.rows}
-              labels={this.props.labels}
-              handleValueChange={this.handleValueChange}
-              handleLabelChange={this.handleLabelChange}
-              clear={this.props.clearCurrent}
-            />
-          );
+          return <Scorecard />;
       }
     })(this.state.visibleTab);
     return (
       <div>
         {visibleComponent}
-        <ConfirmModal
-          text="Submit?"
-          stateVar={this.state.showSubmit}
-          onConfirm={this.handleSubmit}
-          toggle={this.toggleSubmitConfirmation}
-        />
-        <ConfirmModal
-          text="Clear?"
-          stateVar={this.state.showClear}
-          onConfirm={this.props.clearScores}
-          toggle={this.toggleClearConfirmation}
-        />
         <Navbar
           fixedBottom
           onSelect={this.handleNavigation}
@@ -247,19 +169,12 @@ App.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    rows: state.current,
-    history: state.scores,
     labels: state.labels,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    updateCurrent: Actions.updateCurrent,
-    clearCurrent: Actions.clearCurrent,
-    addScore: Actions.addScore,
-    clearScores: Actions.clearScores,
-    undoLastScore: Actions.undoLastScore,
     changeLabels: Actions.changeLabels,
   }, dispatch);
 }

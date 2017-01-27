@@ -9,7 +9,8 @@ module.exports = {
         "browser": true
     },
     "rules": {
-      "no-confusing-arrow": "off",
-      "react/jsx-filename-extension": "off",
+        "no-confusing-arrow": "off",
+        "react/jsx-filename-extension": "off",
+        "react/no-unused-prop-types": "off",
     }
 };

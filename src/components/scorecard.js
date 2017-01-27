@@ -1,15 +1,32 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import _ from 'lodash';
 
 import ScorePicker from './scorepicker';
 import Score from '../utils/score';
+import * as Actions from '../actions';
 
 const Scorecard = (props) => {
+  const handleLabelChange = (value, i) => {
+    const labels = _.clone(props.labels);
+    labels[i] = value;
+    props.changeLabels(labels);
+  };
+
+  const handleValueChange = (id, value) => {
+    const rows = _.cloneDeep(props.rows);
+    const i = rows.findIndex(e => e.id === id);
+    rows[i].value = value;
+    props.updateCurrent(rows);
+  };
+
   const rows = props.rows.map((rowprops, i) =>
     <ScorePicker
       {...rowprops}
       label={props.labels[i]}
-      handleValueChange={props.handleValueChange}
-      handleLabelChange={props.handleLabelChange}
+      handleValueChange={handleValueChange}
+      handleLabelChange={handleLabelChange}
     />,
   );
   const total = Score.calcTotal(props.rows);
@@ -36,7 +53,7 @@ const Scorecard = (props) => {
         </div>
         <div className="row equal">
           <div className="col-md-12">
-            <button onClick={props.clear}>Clear</button>
+            <button onClick={props.clearCurrent}>Clear</button>
           </div>
         </div>
       </div>
@@ -63,4 +80,20 @@ Scorecard.propTypes = {
   clear: React.PropTypes.func.isRequired,
 };
 
-export default Scorecard;
+function mapStateToProps(state) {
+  return {
+    rows: state.current,
+    history: state.scores,
+    labels: state.labels,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    updateCurrent: Actions.updateCurrent,
+    clearCurrent: Actions.clearCurrent,
+    changeLabels: Actions.changeLabels,
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Scorecard);
