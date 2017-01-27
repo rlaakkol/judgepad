@@ -7,6 +7,11 @@ body {
   text-align: center;
 }
 
+#messages {
+  position: fixed;
+  top: 0;
+}
+
 .h-divider{
  margin-top:5px;
  margin-bottom:5px;

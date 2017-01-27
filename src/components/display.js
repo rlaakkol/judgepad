@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import uuid from 'node-uuid';
 
 import Score from '../utils/score';
 import * as Actions from '../actions';
@@ -8,7 +9,9 @@ import * as Actions from '../actions';
 const ScoreDisplay = (props) => {
   const handleClick = () => {
     props.addScore(props.rows);
-    props.addAlert('Submitted', 'alert alert-success');
+    const id = uuid();
+    props.addAlert('Submitted', 'alert alert-success', id);
+    setTimeout(() => props.removeAlert(id), 2000);
   }
   return (
     <div>
@@ -34,6 +37,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     addScore: Actions.addScore,
     addAlert: Actions.addAlert,
+    removeAlert: Actions.removeAlert,
   }, dispatch);
 }
 

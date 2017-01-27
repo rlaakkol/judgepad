@@ -1,3 +1,5 @@
+import dispatch from 'redux';
+
 export const ADD_SCORE = 'ADD_SCORE';
 export const UPDATE_CURRENT = 'UPDATE_CURRENT';
 export const CLEAR_CURRENT = 'CLEAR_CURRENT';
@@ -34,11 +36,12 @@ export function changeLabels(labels) {
   return { type: CHANGE_LABELS, labels };
 }
 
-export function addAlert(text, style) {
+export function addAlert(text, style, id) {
   return {
     type: ADD_ALERT,
     text,
     style,
+    id,
   };
 }
 

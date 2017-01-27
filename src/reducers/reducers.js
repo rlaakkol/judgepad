@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import uuid from 'node-uuid';
 
 import {
   UPDATE_CURRENT,
@@ -70,7 +69,7 @@ const alerts = (state = [], action) => {
         {
           text: action.text,
           style: action.style,
-          id: uuid(),
+          id: action.id,
         },
       ];
     case REMOVE_ALERT:
