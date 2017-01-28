@@ -1,11 +1,11 @@
 import React from 'react';
 
 const Alerts = (props) => {
-  const { alerts, children, style } = props;
+  const { alerts, children } = props;
 
-  const renderAlerts = () => 
-    alerts.map((alert) => 
-        React.cloneElement(children, { alert: alert, key: alert.id })
+  const renderAlerts = () =>
+    alerts.map(alert =>
+        React.cloneElement(children, { alert, key: alert.id }),
     );
 
   return (
@@ -13,6 +13,16 @@ const Alerts = (props) => {
       {renderAlerts()}
     </div>
   );
-}
+};
+
+Alerts.propTypes = {
+  alerts: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      text: React.PropTypes.string,
+      style: React.PropTypes.string,
+      id: React.PropTypes.string,
+    })).isRequired,
+  children: React.PropTypes.element.isRequired,
+};
 
 export default Alerts;

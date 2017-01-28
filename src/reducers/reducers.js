@@ -73,12 +73,7 @@ const alerts = (state = [], action) => {
         },
       ];
     case REMOVE_ALERT:
-      return state.filter((alert) => {
-        if (alert.id === action.id) {
-          return false;
-        }
-        return true;
-      });
+      return state.filter(alert => alert.id !== action.id);
     default:
       return state;
   }

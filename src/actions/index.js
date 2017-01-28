@@ -1,5 +1,3 @@
-import dispatch from 'redux';
-
 export const ADD_SCORE = 'ADD_SCORE';
 export const UPDATE_CURRENT = 'UPDATE_CURRENT';
 export const CLEAR_CURRENT = 'CLEAR_CURRENT';

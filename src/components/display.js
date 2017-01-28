@@ -12,7 +12,7 @@ const ScoreDisplay = (props) => {
     const id = uuid();
     props.addAlert('Submitted', 'alert alert-success', id);
     setTimeout(() => props.removeAlert(id), 2000);
-  }
+  };
   return (
     <div>
       <h1 className="totaldisp">{Math.round(Score.calcTotal(props.rows) * 10) / 10}</h1>
@@ -24,7 +24,7 @@ const ScoreDisplay = (props) => {
           Submit
         </button>
       </div>
-    </div>)
+    </div>);
 };
 
 function mapStateToProps(state) {
@@ -49,6 +49,8 @@ ScoreDisplay.propTypes = {
       value: React.PropTypes.number,
     })).isRequired,
   addScore: React.PropTypes.func.isRequired,
+  removeAlert: React.PropTypes.func.isRequired,
+  addAlert: React.PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScoreDisplay);

@@ -143,6 +143,12 @@ App.propTypes = {
   labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   changeLabels: React.PropTypes.func.isRequired,
   children: React.PropTypes.element.isRequired,
+  alerts: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      text: React.PropTypes.string,
+      style: React.PropTypes.string,
+      id: React.PropTypes.string,
+    })).isRequired,
 };
 
 function mapStateToProps(state) {

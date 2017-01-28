@@ -4,23 +4,33 @@ import { bindActionCreators } from 'redux';
 
 import * as Actions from '../actions';
 
-const Alert = (props) =>
-    <div
-      className={props.alert.style}
-      key={props.alert.id}
-      onClick={() => props.removeAlert(props.alert.id)}
-      style={props.style}
-    >
-          {props.alert.text}
-    </div>;
+const Alert = props =>
+  <div
+    className={props.alert.style}
+    key={props.alert.id}
+    style={props.style}
+  >
+    {props.alert.text}
+    <button onClick={() => props.removeAlert(props.alert.id)}>
+      <i className="fa fa-close" />
+    </button>
+  </div>;
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators({
     removeAlert: Actions.removeAlert,
   }, dispatch);
 
-const mapStateToProps = (state) => {
-  return ({ alerts: state.alerts, });
-}
+const mapStateToProps = state => ({ alerts: state.alerts });
+
+Alert.propTypes = {
+  alert: React.PropTypes.shape({
+    text: React.PropTypes.string,
+    style: React.PropTypes.string,
+    id: React.PropTypes.string,
+  }).isRequired,
+  style: React.PropTypes.string.isRequired,
+  removeAlert: React.PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Alert);
