@@ -1,44 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import uuid from 'node-uuid';
 
 import Score from '../utils/score';
-import * as Actions from '../actions';
+import SubmitButton from './submit';
 
-const ScoreDisplay = (props) => {
-  const handleClick = () => {
-    props.addScore(props.rows);
-    const id = uuid();
-    props.addAlert('Submitted', 'alert alert-success', id);
-    setTimeout(() => props.removeAlert(id), 2000);
-  };
-  return (
-    <div>
-      <h1 className="totaldisp">{Math.round(Score.calcTotal(props.rows) * 10) / 10}</h1>
-      <div className="center">
-        <button
-          className="btn btn-primary"
-          onClick={handleClick}
-        >
-          Submit
-        </button>
-      </div>
-    </div>);
-};
+const ScoreDisplay = props =>
+  <div>
+    <h1 className="totaldisp">{Math.round(Score.calcTotal(props.rows) * 10) / 10}</h1>
+    <div className="center">
+      <SubmitButton
+        className="btn btn-success"
+      >
+        Submit
+      </SubmitButton>
+    </div>
+  </div>;
 
 function mapStateToProps(state) {
   return {
     rows: state.current,
   };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    addScore: Actions.addScore,
-    addAlert: Actions.addAlert,
-    removeAlert: Actions.removeAlert,
-  }, dispatch);
 }
 
 ScoreDisplay.propTypes = {
@@ -48,9 +29,6 @@ ScoreDisplay.propTypes = {
       id: React.PropTypes.number,
       value: React.PropTypes.number,
     })).isRequired,
-  addScore: React.PropTypes.func.isRequired,
-  removeAlert: React.PropTypes.func.isRequired,
-  addAlert: React.PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ScoreDisplay);
+export default connect(mapStateToProps)(ScoreDisplay);

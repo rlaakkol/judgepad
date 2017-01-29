@@ -48,13 +48,13 @@ const HistoryTable = (props) => {
         </tbody>
       </table>
       <button
-        className="btn btn-primary"
+        className="btn btn-danger"
         onClick={props.clearScores}
       >
         Clear history
       </button>
       <button
-        className="btn btn-primary"
+        className="btn btn-warning"
         onClick={props.undoLastScore}
       >
         Remove latest

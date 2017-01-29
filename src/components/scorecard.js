@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 import _ from 'lodash';
 
 import ScorePicker from './scorepicker';
+import SubmitButton from './submit';
 import Score from '../utils/score';
 import * as Actions from '../actions';
 
@@ -52,8 +54,14 @@ const Scorecard = (props) => {
           </div>
         </div>
         <div className="row equal">
-          <div className="col-md-12">
-            <button onClick={props.clearCurrent}>Clear</button>
+          <div className="col-md-4">
+            <button className="btn btn-warning" onClick={props.clearCurrent}>Clear</button>
+          </div>
+          <div className="col-md-4">
+            <button className="btn btn-primary" onClick={() => browserHistory.push('/display')}>Show</button>
+          </div>
+          <div className="col-md-4">
+            <SubmitButton className="btn btn-success">Submit</SubmitButton>
           </div>
         </div>
       </div>
@@ -76,6 +84,7 @@ Scorecard.propTypes = {
       }))).isRequired,
   labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   clearCurrent: React.PropTypes.func.isRequired,
+  addScore: React.PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -91,6 +100,7 @@ function mapDispatchToProps(dispatch) {
     updateCurrent: Actions.updateCurrent,
     clearCurrent: Actions.clearCurrent,
     changeLabels: Actions.changeLabels,
+    addScore: Actions.addScore,
   }, dispatch);
 }
 
