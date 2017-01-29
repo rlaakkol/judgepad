@@ -6,12 +6,12 @@ import * as Actions from '../actions';
 
 const Alert = props =>
   <div
-    className={props.alert.style}
+    className={`message ${props.alert.style}`}
     key={props.alert.id}
     style={props.style}
   >
     {props.alert.text}
-    <button onClick={() => props.removeAlert(props.alert.id)}>
+    <button className="close-btn" onClick={() => props.removeAlert(props.alert.id)}>
       <i className="fa fa-close" />
     </button>
   </div>;

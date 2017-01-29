@@ -10,7 +10,25 @@ body {
 #messages {
   position: fixed;
   top: 0;
+  width: 100%;
+  margin: 0;
 }
+
+.message {
+  margin: 0 auto;
+  width: 300px;
+  text-align: center;
+}
+
+ button.close-btn {
+   background-color: transparent;
+   background-repeat: no-repeat;
+   border: none;
+   cursor: pointer;
+   overflow: hidden;
+   outline: none;
+   float: right;
+ }
 
 .h-divider{
  margin-top:5px;

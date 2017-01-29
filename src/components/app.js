@@ -73,11 +73,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <div id="messages">
-          <Alerts alerts={this.props.alerts}>
-            <Alert />
-          </Alerts>
-        </div>
+        <Alerts alerts={this.props.alerts}>
+          <Alert />
+        </Alerts>
         {this.props.children}
         <Navbar
           fixedBottom

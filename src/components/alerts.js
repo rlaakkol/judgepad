@@ -9,7 +9,7 @@ const Alerts = (props) => {
     );
 
   return (
-    <div className="react-alerts-overlay-component-container">
+    <div id="messages">
       {renderAlerts()}
     </div>
   );
