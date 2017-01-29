@@ -9,7 +9,8 @@
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
     "test:lint": "eslint ./src --ext .js --ext .jsx --cache",
-    "package": "NODE_ENV=production webpack --progress --colors"
+    "package": "NODE_ENV=production webpack --progress --colors",
+    "deploy": "npm run package && surge -p $(git rev-parse --show-toplevel)"
   },
   "author": "",
   "license": "ISC",
