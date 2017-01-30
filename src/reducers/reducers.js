@@ -17,13 +17,17 @@ const defaultRows = [
   { key: 3, id: 3, value: 0 },
   { key: 4, id: 4, value: 0 }];
 
-const defaultLabels = [
-  'Format & sync',
-  'Expression',
-  'Technique & unsoku',
-  'Power',
-  'Use of tengi',
-];
+const defaultLabels = {
+  id: 'dantai',
+  name: 'Dantai Hokei',
+  labels: [
+    'Format & sync',
+    'Expression',
+    'Technique & unsoku',
+    'Power',
+    'Use of tengi',
+  ],
+};
 
 const currentCard = (state = _.cloneDeep(defaultRows), action) => {
   switch (action.type) {

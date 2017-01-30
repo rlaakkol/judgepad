@@ -22,8 +22,8 @@ const HistoryTable = (props) => {
       scores.map((score, j) => <td key={`score${j}${i}`}>{score[i].value}</td>),
     );
   const rowDivs = rows ?
-    rows.map((row, i) => <tr key={i}><th>{props.labels[i]}</th>{row}</tr>) :
-    props.labels.map((label, i) => <tr key={i}><th>{label}</th></tr>);
+    rows.map((row, i) => <tr key={i}><th>{props.labels.labels[i]}</th>{row}</tr>) :
+    props.labels.labels.map((label, i) => <tr key={i}><th>{label}</th></tr>);
   const totals = scores.map((team, i) =>
     <td key={`total${i}`}><em>{Score.calcTotal(team)}</em></td>,
   );
@@ -76,7 +76,11 @@ HistoryTable.propTypes = {
       id: React.PropTypes.number,
       value: React.PropTypes.number,
     })).isRequired,
-  labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  labels: React.PropTypes.shape({
+    id: React.PropTypes.string,
+    name: React.PropTypes.string,
+    labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  }),
   clearScores: React.PropTypes.func.isRequired,
   undoLastScore: React.PropTypes.func.isRequired,
 };

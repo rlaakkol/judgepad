@@ -11,9 +11,9 @@ import * as Actions from '../actions';
 
 const Scorecard = (props) => {
   const handleLabelChange = (value, i) => {
-    const labels = _.clone(props.labels);
+    const labels = _.clone(props.labels.labels);
     labels[i] = value;
-    props.changeLabels(labels);
+    props.changeLabels({ name: props.labels.name, labels });
   };
 
   const handleValueChange = (id, value) => {
@@ -26,7 +26,7 @@ const Scorecard = (props) => {
   const rows = props.rows.map((rowprops, i) =>
     <ScorePicker
       {...rowprops}
-      label={props.labels[i]}
+      label={props.labels.labels[i]}
       handleValueChange={handleValueChange}
       handleLabelChange={handleLabelChange}
     />,
@@ -82,7 +82,11 @@ Scorecard.propTypes = {
         id: React.PropTypes.number,
         value: React.PropTypes.number,
       }))).isRequired,
-  labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  labels: React.PropTypes.shape({
+    id: React.PropTypes.string,
+    name: React.PropTypes.string,
+    labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  }),
   clearCurrent: React.PropTypes.func.isRequired,
   addScore: React.PropTypes.func.isRequired,
 };
