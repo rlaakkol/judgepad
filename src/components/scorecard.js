@@ -39,7 +39,7 @@ const Scorecard = (props) => {
       <div className="container">
         <div className="row equal">
           <div className="col-lg-12">
-            <strong>Team number {props.history.length + 1}</strong>
+            <strong>Joukkue {props.history.length + 1}</strong>
           </div>
         </div>
         <div className="h-divider" />
@@ -47,21 +47,21 @@ const Scorecard = (props) => {
         <div className="h-divider" />
         <div className="row equal">
           <div className="col-md-6">
-            <strong>Total:</strong> {Math.round(total * 10) / 10}
+            <strong>Kokonaispisteet:</strong> {Math.round(total * 10) / 10}
           </div>
           <div className="col-md-6">
-            <strong>Current standing:</strong> {standing} {isTie ? <i className="fa fa-warning" style={{ color: 'red' }} /> : ''}
+            <strong>Tämänhetkinen sijoitus:</strong> {standing} {isTie ? <i className="fa fa-warning" style={{ color: 'red' }} /> : ''}
           </div>
         </div>
         <div className="row equal">
           <div className="col-md-4">
-            <button className="btn btn-warning" onClick={props.clearCurrent}>Clear</button>
+            <button className="btn btn-warning" onClick={props.clearCurrent}>Tyhjennä</button>
           </div>
           <div className="col-md-4">
-            <button className="btn btn-primary" onClick={() => browserHistory.push('/display')}>Show</button>
+            <button className="btn btn-primary" onClick={() => browserHistory.push('/display')}>Näytä</button>
           </div>
           <div className="col-md-4">
-            <SubmitButton className="btn btn-success">Submit</SubmitButton>
+            <SubmitButton className="btn btn-success">Tallenna</SubmitButton>
           </div>
         </div>
       </div>

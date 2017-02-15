@@ -70,21 +70,21 @@ const App = (props) => {
               <NavItem
                 eventKey={1}
               >
-                Scorecard
+                Pisteytys
               </NavItem>
             </LinkContainer>
             <LinkContainer to="/display">
               <NavItem
                 eventKey={2}
               >
-                Show
+                Näytä
               </NavItem>
             </LinkContainer>
             <LinkContainer to="/history">
               <NavItem
                 eventKey={3}
               >
-                History
+                Historia
               </NavItem>
             </LinkContainer>
           </Nav>
@@ -93,11 +93,11 @@ const App = (props) => {
               <NavItem
                 eventKey={4}
               >
-                Help
+                Ohjeet
               </NavItem>
             </LinkContainer>
             <NavDropdown
-              title="Mode"
+              title="Laji"
               id="label-mode-dropdown"
               onSelect={chooseLabelPreset}
             >

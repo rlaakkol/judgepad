@@ -9,12 +9,12 @@ import * as Actions from '../actions';
 const HistoryTable = (props) => {
   const header = _.range(0, props.scores.length).map(i =>
     <th key={i}>
-      Team {i + 1}
+      Joukkue {i + 1}
     </th>,
   );
   header.push(
     <th key="current">
-      Current
+      Nykyinen
     </th>,
   );
   const scores = [...props.scores, props.current];
@@ -35,15 +35,15 @@ const HistoryTable = (props) => {
     <div className="table-responsive">
       <table className="table table-sm table-nonfluid">
         <thead>
-          <tr><th>Category/Team</th>{header}</tr>
+          <tr><th>Kategoria/Joukkue</th>{header}</tr>
         </thead>
         <tbody>
           {rowDivs}
           <tr>
-            <th>Total</th>{totals}
+            <th>Kokonaispisteet</th>{totals}
           </tr>
           <tr>
-            <th>Standing</th>{standings}
+            <th>Sijoitus</th>{standings}
           </tr>
         </tbody>
       </table>
@@ -51,13 +51,13 @@ const HistoryTable = (props) => {
         className="btn btn-danger"
         onClick={props.clearScores}
       >
-        Clear history
+        Tyhjennä historia
       </button>
       <button
         className="btn btn-warning"
         onClick={props.undoLastScore}
       >
-        Remove latest
+        Poista uusin
       </button>
     </div>);
 };
