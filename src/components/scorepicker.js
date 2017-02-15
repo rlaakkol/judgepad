@@ -1,56 +1,50 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, ButtonGroup, FormControl } from 'react-bootstrap';
 
-export default class ScorePicker extends Component {
-  constructor(props) {
-    super(props);
+const ScorePicker = (props) => {
+  const handleChange = value =>
+    props.handleValueChange(props.id, value);
 
-    this.state = { value: this.props.value };
+  const handleTextInput = (event) => {
+    event.preventDefault();
+    props.handleLabelChange(event.target.value, props.id);
+  };
 
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(value) {
-    this.props.handleValueChange(this.props.id, value);
-  }
-
-  render() {
-    const buttons = [...Array(11).keys()].map(i =>
-      <ButtonGroup
-        key={`row${this.props.id.toString()}btn${i.toString()}`}
+  const buttons = [...Array(11).keys()].map(i =>
+    <ButtonGroup
+      key={`row${props.id.toString()}btn${i.toString()}`}
+    >
+      <Button
+        className={`button${i.toString()}`}
+        bsSize="large"
+        bsStyle="default"
+        active={props.value === i}
+        onClick={() => handleChange(i)}
       >
-        <Button
-          className={`button${i.toString()}`}
-          bsSize="large"
-          bsStyle="default"
-          active={this.props.value === i}
-          onClick={() => this.handleChange(i)}
-        >
-          {i}
-        </Button>
-      </ButtonGroup>);
+        {i}
+      </Button>
+    </ButtonGroup>);
 
-    return (
-      <div className="row equal">
-        <div className="col-lg-4 rowlabel">
-          <form>
-            <FormControl
-              type="text"
-              size="30"
-              value={this.props.label}
-              onChange={event => this.props.handleLabelChange(event.target.value, this.props.id)}
-            />
-          </form>
-        </div>
-        <div className="col-lg-8">
-          <ButtonGroup justified>
-            {buttons}
-          </ButtonGroup>
-        </div>
+  return (
+    <div className="row equal">
+      <div className="col-lg-4 rowlabel">
+        <form onSubmit={event => event.preventDefault()}>
+          <FormControl
+            type="text"
+            size="30"
+            value={props.label}
+            onChange={handleTextInput}
+          />
+        </form>
       </div>
-    );
-  }
-}
+      <div className="col-lg-8">
+        <ButtonGroup justified>
+          {buttons}
+        </ButtonGroup>
+      </div>
+    </div>
+  );
+};
 
 ScorePicker.propTypes = {
   handleLabelChange: React.PropTypes.func.isRequired,
@@ -59,3 +53,5 @@ ScorePicker.propTypes = {
   value: React.PropTypes.number.isRequired,
   handleValueChange: React.PropTypes.func.isRequired,
 };
+
+export default ScorePicker;
