@@ -38,7 +38,7 @@ const Scorecard = (props) => {
     <div>
       <div className="container">
         <div className="row equal">
-          <div className="col-md-12">
+          <div className="col-lg-12">
             <strong>Team number {props.history.length + 1}</strong>
           </div>
         </div>
@@ -50,7 +50,7 @@ const Scorecard = (props) => {
             <strong>Total:</strong> {Math.round(total * 10) / 10}
           </div>
           <div className="col-md-6">
-            <strong>Current standing:</strong> {standing} {isTie ? <i className="fa fa-warning" /> : ''}
+            <strong>Current standing:</strong> {standing} {isTie ? <i className="fa fa-warning" style={{ color: 'red' }} /> : ''}
           </div>
         </div>
         <div className="row equal">

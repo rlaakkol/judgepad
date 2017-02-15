@@ -13,11 +13,11 @@ const dantaiLabels = {
   id: 'dantai',
   name: 'Dantai Hokei',
   labels: [
-    'Format & sync',
-    'Technique & unsoku',
-    'Expression',
-    'Power',
-    'Use of tengi',
+    'Muodon säilyminen, samanaikaisuus',
+    'Tekninen puhtaus',
+    'Tekninen vaativuus',
+    'Hengitys ja teho',
+    'Vaikutelma',
   ],
 };
 
@@ -25,11 +25,11 @@ const tenkaiLabels = {
   id: 'tenkai',
   name: 'Tenkai',
   labels: [
-    'Technique & unsoku',
-    'Area & Space',
-    'Attack timing',
-    'Final technique & kimegi',
-    'Use of tengi',
+    'Tilan käyttö ja liikkeen jatkuvuus',
+    'Tekninen puhtaus',
+    'Tekninen vaativuus',
+    'Realistisuus',
+    'Ratkaisutekniikan etäisyys ja ajoitus',
   ],
 };
 

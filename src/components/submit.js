@@ -47,6 +47,13 @@ SubmitButton.propTypes = {
       id: React.PropTypes.number,
       value: React.PropTypes.number,
     })).isRequired,
+  history: React.PropTypes.arrayOf(
+    React.PropTypes.arrayOf(
+      React.PropTypes.shape({
+        key: React.PropTypes.number,
+        id: React.PropTypes.number,
+        value: React.PropTypes.number,
+      }))).isRequired,
   addScore: React.PropTypes.func.isRequired,
   removeAlert: React.PropTypes.func.isRequired,
   addAlert: React.PropTypes.func.isRequired,

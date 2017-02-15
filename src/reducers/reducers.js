@@ -21,11 +21,11 @@ const defaultLabels = {
   id: 'dantai',
   name: 'Dantai Hokei',
   labels: [
-    'Format & sync',
-    'Expression',
-    'Technique & unsoku',
-    'Power',
-    'Use of tengi',
+    'Muodon säilyminen, samanaikaisuus',
+    'Tekninen puhtaus',
+    'Tekninen vaativuus',
+    'Hengitys ja teho',
+    'Vaikutelma',
   ],
 };
 
