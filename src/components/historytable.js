@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 
 import Score from '../utils/score';
-import * as Actions from '../actions';
 
 const HistoryTable = (props) => {
   const header = _.range(0, props.scores.length).map(i =>
@@ -47,18 +45,6 @@ const HistoryTable = (props) => {
           </tr>
         </tbody>
       </table>
-      <button
-        className="btn btn-danger"
-        onClick={props.clearScores}
-      >
-        Tyhjennä historia
-      </button>
-      <button
-        className="btn btn-warning"
-        onClick={props.undoLastScore}
-      >
-        Poista uusin
-      </button>
     </div>);
 };
 
@@ -81,8 +67,6 @@ HistoryTable.propTypes = {
     name: React.PropTypes.string,
     labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   }),
-  clearScores: React.PropTypes.func.isRequired,
-  undoLastScore: React.PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -93,11 +77,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    clearScores: Actions.clearScores,
-    undoLastScore: Actions.undoLastScore,
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HistoryTable);
+export default connect(mapStateToProps)(HistoryTable);

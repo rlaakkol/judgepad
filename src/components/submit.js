@@ -11,7 +11,7 @@ const SubmitButton = (props) => {
   const handleClick = () => {
     props.addScore(props.rows);
     const id = uuid();
-    props.addAlert('Submitted', 'alert alert-success', id);
+    props.addAlert('Tallennettu', 'alert alert-success', id);
     setTimeout(() => props.removeAlert(id), 2000);
   };
   const disabled = Score.isTie(props.history, props.rows);

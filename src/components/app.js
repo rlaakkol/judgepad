@@ -34,13 +34,19 @@ const tenkaiLabels = {
 };
 
 const App = (props) => {
-  const chooseLabelPreset = (mode) => {
-    switch (mode) {
+  const handleDropdownAction = (key) => {
+    switch (key) {
       case 'dantai':
         props.changeLabels(dantaiLabels);
         break;
       case 'tenkai':
         props.changeLabels(tenkaiLabels);
+        break;
+      case 'cancel':
+        props.undoLastScore();
+        break;
+      case 'clear':
+        props.clearScores();
         break;
       default:
         break;
@@ -97,9 +103,25 @@ const App = (props) => {
               </NavItem>
             </LinkContainer>
             <NavDropdown
+              title="Hallinta"
+              id="label-mode-dropdown"
+              onSelect={handleDropdownAction}
+            >
+              <MenuItem
+                eventKey={'cancel'}
+              >
+                Poista uusin
+              </MenuItem>
+              <MenuItem
+                eventKey={'clear'}
+              >
+                Tyhjennä historia
+              </MenuItem>
+            </NavDropdown>
+            <NavDropdown
               title="Laji"
               id="label-mode-dropdown"
-              onSelect={chooseLabelPreset}
+              onSelect={handleDropdownAction}
             >
               <MenuItem
                 eventKey={'dantai'}
@@ -135,6 +157,8 @@ App.propTypes = {
     name: React.PropTypes.string,
     labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   }),
+  clearScores: React.PropTypes.func.isRequired,
+  undoLastScore: React.PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -147,6 +171,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     changeLabels: Actions.changeLabels,
+    undoLastScore: Actions.undoLastScore,
+    clearScores: Actions.clearScores,
   }, dispatch);
 }
 

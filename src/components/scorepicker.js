@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup } from 'react-bootstrap';
+import { Button, ButtonGroup, FormControl } from 'react-bootstrap';
 
 export default class ScorePicker extends Component {
   constructor(props) {
@@ -33,12 +33,14 @@ export default class ScorePicker extends Component {
     return (
       <div className="row equal">
         <div className="col-lg-4 rowlabel">
-          <input
-            type="text"
-            size="30"
-            value={this.props.label}
-            onChange={event => this.props.handleLabelChange(event.target.value, this.props.id)}
-          />
+          <form>
+            <FormControl
+              type="text"
+              size="30"
+              value={this.props.label}
+              onChange={event => this.props.handleLabelChange(event.target.value, this.props.id)}
+            />
+          </form>
         </div>
         <div className="col-lg-8">
           <ButtonGroup justified>
