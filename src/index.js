@@ -10,6 +10,7 @@ import App from './components/app';
 import Scorecard from './components/scorecard';
 import ScoreDisplay from './components/display';
 import HistoryTable from './components/historytable';
+import HelpPage from './components/helppage';
 import rootReducer from './reducers';
 import { ADD_ALERT, REMOVE_ALERT } from './actions';
 
@@ -31,6 +32,7 @@ ReactDOM.render(
         <Route path="/scorecard" component={Scorecard} />
         <Route path="/display" component={ScoreDisplay} />
         <Route path="/history" component={HistoryTable} />
+        <Route path="/help" component={HelpPage} />
       </Route>
     </Router>
   </Provider>

@@ -89,6 +89,13 @@ const App = (props) => {
             </LinkContainer>
           </Nav>
           <Nav pullRight>
+            <LinkContainer to="/help">
+              <NavItem
+                eventKey={4}
+              >
+                Help
+              </NavItem>
+            </LinkContainer>
             <NavDropdown
               title="Mode"
               id="label-mode-dropdown"
