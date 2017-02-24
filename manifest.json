@@ -1,0 +1,7 @@
+{
+  "name": "Taido Judgepad",
+  "short_name": "Judgepad",
+  "start_url": "/scorecard",
+  "display": "standalone",
+  "orientation": "portrait-primary"
+}
