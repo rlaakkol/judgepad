@@ -1,14 +1,9 @@
 import React from 'react';
-import { Button, ButtonGroup, FormControl } from 'react-bootstrap';
+import { Button, ButtonGroup, ControlLabel } from 'react-bootstrap';
 
 const ScorePicker = (props) => {
   const handleChange = value =>
     props.handleValueChange(props.id, value);
-
-  const handleTextInput = (event) => {
-    event.preventDefault();
-    props.handleLabelChange(event.target.value, props.id);
-  };
 
   const buttons = [...Array(11).keys()].map(i =>
     <ButtonGroup
@@ -29,12 +24,9 @@ const ScorePicker = (props) => {
     <div className="row equal">
       <div className="col-lg-4 rowlabel">
         <form onSubmit={event => event.preventDefault()}>
-          <FormControl
-            type="text"
-            size="30"
-            value={props.label}
-            onChange={handleTextInput}
-          />
+          <ControlLabel>
+            {props.label}
+          </ControlLabel>
         </form>
       </div>
       <div className="col-lg-8">
@@ -47,7 +39,6 @@ const ScorePicker = (props) => {
 };
 
 ScorePicker.propTypes = {
-  handleLabelChange: React.PropTypes.func.isRequired,
   label: React.PropTypes.string.isRequired,
   id: React.PropTypes.number.isRequired,
   value: React.PropTypes.number.isRequired,

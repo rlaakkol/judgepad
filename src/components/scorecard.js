@@ -10,12 +10,6 @@ import Score from '../utils/score';
 import * as Actions from '../actions';
 
 const Scorecard = (props) => {
-  const handleLabelChange = (value, i) => {
-    const labels = _.clone(props.labels.labels);
-    labels[i] = value;
-    props.changeLabels({ name: props.labels.name, labels });
-  };
-
   const handleValueChange = (id, value) => {
     const rows = _.cloneDeep(props.rows);
     const i = rows.findIndex(e => e.id === id);
@@ -28,7 +22,6 @@ const Scorecard = (props) => {
       {...rowprops}
       label={props.labels.labels[i]}
       handleValueChange={handleValueChange}
-      handleLabelChange={handleLabelChange}
     />,
   );
   const total = Score.calcTotal(props.rows);
@@ -103,7 +96,6 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     updateCurrent: Actions.updateCurrent,
     clearCurrent: Actions.clearCurrent,
-    changeLabels: Actions.changeLabels,
     addScore: Actions.addScore,
   }, dispatch);
 }
