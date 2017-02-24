@@ -3,6 +3,10 @@ body {
     font-size: large;
 }
 
+.helptext {
+  padding: 15px;
+}
+
 .center {
   margin: auto;
   text-align: center;

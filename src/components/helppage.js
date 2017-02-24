@@ -1,30 +1,71 @@
 import React from 'react';
+import marked from 'marked';
+
+const helpText = `
+DANTAI HOKEI
+------------
+
+**1. Muodon säilyminen ja samanaikaisuus**
+
+Tuomari tarkkailee, pysyykö alkuperäinen muoto ja liikkeiden samanaikaisuus koko hokein ajan
+
+**2. Tekninen puhtaus**
+
+Tuomari arvioi tekniikoiden, kamaen, katseen käytön, unsokun ja unshinin puhtautta
+
+**3. Tekninen vaativuus**
+
+Vaativuuspisteet tulevat automaattisesti:
+- sen hokei 2 pistettä
+- un hokei 3 pistettä
+- hen hokei 4 pistettä
+- nen hokei 5 pistettä
+- ten hokei 6 pistettä
+- ten hokei yhden käden sokutenilla 7 pistettä
+- senin, hen, nentai, ten hokei puolivoltilla eteen- tai taaksepäin 8 pistettä
+- senin, hen, nentai, ten hokei kokovoltilla eteen, taakse tai perhosvoltilla 9 pistettä
+- nentai, ten hokei kierteisellä voltilla 10 pistettä
+
+Kaikkien joukkueen jäsenten pitää tehdä sama korkea tengi. Tengin puhtaudella ei ole merkitystä tässä kategoriassa. Epäonnistuneen tengin vähennykset huomioidaan teknisen puhtauden kategoriassa.
+
+**4. Hengitys ja teho**
+
+Tuomari arvioi hengitystä, kiaita, tehoa ja voimantuottoa sekä toteutuuko tekniikoissa hyökkäys ja puolustus
+
+**5. Vaikutelma**
+
+Tuomari arvioi toteutuuko valmius ja herännyt mieli, hitaat ja nopeat/vahvat ja heikot/laajat ja suppeat/heikot ja voimakkaat liikkeet sekä lopetus ja valppaus
+
+TENKAI
+------
+
+**1. Tilan käyttö ja liikkeen jatkuvuus**
+
+Tuomari tarkkailee tatamialueen käyttöä (pyritään käymään tenkain aikana kaikissa kulmissa ja keskellä), jos kuolee ensimmäisten joukossa ei sakoiteta jos ei ehdi kaikkiin kulmiin.
+
+Tuomari tarkkailee liikkeen jatkuvuutta kombinoinnissa ja tuleeko liikkeitä eri tasoille alas-keskelle-ylös
+
+**2. Tekninen puhtaus**
+
+Tuomari arvioi tekniikoiden, kamaen, unsokun ja unshinin puhtautta
+
+**3. Tekninen vaativuus**
+
+Tuomari tarkkailee tekniikoiden ja unshinin vaativuutta, sekä tekniikoiden määrää (wakiyakuilla 2 kokonaista ja kuolemaan johtanut tekniikka omasta tekniikkaluokasta)
+
+**4. Realistisuus**
+
+Tuomari tarkkailee tehtyjen hyökkäysten etäisyyttä ja kohteen järkevyyttä
+
+**5. Ratkaisutekniikan etäisyys ja ajoitus**
+
+Tuomari arvioi ratkaisutekniikan etäisyyttä ja ajoitusta
+`;
 
 const HelpPage = () =>
-  <div>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vel vehicula enim.
-      Vestibulum vel hendrerit lectus. Morbi volutpat id felis nec fermentum.
-      Nulla quis tristique turpis. Donec at ante a dolor rutrum commodo vitae vitae erat.
-      Integer fermentum, quam quis dictum aliquet, mauris mauris dignissim sapien,
-      in fringilla enim eros sed magna. Etiam volutpat vitae mi ac vehicula.
-      Integer in augue viverra mauris blandit interdum. Nam gravida mauris et semper
-      tempor. Morbi ut nunc nec enim blandit varius. Pellentesque congue nisl eget
-      feugiat vehicula. Nulla malesuada mollis lacus. Quisque posuere arcu vitae
-      suscipit rutrum. Integer nec risus at dui venenatis pulvinar vitae a sem.
-    </p>
-    <p>
-      Sed rutrum consequat molestie. Fusce congue sit amet dui vel interdum.
-      Cras suscipit vehicula nisl sit amet rhoncus. Nulla euismod non lorem ut
-      elementum. Fusce urna magna, porttitor vitae consectetur non, blandit sit
-      amet eros. Integer magna leo, lacinia sed imperdiet ac, elementum in turpis.
-      Etiam suscipit magna non justo rutrum, quis sollicitudin nunc fermentum. Fusce
-      at faucibus libero. Sed bibendum ligula at sem vestibulum, nec convallis
-      ligula scelerisque. Nulla suscipit urna eu enim facilisis, et ultrices tellus
-      bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed
-      interdum blandit mauris. Suspendisse tristique auctor nisl in efficitur. Fusce
-      ut convallis mi. Nullam interdum sed odio sed dignissim.
-    </p>
-  </div>;
+  <div
+    className="helptext"
+    dangerouslySetInnerHTML={{ __html: marked(helpText, { sanitize: true }) }}
+  />;
 
 export default HelpPage;
