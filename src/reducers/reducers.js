@@ -15,7 +15,9 @@ const defaultRows = [
   { key: 1, id: 1, value: 0 },
   { key: 2, id: 2, value: 0 },
   { key: 3, id: 3, value: 0 },
-  { key: 4, id: 4, value: 0 }];
+  { key: 4, id: 4, value: 0 },
+  { key: 5, id: 5, value: 0 },
+];
 
 const defaultLabels = {
   id: 'dantai',
@@ -26,6 +28,7 @@ const defaultLabels = {
     'Tekninen vaativuus',
     'Hengitys ja teho',
     'Vaikutelma',
+    'Lisäpiste',
   ],
 };
 

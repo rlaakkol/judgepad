@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { browserHistory } from 'react-router';
+
 import _ from 'lodash';
 
 import ScorePicker from './scorepicker';
@@ -17,12 +17,21 @@ const Scorecard = (props) => {
     props.updateCurrent(rows);
   };
 
-  const rows = props.rows.map((rowprops, i) =>
+  const rows = props.rows.slice(0, 5).map((rowprops, i) =>
     <ScorePicker
       {...rowprops}
       label={props.labels.labels[i]}
       handleValueChange={handleValueChange}
     />,
+  );
+  const extraRow = props.rows[5];
+  const extraPicker = (
+    <ScorePicker
+      {...extraRow}
+      label={props.labels.labels[5]}
+      handleValueChange={handleValueChange}
+      isExtra
+    />
   );
   const total = Score.calcTotal(props.rows);
   const standing = Score.getStanding(props.history, props.rows);
@@ -37,6 +46,7 @@ const Scorecard = (props) => {
         </div>
         <div className="h-divider" />
         {rows}
+        {extraPicker}
         <div className="h-divider" />
         <div className="row equal">
           <div className="col-md-6">
@@ -51,10 +61,12 @@ const Scorecard = (props) => {
             <button className="btn btn-warning" onClick={props.clearCurrent}>Tyhjennä</button>
           </div>
           <div className="col-md-4">
-            <button className="btn btn-primary" onClick={() => browserHistory.push('/display')}>Näytä</button>
-          </div>
-          <div className="col-md-4">
-            <SubmitButton className="btn btn-success">Tallenna</SubmitButton>
+            <SubmitButton
+              className="btn btn-success"
+              nextPage="/display"
+            >
+              Tallenna ja näytä
+            </SubmitButton>
           </div>
         </div>
       </div>

@@ -5,7 +5,9 @@ const ScorePicker = (props) => {
   const handleChange = value =>
     props.handleValueChange(props.id, value);
 
-  const buttons = [...Array(11).keys()].map(i =>
+  const values = props.isExtra ? [-0.5, 0, 0.5] : [...Array(11).keys()];
+
+  const buttons = values.map(i =>
     <ButtonGroup
       key={`row${props.id.toString()}btn${i.toString()}`}
     >
@@ -43,6 +45,7 @@ ScorePicker.propTypes = {
   id: React.PropTypes.number.isRequired,
   value: React.PropTypes.number.isRequired,
   handleValueChange: React.PropTypes.func.isRequired,
+  isExtra: React.PropTypes.bool,
 };
 
 export default ScorePicker;

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import uuid from 'node-uuid';
 import { Button } from 'react-bootstrap';
+import { browserHistory } from 'react-router';
 
 import * as Actions from '../actions';
 import Score from '../utils/score';
@@ -13,6 +14,7 @@ const SubmitButton = (props) => {
     const id = uuid();
     props.addAlert('Tallennettu', 'alert alert-success', id);
     setTimeout(() => props.removeAlert(id), 2000);
+    browserHistory.push(props.nextPage);
   };
   const disabled = Score.isTie(props.history, props.rows);
   return (
@@ -41,6 +43,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 SubmitButton.propTypes = {
+  nextPage: React.PropTypes.string,
   rows: React.PropTypes.arrayOf(
     React.PropTypes.shape({
       key: React.PropTypes.number,

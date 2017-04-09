@@ -1,6 +1,6 @@
 const calcTotal = rows =>
   rows.map(item => item.value).reduce((a, b) =>
-    Number.parseInt(a, 10) + Number.parseInt(b, 10)) / rows.length;
+    Number.parseFloat(a, 10) + Number.parseFloat(b, 10)) / 5;
 
 const getStanding = (history, current) =>
   history.reduce((a, b) => calcTotal(b) > calcTotal(current) ? a + 1 : a, 1);

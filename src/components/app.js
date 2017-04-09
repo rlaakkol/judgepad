@@ -18,6 +18,7 @@ const dantaiLabels = {
     'Tekninen vaativuus',
     'Hengitys ja teho',
     'Vaikutelma',
+    'Lisäpiste',
   ],
 };
 
@@ -30,6 +31,7 @@ const tenkaiLabels = {
     'Tekninen vaativuus',
     'Realistisuus',
     'Ratkaisutekniikan etäisyys ja ajoitus',
+    'Lisäpiste',
   ],
 };
 
