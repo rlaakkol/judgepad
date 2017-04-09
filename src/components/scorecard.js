@@ -57,10 +57,10 @@ const Scorecard = (props) => {
           </div>
         </div>
         <div className="row equal">
-          <div className="col-md-4">
+          <div className="col-md-2 col-md-offset-3">
             <button className="btn btn-warning" onClick={props.clearCurrent}>Tyhjennä</button>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-2 col-md-offset-2">
             <SubmitButton
               className="btn btn-success"
               nextPage="/display"

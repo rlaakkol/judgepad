@@ -81,13 +81,6 @@ const App = (props) => {
                 Pisteytys
               </NavItem>
             </LinkContainer>
-            <LinkContainer to="/display">
-              <NavItem
-                eventKey={2}
-              >
-                Näytä
-              </NavItem>
-            </LinkContainer>
             <LinkContainer to="/history">
               <NavItem
                 eventKey={3}
@@ -97,6 +90,13 @@ const App = (props) => {
             </LinkContainer>
           </Nav>
           <Nav pullRight>
+            <LinkContainer to="/display?navigation=true">
+              <NavItem
+                eventKey={2}
+              >
+                Näytä edellinen tallennettu
+              </NavItem>
+            </LinkContainer>
             <LinkContainer to="/help">
               <NavItem
                 eventKey={4}

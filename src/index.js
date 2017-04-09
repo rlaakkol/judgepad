@@ -22,18 +22,18 @@ const createStoreWithMiddleware = applyMiddleware(middleware)(createStore);
 const store = createStoreWithMiddleware(reducer);
 
 const load = storage.createLoader(engine);
-load(store);
-
-ReactDOM.render(
-  <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/" component={App}>
-        <IndexRoute component={Scorecard} />
-        <Route path="/scorecard" component={Scorecard} />
-        <Route path="/display" component={ScoreDisplay} />
-        <Route path="/history" component={HistoryTable} />
-        <Route path="/help" component={HelpPage} />
-      </Route>
-    </Router>
-  </Provider>
-  , document.querySelector('.main'));
+load(store).then(() => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <Router history={browserHistory}>
+        <Route path="/" component={App}>
+          <IndexRoute component={Scorecard} />
+          <Route path="/scorecard" component={Scorecard} />
+          <Route path="/display" component={ScoreDisplay} />
+          <Route path="/history" component={HistoryTable} />
+          <Route path="/help" component={HelpPage} />
+        </Route>
+      </Router>
+    </Provider>
+    , document.querySelector('.main'));
+});
