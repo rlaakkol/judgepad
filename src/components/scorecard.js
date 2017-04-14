@@ -38,6 +38,7 @@ const Scorecard = props => {
   const total = Score.calcTotal(props.rows)
   const standing = Score.getStanding(props.history, props.rows)
   const isTie = Score.isTie(props.history, props.rows)
+  const warningSign = <i className="fa fa-warning" style={{ color: 'red' }} />
   return (
     <div>
       <div className="container">
@@ -59,9 +60,7 @@ const Scorecard = props => {
             {' '}
             {standing}
             {' '}
-            {isTie
-              ? <i className="fa fa-warning" style={{ color: 'red' }} />
-              : ''}
+            {isTie ? warningSign : ''}
           </div>
         </div>
         <div className="row equal">
@@ -74,6 +73,11 @@ const Scorecard = props => {
             <SubmitButton className="btn btn-success" nextPage="/display">
               Tallenna ja näytä
             </SubmitButton>
+          </div>
+        </div>
+        <div className="row equal">
+          <div className="col-md-4 col-md-offset-6 text-center">
+            {isTie ? 'Tasapisteet, et voi tallentaa!' : ''}
           </div>
         </div>
       </div>
