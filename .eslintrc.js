@@ -19,6 +19,7 @@ module.exports = {
         "react/jsx-filename-extension": "off",
         "react/no-unused-prop-types": "off",
         "react/forbid-prop-types": "off",
+        "react/no-danger": "off",
         "quotes": ["error", "single"],
         "semi": ["error", "never"]
     }
