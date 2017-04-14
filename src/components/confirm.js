@@ -1,7 +1,7 @@
-import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React from 'react'
+import { Modal, Button } from 'react-bootstrap'
 
-const ConfirmModal = props =>
+const ConfirmModal = props => (
   <Modal show={props.stateVar}>
     <Modal.Header>
       <Modal.Title>Confirm</Modal.Title>
@@ -16,12 +16,15 @@ const ConfirmModal = props =>
       <Button
         bsStyle="primary"
         onClick={() => {
-          props.onConfirm();
-          props.toggle();
+          props.onConfirm()
+          props.toggle()
         }}
-        >Confirm</Button>
+      >
+        Confirm
+      </Button>
     </Modal.Footer>
 
-  </Modal>;
+  </Modal>
+)
 
-export default ConfirmModal;
+export default ConfirmModal

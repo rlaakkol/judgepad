@@ -1,16 +1,13 @@
-import React from 'react';
-import { Button, ButtonGroup, ControlLabel } from 'react-bootstrap';
+import React from 'react'
+import { Button, ButtonGroup, ControlLabel } from 'react-bootstrap'
 
-const ScorePicker = (props) => {
-  const handleChange = value =>
-    props.handleValueChange(props.id, value);
+const ScorePicker = props => {
+  const handleChange = value => props.handleValueChange(props.id, value)
 
-  const values = props.isExtra ? [-0.5, 0, 0.5] : [...Array(11).keys()];
+  const values = props.isExtra ? [-0.5, 0, 0.5] : [...Array(11).keys()]
 
-  const buttons = values.map(i =>
-    <ButtonGroup
-      key={`row${props.id.toString()}btn${i.toString()}`}
-    >
+  const buttons = values.map(i => (
+    <ButtonGroup key={`row${props.id.toString()}btn${i.toString()}`}>
       <Button
         className={`button${i.toString()}`}
         bsSize="large"
@@ -20,7 +17,8 @@ const ScorePicker = (props) => {
       >
         {i}
       </Button>
-    </ButtonGroup>);
+    </ButtonGroup>
+  ))
 
   return (
     <div className="row equal">
@@ -37,15 +35,15 @@ const ScorePicker = (props) => {
         </ButtonGroup>
       </div>
     </div>
-  );
-};
+  )
+}
 
 ScorePicker.propTypes = {
   label: React.PropTypes.string.isRequired,
   id: React.PropTypes.number.isRequired,
   value: React.PropTypes.number.isRequired,
   handleValueChange: React.PropTypes.func.isRequired,
-  isExtra: React.PropTypes.bool,
-};
+  isExtra: React.PropTypes.bool
+}
 
-export default ScorePicker;
+export default ScorePicker

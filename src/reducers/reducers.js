@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash'
 
 import {
   UPDATE_CURRENT,
@@ -8,7 +8,8 @@ import {
   CHANGE_LABELS,
   UNDO_LAST_SCORE,
   ADD_ALERT,
-  REMOVE_ALERT } from '../actions';
+  REMOVE_ALERT
+} from '../actions'
 
 const defaultRows = [
   { key: 0, id: 0, value: 0 },
@@ -16,8 +17,8 @@ const defaultRows = [
   { key: 2, id: 2, value: 0 },
   { key: 3, id: 3, value: 0 },
   { key: 4, id: 4, value: 0 },
-  { key: 5, id: 5, value: 0 },
-];
+  { key: 5, id: 5, value: 0 }
+]
 
 const defaultLabels = {
   id: 'dantai',
@@ -28,45 +29,42 @@ const defaultLabels = {
     'Tekninen vaativuus',
     'Hengitys ja teho',
     'Vaikutelma',
-    'Lisäpiste',
-  ],
-};
+    'Lisäpiste'
+  ]
+}
 
 const currentCard = (state = _.cloneDeep(defaultRows), action) => {
   switch (action.type) {
     case UPDATE_CURRENT:
-      return action.rows;
+      return action.rows
     case CLEAR_CURRENT:
-      return _.cloneDeep(defaultRows);
+      return _.cloneDeep(defaultRows)
     default:
-      return state;
+      return state
   }
-};
+}
 
 const scoreCards = (state = [], action) => {
   switch (action.type) {
     case ADD_SCORE:
-      return [
-        ...state,
-        action.scores,
-      ];
+      return [...state, action.scores]
     case CLEAR_SCORES:
-      return [];
+      return []
     case UNDO_LAST_SCORE:
-      return state.slice(0, -1);
+      return state.slice(0, -1)
     default:
-      return state;
+      return state
   }
-};
+}
 
 const labels = (state = defaultLabels, action) => {
   switch (action.type) {
     case CHANGE_LABELS:
-      return action.labels;
+      return action.labels
     default:
-      return state;
+      return state
   }
-};
+}
 
 const alerts = (state = [], action) => {
   switch (action.type) {
@@ -76,14 +74,14 @@ const alerts = (state = [], action) => {
         {
           text: action.text,
           style: action.style,
-          id: action.id,
-        },
-      ];
+          id: action.id
+        }
+      ]
     case REMOVE_ALERT:
-      return state.filter(alert => alert.id !== action.id);
+      return state.filter(alert => alert.id !== action.id)
     default:
-      return state;
+      return state
   }
-};
+}
 
-export { currentCard, scoreCards, labels, alerts };
+export { currentCard, scoreCards, labels, alerts }

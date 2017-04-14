@@ -1,5 +1,5 @@
-import React from 'react';
-import marked from 'marked';
+import React from 'react'
+import marked from 'marked'
 
 const helpText = `
 DANTAI HOKEI
@@ -60,12 +60,13 @@ Tuomari tarkkailee tehtyjen hyökkäysten etäisyyttä ja kohteen järkevyyttä
 **5. Ratkaisutekniikan etäisyys ja ajoitus**
 
 Tuomari arvioi ratkaisutekniikan etäisyyttä ja ajoitusta
-`;
+`
 
-const HelpPage = () =>
+const HelpPage = () => (
   <div
     className="helptext"
     dangerouslySetInnerHTML={{ __html: marked(helpText, { sanitize: true }) }}
-  />;
+  />
+)
 
-export default HelpPage;
+export default HelpPage

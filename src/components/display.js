@@ -1,24 +1,23 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { browserHistory } from 'react-router';
+import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { browserHistory } from 'react-router'
 
-import Score from '../utils/score';
-import * as Actions from '../actions';
+import Score from '../utils/score'
+import * as Actions from '../actions'
 
-const ScoreDisplay = (props) => {
-  const isNav = props.location.query.navigation;
-  const rows = props.scores[props.scores.length - 1];
+const ScoreDisplay = props => {
+  const isNav = props.location.query.navigation
+  const rows = props.scores[props.scores.length - 1]
   const buttons = isNav
     ? ''
-    : (
-      <div className="row">
+    : <div className="row">
         <div className="col-md-2 col-md-offset-3">
           <button
             className="btn btn-warning"
             onClick={() => {
-              props.undoLastScore();
-              browserHistory.push('/scorecard');
+              props.undoLastScore()
+              browserHistory.push('/scorecard')
             }}
           >
             Peru
@@ -28,34 +27,38 @@ const ScoreDisplay = (props) => {
           <button
             className="btn btn-success"
             onClick={() => {
-              props.clearCurrent();
-              browserHistory.push('/scorecard');
+              props.clearCurrent()
+              browserHistory.push('/scorecard')
             }}
           >
             Seuraava
           </button>
         </div>
       </div>
-    );
   return (
     <div className="container">
-      <h1 className="totaldisp">{Math.round(Score.calcTotal(rows) * 10) / 10}</h1>
+      <h1 className="totaldisp">
+        {Math.round(Score.calcTotal(rows) * 10) / 10}
+      </h1>
       {buttons}
     </div>
-  );
-};
+  )
+}
 
 function mapStateToProps(state) {
   return {
-    scores: state.scores,
-  };
+    scores: state.scores
+  }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    undoLastScore: Actions.undoLastScore,
-    clearCurrent: Actions.clearCurrent,
-  }, dispatch);
+  return bindActionCreators(
+    {
+      undoLastScore: Actions.undoLastScore,
+      clearCurrent: Actions.clearCurrent
+    },
+    dispatch
+  )
 }
 
 ScoreDisplay.propTypes = {
@@ -64,11 +67,13 @@ ScoreDisplay.propTypes = {
       React.PropTypes.shape({
         key: React.PropTypes.number,
         id: React.PropTypes.number,
-        value: React.PropTypes.number,
-      }))).isRequired,
+        value: React.PropTypes.number
+      })
+    )
+  ).isRequired,
   undoLastScore: React.PropTypes.func.isRequired,
   clearCurrent: React.PropTypes.func.isRequired,
-  location: React.PropTypes.object,
-};
+  location: React.PropTypes.object
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ScoreDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(ScoreDisplay)

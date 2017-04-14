@@ -1,27 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import * as storage from 'redux-storage';
-import createEngine from 'redux-storage-engine-localstorage';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import * as storage from 'redux-storage'
+import createEngine from 'redux-storage-engine-localstorage'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
-import App from './components/app';
-import Scorecard from './components/scorecard';
-import ScoreDisplay from './components/display';
-import HistoryTable from './components/historytable';
-import HelpPage from './components/helppage';
-import rootReducer from './reducers';
-import { ADD_ALERT, REMOVE_ALERT } from './actions';
+import App from './components/app'
+import Scorecard from './components/scorecard'
+import ScoreDisplay from './components/display'
+import HistoryTable from './components/historytable'
+import HelpPage from './components/helppage'
+import rootReducer from './reducers'
+import { ADD_ALERT, REMOVE_ALERT } from './actions'
 
+const reducer = storage.reducer(rootReducer)
+const engine = createEngine('judgepad')
+const middleware = storage.createMiddleware(engine, [ADD_ALERT, REMOVE_ALERT])
+const createStoreWithMiddleware = applyMiddleware(middleware)(createStore)
+const store = createStoreWithMiddleware(reducer)
 
-const reducer = storage.reducer(rootReducer);
-const engine = createEngine('judgepad');
-const middleware = storage.createMiddleware(engine, [ADD_ALERT, REMOVE_ALERT]);
-const createStoreWithMiddleware = applyMiddleware(middleware)(createStore);
-const store = createStoreWithMiddleware(reducer);
-
-const load = storage.createLoader(engine);
+const load = storage.createLoader(engine)
 load(store).then(() => {
   ReactDOM.render(
     <Provider store={store}>
@@ -34,6 +33,7 @@ load(store).then(() => {
           <Route path="/help" component={HelpPage} />
         </Route>
       </Router>
-    </Provider>
-    , document.querySelector('.main'));
-});
+    </Provider>,
+    document.querySelector('.main')
+  )
+})
