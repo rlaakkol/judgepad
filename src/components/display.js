@@ -12,9 +12,9 @@ const ScoreDisplay = props => {
   const buttons = isNav
     ? ''
     : <div className="row">
-        <div className="col-md-2 col-md-offset-3">
+        <div className="col-sm-2 col-sm-offset-3">
           <button
-            className="btn btn-warning"
+            className="btn btn-block btn-warning"
             onClick={() => {
               props.undoLastScore()
               browserHistory.push('/scorecard')
@@ -23,9 +23,9 @@ const ScoreDisplay = props => {
             Peru
           </button>
         </div>
-        <div className="col-md-2 col-md-offset-2">
+        <div className="col-sm-2 col-sm-offset-2">
           <button
-            className="btn btn-success"
+            className="btn btn-block btn-success"
             onClick={() => {
               props.clearCurrent()
               browserHistory.push('/scorecard')
@@ -36,11 +36,15 @@ const ScoreDisplay = props => {
         </div>
       </div>
   return (
-    <div className="container">
-      <h1 className="totaldisp">
-        {Math.round(Score.calcTotal(rows) * 10) / 10}
-      </h1>
-      {buttons}
+    <div>
+      <div className="container">
+        <h1 className="totaldisp">
+          {Math.round(Score.calcTotal(rows) * 10) / 10}
+        </h1>
+      </div>
+      <div className="container footer-fixed">
+        {buttons}
+      </div>
     </div>
   )
 }

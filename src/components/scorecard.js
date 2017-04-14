@@ -63,14 +63,16 @@ const Scorecard = props => {
             {isTie ? warningSign : ''}
           </div>
         </div>
+      </div>
+      <div className="container footer-fixed">
         <div className="row equal">
           <div className="col-md-2 col-md-offset-3">
-            <button className="btn btn-warning" onClick={props.clearCurrent}>
+            <button className="btn btn-block btn-warning" onClick={props.clearCurrent}>
               Tyhjennä
             </button>
           </div>
           <div className="col-md-2 col-md-offset-2">
-            <SubmitButton className="btn btn-success" nextPage="/display">
+            <SubmitButton className="btn btn-block btn-success" nextPage="/display">
               Tallenna ja näytä
             </SubmitButton>
           </div>
