@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -31,13 +32,13 @@ const mapDispatchToProps = dispatch =>
 const mapStateToProps = state => ({ alerts: state.alerts })
 
 Alert.propTypes = {
-  alert: React.PropTypes.shape({
-    text: React.PropTypes.string,
-    style: React.PropTypes.string,
-    id: React.PropTypes.string
+  alert: PropTypes.shape({
+    text: PropTypes.string,
+    style: PropTypes.string,
+    id: PropTypes.string
   }).isRequired,
-  style: React.PropTypes.string.isRequired,
-  removeAlert: React.PropTypes.func.isRequired
+  style: PropTypes.string,
+  removeAlert: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Alert)
