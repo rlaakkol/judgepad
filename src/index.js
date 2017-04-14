@@ -12,11 +12,11 @@ import ScoreDisplay from './components/display'
 import HistoryTable from './components/historytable'
 import HelpPage from './components/helppage'
 import rootReducer from './reducers'
-import { ADD_ALERT, REMOVE_ALERT } from './actions'
+import { ADD_ALERT } from './actions'
 
 const reducer = storage.reducer(rootReducer)
 const engine = createEngine('judgepad')
-const middleware = storage.createMiddleware(engine, [ADD_ALERT, REMOVE_ALERT])
+const middleware = storage.createMiddleware(engine, [ADD_ALERT])
 const createStoreWithMiddleware = applyMiddleware(middleware)(createStore)
 const store = createStoreWithMiddleware(reducer)
 
