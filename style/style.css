@@ -27,11 +27,16 @@ body {
 }
 
 .footer-fixed {
-  position: fixed;
-  bottom: 130px;
   width: 100%;
   height: 50px;
   padding-bottom: 0;
+}
+
+@media (min-height: 720px) {
+  .footer-fixed {
+    position: fixed;
+    bottom: 130px;
+  }
 }
 
  button.close-btn {
