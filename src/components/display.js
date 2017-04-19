@@ -9,6 +9,7 @@ import * as Actions from '../actions'
 const ScoreDisplay = props => {
   const isNav = props.location.query.navigation
   const rows = props.scores[props.scores.length - 1]
+  const score = rows ? Math.round(Score.calcTotal(rows) * 10) / 10 : 'N/A'
   const buttons = isNav
     ? ''
     : <div className="row">
@@ -39,7 +40,7 @@ const ScoreDisplay = props => {
     <div>
       <div className="container">
         <h1 className="totaldisp">
-          {Math.round(Score.calcTotal(rows) * 10) / 10}
+          {score}
         </h1>
       </div>
       <div className="container footer-fixed">
