@@ -19,8 +19,8 @@ Vaativuuspisteet tulevat automaattisesti:
 - sen hokei 2 pistettä
 - un hokei 3 pistettä
 - hen hokei 4 pistettä
-- nen hokei 5 pistettä
-- ten hokei 6 pistettä
+- nen, jinsei no hokei 5 pistettä
+- ten, tensei, chisei no hokei 6 pistettä
 - ten hokei yhden käden sokutenilla 7 pistettä
 - senin, hen, nentai, ten hokei puolivoltilla eteen- tai taaksepäin 8 pistettä
 - senin, hen, nentai, ten hokei kokovoltilla eteen, taakse tai perhosvoltilla 9 pistettä
