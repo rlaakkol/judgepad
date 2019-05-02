@@ -5,61 +5,61 @@ const helpText = `
 DANTAI HOKEI
 ------------
 
-**1. Muodon säilyminen ja samanaikaisuus**
+**1. Formation preservation, synchronization**
 
-Tuomari tarkkailee, pysyykö alkuperäinen muoto ja liikkeiden samanaikaisuus koko hokein ajan
+The judge observes whether the original formation is preserved, and all movements are done in synchronization during the entire hokei.
 
-**2. Tekninen puhtaus**
+**2. Technical purity**
 
-Tuomari arvioi tekniikoiden, kamaen, katseen käytön, unsokun ja unshinin puhtautta
+The judge evaluates the technical purity of techniques, kamae, chakugan, unsoku and unshin.
 
-**3. Tekninen vaativuus**
+**3. Technical difficulty**
 
-Vaativuuspisteet tulevat automaattisesti:
-- sen hokei 2 pistettä
-- un hokei 3 pistettä
-- hen hokei 4 pistettä
-- nen, jinsei no hokei 5 pistettä
-- ten, tensei, chisei no hokei 6 pistettä
-- ten hokei yhden käden sokutenilla 7 pistettä
-- senin, hen, nentai, ten hokei puolivoltilla eteen- tai taaksepäin 8 pistettä
-- senin, hen, nentai, ten hokei kokovoltilla eteen, taakse tai perhosvoltilla 9 pistettä
-- nentai, ten hokei kierteisellä voltilla 10 pistettä
+The technical difficulty points are given automatically:
+- sen hokei 2 points
+- un hokei 3 points
+- hen hokei 4 points
+- nen, jinsei no hokei 5 points
+- ten, tensei, chisei no hokei 6 points
+- ten hokei with one-handed cardwheel 7 points
+- senin, hen, nentai, ten hokei with handspring forward or backward 8 points
+- senin, hen, nentai, ten hokei with somersault forward, backward or sideways 9 points
+- nentai, ten hokei with twisted somersault 10 points
 
-Kaikkien joukkueen jäsenten pitää tehdä sama korkea tengi. Tengin puhtaudella ei ole merkitystä tässä kategoriassa. Epäonnistuneen tengin vähennykset huomioidaan teknisen puhtauden kategoriassa.
+All team members must perform the same higher level tengi. The technical purity of the tengi is not evaluated in this category. The points deductions for failed tengi are taken into account in the technical purity category.
 
-**4. Hengitys ja teho**
+**4. Breathing and effectiveness**
 
-Tuomari arvioi hengitystä, kiaita, tehoa ja voimantuottoa sekä toteutuuko tekniikoissa hyökkäys ja puolustus
+The judge evaluates the breathing, kiai, effect and generation of power, and if attack and defense are realized in the techniques.
 
-**5. Vaikutelma**
+**5. Impression**
 
-Tuomari arvioi toteutuuko valmius ja herännyt mieli, hitaat ja nopeat/vahvat ja heikot/laajat ja suppeat/heikot ja voimakkaat liikkeet sekä lopetus ja valppaus
+The judge evaluates if the readiness and clear mind, slow and fast/strong and weak/wide and compact movements, and the finish and alertness.
 
 TENKAI
 ------
 
-**1. Tilan käyttö ja liikkeen jatkuvuus**
+**1. Use of space and continuity of movement**
 
-Tuomari tarkkailee tatamialueen käyttöä (pyritään käymään tenkain aikana kaikissa kulmissa ja keskellä), jos kuolee ensimmäisten joukossa ei sakoiteta jos ei ehdi kaikkiin kulmiin.
+The judge evaluates the use of the tatami area (the aim is to visit all corners and the middle of the area during the tenkai), but if the competitor is the one of the first to be taken out their points are not deducted for not visiting all corners.
 
-Tuomari tarkkailee liikkeen jatkuvuutta kombinoinnissa ja tuleeko liikkeitä eri tasoille alas-keskelle-ylös
+The judge evaluates the continuity of the movement in combinations and whether movements are performed for different levels (low – middle – high).
 
-**2. Tekninen puhtaus**
+**2. Technical purity**
 
-Tuomari arvioi tekniikoiden, kamaen, unsokun ja unshinin puhtautta
+The judge evaluates the technical purity of techniques, kamae, unsoku and unshin.
 
-**3. Tekninen vaativuus**
+**3. Technical difficulty**
 
-Tuomari tarkkailee tekniikoiden ja unshinin vaativuutta, sekä tekniikoiden määrää (wakiyakuilla 2 kokonaista ja kuolemaan johtanut tekniikka omasta tekniikkaluokasta)
+The judge evaluates the technical difficulty of the techniques and unshin, as well as the number of techniques performed (for a wakiyaku, there must be a minimum of two complete techniques from their own class of techniques and the final technique that leads to the “death”)
 
-**4. Realistisuus**
+**4. Realisticity**
 
-Tuomari tarkkailee tehtyjen hyökkäysten etäisyyttä ja kohteen järkevyyttä
+The judge evaluates the distance of attacks and the rationality of the target.
 
-**5. Ratkaisutekniikan etäisyys ja ajoitus**
+**5. The distance and timing of the finishing technique**
 
-Tuomari arvioi ratkaisutekniikan etäisyyttä ja ajoitusta
+The judge evaluates the distance and timing of the final, finishing technique.
 `
 
 const HelpPage = () => (

@@ -21,7 +21,7 @@ const ScoreDisplay = props => {
               browserHistory.push('/scorecard')
             }}
           >
-            Peru
+            Cancel
           </button>
         </div>
         <div className="col-sm-2 col-sm-offset-2">
@@ -32,7 +32,7 @@ const ScoreDisplay = props => {
               browserHistory.push('/scorecard')
             }}
           >
-            Seuraava
+            Next
           </button>
         </div>
       </div>

@@ -24,12 +24,12 @@ const defaultLabels = {
   id: 'dantai',
   name: 'Dantai Hokei',
   labels: [
-    'Muodon säilyminen, samanaikaisuus',
-    'Tekninen puhtaus',
-    'Tekninen vaativuus',
-    'Hengitys ja teho',
-    'Vaikutelma',
-    'Lisäpiste'
+    'Form preservation, synchronization',
+    'Technical purity',
+    'Technical difficulty',
+    'Breathing and effectiveness',
+    'Impression',
+    'Additional point'
   ]
 }
 

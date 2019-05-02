@@ -44,7 +44,7 @@ const Scorecard = props => {
       <div className="container">
         <div className="row equal">
           <div className="col-lg-12">
-            <strong>Joukkue {props.history.length + 1}</strong>
+            <strong>Team {props.history.length + 1}</strong>
           </div>
         </div>
         <div className="h-divider" />
@@ -53,10 +53,10 @@ const Scorecard = props => {
         <div className="h-divider" />
         <div className="row equal">
           <div className="col-md-6">
-            <strong>Kokonaispisteet:</strong> {Math.round(total * 10) / 10}
+            <strong>Total score:</strong> {Math.round(total * 10) / 10}
           </div>
           <div className="col-md-6">
-            <strong>Tämänhetkinen sijoitus:</strong>
+            <strong>Current standing:</strong>
             {' '}
             {standing}
             {' '}
@@ -68,18 +68,18 @@ const Scorecard = props => {
         <div className="row equal">
           <div className="col-md-2 col-md-offset-3">
             <button className="btn btn-block btn-warning" onClick={props.clearCurrent}>
-              Tyhjennä
+              Clear
             </button>
           </div>
           <div className="col-md-2 col-md-offset-2">
             <SubmitButton className="btn btn-block btn-success" nextPage="/display">
-              Tallenna ja näytä
+              Save and display
             </SubmitButton>
           </div>
         </div>
         <div className="row equal">
           <div className="col-md-4 col-md-offset-6 text-center">
-            {isTie ? 'Tasapisteet, et voi tallentaa!' : ''}
+            {isTie ? 'Equal points not possible to save!' : ''}
           </div>
         </div>
       </div>

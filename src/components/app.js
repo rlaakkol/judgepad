@@ -13,12 +13,12 @@ const dantaiLabels = {
   id: 'dantai',
   name: 'Dantai Hokei',
   labels: [
-    'Muodon säilyminen, samanaikaisuus',
-    'Tekninen puhtaus',
-    'Tekninen vaativuus',
-    'Hengitys ja teho',
-    'Vaikutelma',
-    'Lisäpiste'
+    'Form preservation, synchronization',
+    'Technical purity',
+    'Technical difficulty',
+    'Breathing and effectiveness',
+    'Impression',
+    'Additional point'
   ]
 }
 
@@ -26,12 +26,12 @@ const tenkaiLabels = {
   id: 'tenkai',
   name: 'Tenkai',
   labels: [
-    'Tilan käyttö ja liikkeen jatkuvuus',
-    'Tekninen puhtaus',
-    'Tekninen vaativuus',
-    'Realistisuus',
-    'Ratkaisutekniikan etäisyys ja ajoitus',
-    'Lisäpiste'
+    'Use of space and continuity of movement',
+    'Technical purity',
+    'Technical difficulty',
+    'Realisticity',
+    'The disctance and timing of the finishing technique',
+    'Additional point'
   ]
 }
 
@@ -74,40 +74,40 @@ const App = props => {
           <Nav>
             <LinkContainer to="/scorecard">
               <NavItem eventKey={1}>
-                Pisteytys
+                Scoring
               </NavItem>
             </LinkContainer>
             <LinkContainer to="/history">
               <NavItem eventKey={3}>
-                Historia
+                History
               </NavItem>
             </LinkContainer>
           </Nav>
           <Nav pullRight>
             <LinkContainer to="/display?navigation=true">
               <NavItem eventKey={2}>
-                Näytä edellinen tallennettu
+                Show latest record
               </NavItem>
             </LinkContainer>
             <LinkContainer to="/help">
               <NavItem eventKey={4}>
-                Ohjeet
+                Instructions
               </NavItem>
             </LinkContainer>
             <NavDropdown
-              title="Hallinta"
+              title="Settings"
               id="label-mode-dropdown"
               onSelect={handleDropdownAction}
             >
               <MenuItem eventKey={'cancel'}>
-                Poista uusin
+                Delete latest
               </MenuItem>
               <MenuItem eventKey={'clear'}>
-                Tyhjennä historia
+                Clear history
               </MenuItem>
             </NavDropdown>
             <NavDropdown
-              title="Laji"
+              title="Event"
               id="label-mode-dropdown"
               onSelect={handleDropdownAction}
             >

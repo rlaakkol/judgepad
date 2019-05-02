@@ -12,7 +12,7 @@ const SubmitButton = props => {
   const handleClick = () => {
     props.addScore(props.rows)
     const id = uuid()
-    props.addAlert('Tallennettu', 'alert alert-success', id)
+    props.addAlert('Saved', 'alert alert-success', id)
     setTimeout(() => props.removeAlert(id), 2000)
     browserHistory.push(props.nextPage)
   }

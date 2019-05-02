@@ -7,12 +7,12 @@ import Score from '../utils/score'
 const HistoryTable = props => {
   const header = _.range(0, props.scores.length).map(i => (
     <th key={i}>
-      Joukkue {i + 1}
+      Team {i + 1}
     </th>
   ))
   header.push(
     <th key="current">
-      Nykyinen
+      Current
     </th>
   )
   const scores = [...props.scores, props.current]
@@ -37,15 +37,15 @@ const HistoryTable = props => {
     <div className="table-responsive">
       <table className="table table-sm table-nonfluid">
         <thead>
-          <tr><th>Kategoria/Joukkue</th>{header}</tr>
+          <tr><th>Category/Team</th>{header}</tr>
         </thead>
         <tbody>
           {rowDivs}
           <tr>
-            <th>Kokonaispisteet</th>{totals}
+            <th>Final score</th>{totals}
           </tr>
           <tr>
-            <th>Sijoitus</th>{standings}
+            <th>Standings</th>{standings}
           </tr>
         </tbody>
       </table>
