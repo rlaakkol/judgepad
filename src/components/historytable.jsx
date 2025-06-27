@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import PropTypes from 'prop-types'
 
 import Score from '../utils/score'
 
@@ -54,26 +55,26 @@ const HistoryTable = props => {
 }
 
 HistoryTable.propTypes = {
-  scores: React.PropTypes.arrayOf(
-    React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        key: React.PropTypes.number,
-        id: React.PropTypes.number,
-        value: React.PropTypes.number
+  scores: PropTypes.arrayOf(
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.number,
+        id: PropTypes.number,
+        value: PropTypes.number
       })
     )
   ).isRequired,
-  current: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      key: React.PropTypes.number,
-      id: React.PropTypes.number,
-      value: React.PropTypes.number
+  current: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.number,
+      id: PropTypes.number,
+      value: PropTypes.number
     })
   ).isRequired,
-  labels: React.PropTypes.shape({
-    id: React.PropTypes.string,
-    name: React.PropTypes.string,
-    labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired
+  labels: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    labels: PropTypes.arrayOf(PropTypes.string).isRequired
   })
 }
 

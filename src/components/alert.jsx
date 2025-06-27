@@ -1,11 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
-import * as Actions from '../actions'
-
-const Alert = props => (
+export const Alert = props => (
   <div
     className={`message ${props.alert.style}`}
     key={props.alert.id}
@@ -21,16 +17,6 @@ const Alert = props => (
   </div>
 )
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      removeAlert: Actions.removeAlert
-    },
-    dispatch
-  )
-
-const mapStateToProps = state => ({ alerts: state.alerts })
-
 Alert.propTypes = {
   alert: PropTypes.shape({
     text: PropTypes.string,
@@ -41,4 +27,4 @@ Alert.propTypes = {
   removeAlert: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Alert)
+export default Alert

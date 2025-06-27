@@ -1,5 +1,6 @@
 import React from 'react'
-import marked from 'marked'
+import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 
 const helpText = `
 DANTAI HOKEI
@@ -65,7 +66,7 @@ The judge evaluates the distance and timing of the final, finishing technique.
 const HelpPage = () => (
   <div
     className="helptext"
-    dangerouslySetInnerHTML={{ __html: marked(helpText, { sanitize: true }) }}
+    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(helpText)) }}
   />
 )
 

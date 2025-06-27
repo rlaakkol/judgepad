@@ -1,20 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import uuid from 'node-uuid'
+import { v4 as uuidv4 } from 'uuid'
+import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
-import { browserHistory } from 'react-router'
 
 import * as Actions from '../actions'
 import Score from '../utils/score'
 
 const SubmitButton = props => {
+  const navigate = useNavigate()
   const handleClick = () => {
     props.addScore(props.rows)
-    const id = uuid()
+    const id = uuidv4()
     props.addAlert('Saved', 'alert alert-success', id)
     setTimeout(() => props.removeAlert(id), 2000)
-    browserHistory.push(props.nextPage)
+    navigate(props.nextPage)
   }
   const disabled = Score.isTie(props.history, props.rows)
   return (
@@ -47,28 +49,28 @@ function mapDispatchToProps(dispatch) {
 }
 
 SubmitButton.propTypes = {
-  nextPage: React.PropTypes.string,
-  rows: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      key: React.PropTypes.number,
-      id: React.PropTypes.number,
-      value: React.PropTypes.number
+  nextPage: PropTypes.string,
+  rows: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.number,
+      id: PropTypes.number,
+      value: PropTypes.number
     })
   ).isRequired,
-  history: React.PropTypes.arrayOf(
-    React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        key: React.PropTypes.number,
-        id: React.PropTypes.number,
-        value: React.PropTypes.number
+  history: PropTypes.arrayOf(
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.number,
+        id: PropTypes.number,
+        value: PropTypes.number
       })
     )
   ).isRequired,
-  addScore: React.PropTypes.func.isRequired,
-  removeAlert: React.PropTypes.func.isRequired,
-  addAlert: React.PropTypes.func.isRequired,
-  children: React.PropTypes.string.isRequired,
-  className: React.PropTypes.string.isRequired
+  addScore: PropTypes.func.isRequired,
+  removeAlert: PropTypes.func.isRequired,
+  addAlert: PropTypes.func.isRequired,
+  children: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubmitButton)
