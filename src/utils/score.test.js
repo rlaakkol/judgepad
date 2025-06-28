@@ -19,7 +19,7 @@ describe('Score utility', () => {
 
     it('handles an empty array by throwing an error', () => {
       // The function will throw an error because reduce is called on an empty array without an initial value
-      expect(() => Score.calcTotal([])).toBe(0);
+      expect(() => Score.calcTotal([])).toThrow();
     });
   });
 

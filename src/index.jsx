@@ -9,6 +9,7 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 import { PersistGate } from 'redux-persist/integration/react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+import './i18n'
 import App from './components/app.jsx'
 import Scorecard from './components/scorecard.jsx'
 import ScoreDisplay from './components/display.jsx'

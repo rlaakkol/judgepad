@@ -2,18 +2,20 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 
 import Score from '../utils/score'
 
 const HistoryTable = props => {
+  const { t } = useTranslation()
   const header = _.range(0, props.scores.length).map(i => (
     <th key={i}>
-      Team {i + 1}
+      {t('historyTable.team')} {i + 1}
     </th>
   ))
   header.push(
     <th key="current">
-      Current
+      {t('historyTable.current')}
     </th>
   )
   const scores = [...props.scores, props.current]
@@ -38,15 +40,15 @@ const HistoryTable = props => {
     <div className="table-responsive">
       <table className="table table-sm table-nonfluid">
         <thead>
-          <tr><th>Category/Team</th>{header}</tr>
+          <tr><th>{t('historyTable.categoryTeam')}</th>{header}</tr>
         </thead>
         <tbody>
           {rowDivs}
           <tr>
-            <th>Final score</th>{totals}
+            <th>{t('historyTable.finalScore')}</th>{totals}
           </tr>
           <tr>
-            <th>Standings</th>{standings}
+            <th>{t('historyTable.standings')}</th>{standings}
           </tr>
         </tbody>
       </table>

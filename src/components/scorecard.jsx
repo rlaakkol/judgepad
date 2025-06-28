@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 
 import _ from 'lodash'
 
@@ -8,6 +9,7 @@ import SubmitButton from './submit.jsx'
 import Score from '../utils/score'
 
 const Scorecard = props => {
+  const { t } = useTranslation()
   const handleValueChange = (id, value) => {
     const rows = _.cloneDeep(props.rows)
     const i = rows.findIndex(e => e.id === id)
@@ -47,7 +49,7 @@ const Scorecard = props => {
     <div>
       <div className="row">
         <div className="col-12">
-          <strong>Team {props.history.length + 1}</strong>
+          <strong>{t('scorecard.team')} {props.history.length + 1}</strong>
         </div>
       </div>
       <hr className="my-3" />
@@ -56,10 +58,10 @@ const Scorecard = props => {
       <hr className="my-3" />
       <div className="row equal">
         <div className="col-md-6">
-          <strong>Total score:</strong> {Math.round(total * 10) / 10}
+          <strong>{t('scorecard.totalScore')}:</strong> {Math.round(total * 10) / 10}
         </div>
         <div className="col-md-6">
-          <strong>Current standing:</strong>
+          <strong>{t('scorecard.currentStanding')}:</strong>
           {' '}
           {standing}
           {' '}
@@ -70,18 +72,18 @@ const Scorecard = props => {
         <div className="row justify-content-center gx-5">
           <div className="col-md-3 d-grid">
             <button className="btn btn-warning" onClick={props.clearCurrent}>
-              Clear
+              {t('scorecard.clear')}
             </button>
           </div>
           <div className="col-md-3 d-grid">
             <SubmitButton className="btn btn-success" nextPage="/display">
-              Save and display
+              {t('scorecard.saveAndDisplay')}
             </SubmitButton>
           </div>
         </div>
         <div className="row justify-content-center mt-2">
           <div className="col-md-6 text-center">
-            {isTie ? 'Equal points not possible to save!' : ''}
+            {isTie ? t('scorecard.equalPointsNotPossibleToSave') : ''}
           </div>
         </div>
       </div>

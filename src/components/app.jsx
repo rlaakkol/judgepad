@@ -1,37 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { NavLink, Outlet } from 'react-router-dom'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 
 import Alerts from './alerts.jsx'
 
-const dantaiLabels = {
-  id: 'dantai',
-  name: 'Dantai Hokei',
-  labels: [
-    'Form preservation, synchronization',
-    'Technical purity',
-    'Technical difficulty',
-    'Breathing and effectiveness',
-    'Impression',
-    'Additional point'
-  ]
-}
-
-const tenkaiLabels = {
-  id: 'tenkai',
-  name: 'Tenkai',
-  labels: [
-    'Use of space and continuity of movement',
-    'Technical purity',
-    'Technical difficulty',
-    'Realisticity',
-    'The disctance and timing of the finishing technique',
-    'Additional point'
-  ]
-}
-
 const App = props => {
+  const { t, i18n } = useTranslation()
+  const dantaiLabels = {
+    id: 'dantai',
+    name: t('dantaiLabels.name'),
+    labels: t('dantaiLabels.labels', { returnObjects: true })
+  }
+
+  const tenkaiLabels = {
+    id: 'tenkai',
+    name: t('tenkaiLabels.name'),
+    labels: t('tenkaiLabels.labels', { returnObjects: true })
+  }
+
+  useEffect(() => {
+    if (props.labels.id === 'dantai') {
+      props.changeLabels(dantaiLabels)
+    } else {
+      props.changeLabels(tenkaiLabels)
+    }
+  }, [i18n.language])
+
   const handleDropdownAction = key => {
     switch (key) {
       case 'dantai':
@@ -51,6 +47,10 @@ const App = props => {
     }
   }
 
+  const handleLanguageChange = lang => {
+    i18n.changeLanguage(lang)
+  }
+
   return (
     <div>
       <Alerts alerts={props.alerts} removeAlert={props.removeAlert} />
@@ -66,34 +66,41 @@ const App = props => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link as={NavLink} to="/scorecard">
-                Scoring
+                {t('navigation.scoring')}
               </Nav.Link>
               <Nav.Link as={NavLink} to="/history">
-                History
+                {t('navigation.history')}
               </Nav.Link>
             </Nav>
             <Nav>
               <Nav.Link as={NavLink} to="/display?navigation=true">
-                Show latest record
+                {t('navigation.showLatestRecord')}
               </Nav.Link>
               <Nav.Link as={NavLink} to="/help">
-                Instructions
+                {t('navigation.instructions')}
               </Nav.Link>
               <NavDropdown
-                title="Settings"
+                title={t('navigation.settings')}
                 id="settings-dropdown"
                 onSelect={handleDropdownAction}
                 drop="up"
               >
+                <NavDropdown.Item onClick={() => handleLanguageChange('en')}>
+                  {t('navigation.english')}
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => handleLanguageChange('fi')}>
+                  {t('navigation.finnish')}
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
                 <NavDropdown.Item eventKey={'cancel'}>
-                  Delete latest
+                  {t('navigation.deleteLatest')}
                 </NavDropdown.Item>
                 <NavDropdown.Item eventKey={'clear'}>
-                  Clear history
+                  {t('navigation.clearHistory')}
                 </NavDropdown.Item>
               </NavDropdown>
               <NavDropdown
-                title="Event"
+                title={t('navigation.event')}
                 id="event-dropdown"
                 onSelect={handleDropdownAction}
                 drop="up"
@@ -103,13 +110,13 @@ const App = props => {
                   eventKey={'dantai'}
                   active={props.labels.id === 'dantai'}
                 >
-                  Dantai Hokei
+                  {t('dantaiLabels.name')}
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   eventKey={'tenkai'}
                   active={props.labels.id === 'tenkai'}
                 >
-                  Tenkai
+                  {t('tenkaiLabels.name')}
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>

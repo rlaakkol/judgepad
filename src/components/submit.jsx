@@ -5,16 +5,18 @@ import { v4 as uuidv4 } from 'uuid'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 
 import * as Actions from '../actions'
 import Score from '../utils/score'
 
 const SubmitButton = props => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const handleClick = () => {
     props.addScore(props.rows)
     const id = uuidv4()
-    props.addAlert('Saved', 'alert alert-success', id)
+    props.addAlert(t('submit.saved'), 'alert alert-success', id)
     setTimeout(() => props.removeAlert(id), 2000)
     navigate(props.nextPage)
   }

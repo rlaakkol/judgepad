@@ -1,0 +1,112 @@
+{
+  "dantaiLabels": {
+    "name": "Dantai Hokei",
+    "labels": [
+      "Muodon säilyminen, samanaikaisuus",
+      "Tekninen puhtaus",
+      "Tekninen vaativuus",
+      "Hengitys ja teho",
+      "Vaikutelma",
+      "Lisäpiste"
+    ]
+  },
+  "tenkaiLabels": {
+    "name": "Tenkai",
+    "labels": [
+      "Tilan käyttö ja liikkeen jatkuvuus",
+      "Tekninen puhtaus",
+      "Tekninen vaativuus",
+      "Realistisuus",
+      "Ratkaisutekniikan etäisyys ja ajoitus",
+      "Lisäpiste"
+    ]
+  },
+  "navigation": {
+    "scoring": "Pisteytys",
+    "history": "Historia",
+    "showLatestRecord": "Näytä edellinen tallennettu",
+    "instructions": "Ohjeet",
+    "settings": "Hallinta",
+    "deleteLatest": "Poista uusin",
+    "clearHistory": "Tyhjennä historia",
+    "event": "Laji",
+    "english": "English",
+    "finnish": "Suomi"
+  },
+  "confirm": {
+    "areYouSure": "Oletko varma?",
+    "cancel": "Peruuta",
+    "confirm": "Vahvista"
+  },
+  "display": {
+    "cancel": "Peru",
+    "next": "Seuraava",
+    "notApplicable": "N/A"
+  },
+  "helpPage": {
+    "dantaiHokei": {
+      "title": "DANTAI HOKEI",
+      "points1": {
+        "title": "1. Muodon säilyminen ja samanaikaisuus",
+        "description": "Tuomari tarkkailee, pysyykö alkuperäinen muoto ja liikkeiden samanaikaisuus koko hokein ajan"
+      },
+      "points2": {
+        "title": "2. Tekninen puhtaus",
+        "description": "Tuomari arvioi tekniikoiden, kamaen, katseen käytön, unsokun ja unshinin puhtautta"
+      },
+      "points3": {
+        "title": "3. Tekninen vaativuus",
+        "description": "Vaativuuspisteet tulevat automaattisesti:\n- sen hokei 2 pistettä\n- un hokei 3 pistettä\n- hen hokei 4 pistettä\n- nen, jinsei no hokei 5 pistettä\n- ten, tensei, chisei no hokei 6 pistettä\n- ten hokei yhden käden sokutenilla 7 pistettä\n- senin, hen, nentai, ten hokei puolivoltilla eteen- tai taaksepäin 8 pistettä\n- senin, hen, nentai, ten hokei kokovoltilla eteen, taakse tai perhosvoltilla 9 pistettä\n- nentai, ten hokei kierteisellä voltilla 10 pistettä\n\nKaikkien joukkueen jäsenten pitää tehdä sama korkea tengi. Tengin puhtaudella ei ole merkitystä tässä kategoriassa. Epäonnistuneen tengin vähennykset huomioidaan teknisen puhtauden kategoriassa."
+      },
+      "points4": {
+        "title": "4. Hengitys ja teho",
+        "description": "Tuomari arvioi hengitystä, kiaita, tehoa ja voimantuottoa sekä toteutuuko tekniikoissa hyökkäys ja puolustus"
+      },
+      "points5": {
+        "title": "5. Vaikutelma",
+        "description": "Tuomari arvioi toteutuuko valmius ja herännyt mieli, hitaat ja nopeat/vahvat ja heikot/laajat ja suppeat/heikot ja voimakkaat liikkeet sekä lopetus ja valppaus"
+      }
+    },
+    "tenkai": {
+      "title": "TENKAI",
+      "points1": {
+        "title": "1. Tilan käyttö ja liikkeen jatkuvuus",
+        "description": "Tuomari tarkkailee tatamialueen käyttöä (pyritään käymään tenkain aikana kaikissa kulmissa ja keskellä), jos kuolee ensimmäisten joukossa ei sakoiteta jos ei ehdi kaikkiin kulmiin.\n\nTuomari tarkkailee liikkeen jatkuvuutta kombinoinnissa ja tuleeko liikkeitä eri tasoille alas-keskelle-ylös"
+      },
+      "points2": {
+        "title": "2. Tekninen puhtaus",
+        "description": "Tuomari arvioi tekniikoiden, kamaen, unsokun ja unshinin puhtautta"
+      },
+      "points3": {
+        "title": "3. Tekninen vaativuus",
+        "description": "Tuomari tarkkailee tekniikoiden ja unshinin vaativuutta, sekä tekniikoiden määrää (wakiyakuilla 2 kokonaista ja kuolemaan johtanut tekniikka omasta tekniikkaluokasta)"
+      },
+      "points4": {
+        "title": "4. Realistisuus",
+        "description": "Tuomari tarkkailee tehtyjen hyökkäysten etäisyyttä ja kohteen järkevyyttä"
+      },
+      "points5": {
+        "title": "5. Ratkaisutekniikan etäisyys ja ajoitus",
+        "description": "Tuomari arvioi ratkaisutekniikan etäisyyttä ja ajoitusta"
+      }
+    }
+  },
+  "historyTable": {
+    "team": "Joukkue",
+    "current": "Nykyinen",
+    "categoryTeam": "Kategoria/Joukkue",
+    "finalScore": "Kokonaispisteet",
+    "standings": "Sijoitus"
+  },
+  "scorecard": {
+    "team": "Joukkue",
+    "totalScore": "Kokonaispisteet",
+    "currentStanding": "Tämänhetkinen sijoitus",
+    "clear": "Tyhjennä",
+    "saveAndDisplay": "Tallenna ja näytä",
+    "equalPointsNotPossibleToSave": "Tasapisteet, et voi tallentaa!"
+  },
+  "submit": {
+    "saved": "Tallennettu"
+  }
+}

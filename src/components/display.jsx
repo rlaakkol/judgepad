@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 
 import Score from '../utils/score'
 import * as Actions from '../actions'
@@ -10,9 +11,10 @@ import * as Actions from '../actions'
 const ScoreDisplay = props => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
+  const { t } = useTranslation()
   const isNav = searchParams.get('navigation')
   const rows = props.scores[props.scores.length - 1]
-  const score = rows ? Math.round(Score.calcTotal(rows) * 10) / 10 : 'N/A'
+  const score = rows ? Math.round(Score.calcTotal(rows) * 10) / 10 : t('display.notApplicable')
   const buttons = isNav
     ? ''
     : <div className="action-buttons">
@@ -25,7 +27,7 @@ const ScoreDisplay = props => {
                 navigate('/scorecard')
               }}
             >
-              Cancel
+              {t('display.cancel')}
             </button>
           </div>
           <div className="col-md-3 d-grid">
@@ -36,7 +38,7 @@ const ScoreDisplay = props => {
                 navigate('/scorecard')
               }}
             >
-              Next
+              {t('display.next')}
             </button>
           </div>
         </div>
