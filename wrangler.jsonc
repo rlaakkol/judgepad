@@ -1,0 +1,12 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "judgepad",
+	"compatibility_date": "2025-06-28",
+	"assets": {
+		"not_found_handling": "single-page-application"
+	}
+}
