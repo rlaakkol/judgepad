@@ -1,4 +1,4 @@
-import { Row, Labels, Action } from '../types'
+import { Row, Labels, AppAction } from '../types'
 
 export const ADD_SCORE = 'ADD_SCORE'
 export const UPDATE_CURRENT = 'UPDATE_CURRENT'
@@ -12,31 +12,31 @@ export const REMOVE_ALERT = 'REMOVE_ALERT'
 /*
  * action creators
  */
-export function updateCurrent(rows: Row[]): Action {
+export function updateCurrent(rows: Row[]): AppAction {
   return { type: UPDATE_CURRENT, rows }
 }
 
-export function clearCurrent(): Action {
+export function clearCurrent(): AppAction {
   return { type: CLEAR_CURRENT }
 }
 
-export function addScore(scoreCard: Row[]): Action {
+export function addScore(scoreCard: Row[]): AppAction {
   return { type: ADD_SCORE, scores: scoreCard }
 }
 
-export function clearScores(): Action {
+export function clearScores(): AppAction {
   return { type: CLEAR_SCORES }
 }
 
-export function undoLastScore(): Action {
+export function undoLastScore(): AppAction {
   return { type: UNDO_LAST_SCORE }
 }
 
-export function changeLabels(labels: Labels): Action {
+export function changeLabels(labels: Labels): AppAction {
   return { type: CHANGE_LABELS, labels }
 }
 
-export function addAlert(text: string, style: string, id: string): Action {
+export function addAlert(text: string, style: string, id: string): AppAction {
   return {
     type: ADD_ALERT,
     text,
@@ -45,7 +45,7 @@ export function addAlert(text: string, style: string, id: string): Action {
   }
 }
 
-export function removeAlert(id: string): Action {
+export function removeAlert(id: string): AppAction {
   return {
     type: REMOVE_ALERT,
     id
