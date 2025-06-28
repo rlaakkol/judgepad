@@ -10,8 +10,9 @@ import {
   ADD_ALERT,
   REMOVE_ALERT
 } from '../actions'
+import { Action, Row, Labels, Alert } from '../types'
 
-const defaultRows = [
+const defaultRows: Row[] = [
   { key: 0, id: 0, value: 0 },
   { key: 1, id: 1, value: 0 },
   { key: 2, id: 2, value: 0 },
@@ -20,7 +21,7 @@ const defaultRows = [
   { key: 5, id: 5, value: 0 }
 ]
 
-const defaultLabels = {
+const defaultLabels: Labels = {
   id: 'dantai',
   name: 'Dantai Hokei',
   labels: [
@@ -33,10 +34,10 @@ const defaultLabels = {
   ]
 }
 
-const currentCard = (state = _.cloneDeep(defaultRows), action) => {
+const currentCard = (state: Row[] = _.cloneDeep(defaultRows), action: Action): Row[] => {
   switch (action.type) {
     case UPDATE_CURRENT:
-      return action.rows
+      return action.rows!
     case CLEAR_CURRENT:
       return _.cloneDeep(defaultRows)
     default:
@@ -44,10 +45,10 @@ const currentCard = (state = _.cloneDeep(defaultRows), action) => {
   }
 }
 
-const scoreCards = (state = [], action) => {
+const scoreCards = (state: Row[][] = [], action: Action): Row[][] => {
   switch (action.type) {
     case ADD_SCORE:
-      return [...state, action.scores]
+      return [...state, action.scores!]
     case CLEAR_SCORES:
       return []
     case UNDO_LAST_SCORE:
@@ -57,24 +58,24 @@ const scoreCards = (state = [], action) => {
   }
 }
 
-const labels = (state = defaultLabels, action) => {
+const labels = (state: Labels = defaultLabels, action: Action): Labels => {
   switch (action.type) {
     case CHANGE_LABELS:
-      return action.labels
+      return action.labels!
     default:
       return state
   }
 }
 
-const alerts = (state = [], action) => {
+const alerts = (state: Alert[] = [], action: Action): Alert[] => {
   switch (action.type) {
     case ADD_ALERT:
       return [
         ...state,
         {
-          text: action.text,
-          style: action.style,
-          id: action.id
+          text: action.text!,
+          style: action.style!,
+          id: action.id!
         }
       ]
     case REMOVE_ALERT:

@@ -1,9 +1,16 @@
 import React from 'react'
 import { Button, ButtonGroup, Form } from 'react-bootstrap'
-import PropTypes from 'prop-types'
 
-const ScorePicker = props => {
-  const handleChange = value => props.handleValueChange(props.id, value)
+interface ScorePickerProps {
+  label: string;
+  id: number;
+  value: number;
+  handleValueChange: (id: number, value: number) => void;
+  isExtra?: boolean;
+}
+
+const ScorePicker: React.FC<ScorePickerProps> = (props) => {
+  const handleChange = (value: number) => props.handleValueChange(props.id, value)
 
   const values = props.isExtra ? [-0.5, 0, 0.5] : [...Array(11).keys()]
 
@@ -61,14 +68,6 @@ const ScorePicker = props => {
       </div>
     </div>
   )
-}
-
-ScorePicker.propTypes = {
-  label: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-  handleValueChange: PropTypes.func.isRequired,
-  isExtra: PropTypes.bool
 }
 
 export default ScorePicker

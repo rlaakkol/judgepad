@@ -10,13 +10,14 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import './i18n'
-import App from './components/app.jsx'
-import Scorecard from './components/scorecard.jsx'
-import ScoreDisplay from './components/display.jsx'
-import HistoryTable from './components/historytable.jsx'
-import HelpPage from './components/helppage.jsx'
+import App from './components/app'
+import Scorecard from './components/scorecard'
+import ScoreDisplay from './components/display'
+import HistoryTable from './components/historytable'
+import HelpPage from './components/helppage'
 import rootReducer from './reducers'
 import * as Actions from './actions'
+import { RootState } from './reducers'
 
 const persistConfig = {
   key: 'root',
@@ -28,12 +29,12 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 const store = createStore(persistedReducer)
 const persistor = persistStore(store)
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: RootState) => ({
   alerts: state.alerts,
   labels: state.labels,
 })
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch: any) =>
   bindActionCreators(
     {
       changeLabels: Actions.changeLabels,
@@ -47,12 +48,12 @@ const mapDispatchToProps = dispatch =>
 const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App)
 
 const ConnectedScorecard = connect(
-  state => ({
+  (state: RootState) => ({
     rows: state.current,
     history: state.scores,
     labels: state.labels,
   }),
-  dispatch =>
+  (dispatch: any) =>
     bindActionCreators(
       {
         updateCurrent: Actions.updateCurrent,
@@ -64,21 +65,23 @@ const ConnectedScorecard = connect(
 )(Scorecard)
 
 const container = document.querySelector('.main')
-const root = ReactDOM.createRoot(container)
-root.render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<ConnectedApp />}>
-            <Route index element={<ConnectedScorecard />} />
-            <Route path="scorecard" element={<ConnectedScorecard />} />
-            <Route path="display" element={<ScoreDisplay />} />
-            <Route path="history" element={<HistoryTable />} />
-            <Route path="help" element={<HelpPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </PersistGate>
-  </Provider>
-)
+if (container) {
+  const root = ReactDOM.createRoot(container)
+  root.render(
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<ConnectedApp />}>
+              <Route index element={<ConnectedScorecard />} />
+              <Route path="scorecard" element={<ConnectedScorecard />} />
+              <Route path="display" element={<ScoreDisplay />} />
+              <Route path="history" element={<HistoryTable />} />
+              <Route path="help" element={<HelpPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
+  )
+}

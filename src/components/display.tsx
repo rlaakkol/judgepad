@@ -2,13 +2,20 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { useSearchParams, useNavigate } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
 import Score from '../utils/score'
 import * as Actions from '../actions'
+import { Row } from '../types'
+import { RootState } from '../reducers'
 
-const ScoreDisplay = props => {
+interface ScoreDisplayProps {
+  scores: Row[][];
+  undoLastScore: () => void;
+  clearCurrent: () => void;
+}
+
+const ScoreDisplay: React.FC<ScoreDisplayProps> = (props) => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const { t } = useTranslation()
@@ -57,13 +64,13 @@ const ScoreDisplay = props => {
   )
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: RootState) {
   return {
     scores: state.scores
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any) {
   return bindActionCreators(
     {
       undoLastScore: Actions.undoLastScore,
@@ -71,20 +78,6 @@ function mapDispatchToProps(dispatch) {
     },
     dispatch
   )
-}
-
-ScoreDisplay.propTypes = {
-  scores: PropTypes.arrayOf(
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        key: PropTypes.number,
-        id: PropTypes.number,
-        value: PropTypes.number
-      })
-    )
-  ).isRequired,
-  undoLastScore: PropTypes.func.isRequired,
-  clearCurrent: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScoreDisplay)

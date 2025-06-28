@@ -1,16 +1,25 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
 import _ from 'lodash'
 
-import ScorePicker from './scorepicker.jsx'
-import SubmitButton from './submit.jsx'
+import ScorePicker from './scorepicker'
+import SubmitButton from './submit'
 import Score from '../utils/score'
+import { Row, Labels } from '../types'
 
-const Scorecard = props => {
+interface ScorecardProps {
+  rows: Row[];
+  history: Row[][];
+  labels: Labels;
+  clearCurrent: () => void;
+  addScore: (scoreCard: Row[]) => void;
+  updateCurrent: (rows: Row[]) => void;
+}
+
+const Scorecard: React.FC<ScorecardProps> = (props) => {
   const { t } = useTranslation()
-  const handleValueChange = (id, value) => {
+  const handleValueChange = (id: number, value: number) => {
     const rows = _.cloneDeep(props.rows)
     const i = rows.findIndex(e => e.id === id)
     rows[i].value = value
@@ -89,33 +98,6 @@ const Scorecard = props => {
       </div>
     </div>
   );
-}
-
-Scorecard.propTypes = {
-  rows: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.number,
-      id: PropTypes.number,
-      value: PropTypes.number
-    })
-  ).isRequired,
-  history: PropTypes.arrayOf(
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        key: PropTypes.number,
-        id: PropTypes.number,
-        value: PropTypes.number
-      })
-    )
-  ).isRequired,
-  labels: PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-    labels: PropTypes.arrayOf(PropTypes.string).isRequired
-  }),
-  clearCurrent: PropTypes.func.isRequired,
-  addScore: PropTypes.func.isRequired,
-  updateCurrent: PropTypes.func.isRequired
 }
 
 export default Scorecard

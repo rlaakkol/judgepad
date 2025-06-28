@@ -1,9 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-import Alert from './alert.jsx'
+import Alert from './alert'
+import { Alert as AlertType } from '../types'
 
-const Alerts = props => {
+interface AlertsProps {
+  alerts: AlertType[];
+  removeAlert: (id: string) => void;
+}
+
+const Alerts: React.FC<AlertsProps> = (props) => {
   const { alerts, removeAlert } = props
 
   const renderAlerts = () =>
@@ -16,17 +21,6 @@ const Alerts = props => {
       {renderAlerts()}
     </div>
   )
-}
-
-Alerts.propTypes = {
-  alerts: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string,
-      style: PropTypes.string,
-      id: PropTypes.string
-    })
-  ).isRequired,
-  removeAlert: PropTypes.func.isRequired
 }
 
 export default Alerts

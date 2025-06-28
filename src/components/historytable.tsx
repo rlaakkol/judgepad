@@ -1,12 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
 import Score from '../utils/score'
+import { Row, Labels } from '../types'
+import { RootState } from '../reducers'
 
-const HistoryTable = props => {
+interface HistoryTableProps {
+  scores: Row[][];
+  current: Row[];
+  labels: Labels;
+}
+
+const HistoryTable: React.FC<HistoryTableProps> = (props) => {
   const { t } = useTranslation()
   const header = _.range(0, props.scores.length).map(i => (
     <th key={i}>
@@ -56,31 +63,7 @@ const HistoryTable = props => {
   )
 }
 
-HistoryTable.propTypes = {
-  scores: PropTypes.arrayOf(
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        key: PropTypes.number,
-        id: PropTypes.number,
-        value: PropTypes.number
-      })
-    )
-  ).isRequired,
-  current: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.number,
-      id: PropTypes.number,
-      value: PropTypes.number
-    })
-  ).isRequired,
-  labels: PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-    labels: PropTypes.arrayOf(PropTypes.string).isRequired
-  })
-}
-
-function mapStateToProps(state) {
+function mapStateToProps(state: RootState) {
   return {
     current: state.current,
     scores: state.scores,

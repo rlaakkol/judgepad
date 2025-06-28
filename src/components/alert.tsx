@@ -1,7 +1,13 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { Alert as AlertType } from '../types'
 
-export const Alert = props => (
+interface AlertProps {
+  alert: AlertType;
+  style?: string;
+  removeAlert: (id: string) => void;
+}
+
+export const Alert: React.FC<AlertProps> = (props) => (
   <div
     className={`message ${props.alert.style}`}
     key={props.alert.id}
@@ -16,15 +22,5 @@ export const Alert = props => (
     </button>
   </div>
 )
-
-Alert.propTypes = {
-  alert: PropTypes.shape({
-    text: PropTypes.string,
-    style: PropTypes.string,
-    id: PropTypes.string
-  }).isRequired,
-  style: PropTypes.string,
-  removeAlert: PropTypes.func.isRequired
-}
 
 export default Alert

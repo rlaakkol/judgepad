@@ -1,20 +1,29 @@
 import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
 import { NavLink, Outlet } from 'react-router-dom'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
-import Alerts from './alerts.jsx'
+import Alerts from './alerts'
+import { Labels, Alert } from '../types'
 
-const App = props => {
+interface AppProps {
+  changeLabels: (labels: Labels) => void;
+  alerts: Alert[];
+  labels: Labels;
+  clearScores: () => void;
+  undoLastScore: () => void;
+  removeAlert: (id: string) => void;
+}
+
+const App: React.FC<AppProps> = (props) => {
   const { t, i18n } = useTranslation()
-  const dantaiLabels = {
+  const dantaiLabels: Labels = {
     id: 'dantai',
     name: t('dantaiLabels.name'),
     labels: t('dantaiLabels.labels', { returnObjects: true })
   }
 
-  const tenkaiLabels = {
+  const tenkaiLabels: Labels = {
     id: 'tenkai',
     name: t('tenkaiLabels.name'),
     labels: t('tenkaiLabels.labels', { returnObjects: true })
@@ -28,7 +37,7 @@ const App = props => {
     }
   }, [i18n.language])
 
-  const handleDropdownAction = key => {
+  const handleDropdownAction = (key: string | null) => {
     switch (key) {
       case 'dantai':
         props.changeLabels(dantaiLabels)
@@ -47,7 +56,7 @@ const App = props => {
     }
   }
 
-  const handleLanguageChange = lang => {
+  const handleLanguageChange = (lang: string) => {
     i18n.changeLanguage(lang)
   }
 
@@ -125,25 +134,6 @@ const App = props => {
       </Navbar>
     </div>
   )
-}
-
-App.propTypes = {
-  changeLabels: PropTypes.func.isRequired,
-  alerts: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string,
-      style: PropTypes.string,
-      id: PropTypes.string
-    })
-  ).isRequired,
-  labels: PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-    labels: PropTypes.arrayOf(PropTypes.string).isRequired
-  }),
-  clearScores: PropTypes.func.isRequired,
-  undoLastScore: PropTypes.func.isRequired,
-  removeAlert: PropTypes.func.isRequired
 }
 
 export default App

@@ -1,9 +1,15 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-const Confirm = ({ stateVar, text, onConfirm, toggle }) => {
+interface ConfirmProps {
+  stateVar: boolean;
+  text: string;
+  onConfirm: () => void;
+  toggle: () => void;
+}
+
+const Confirm: React.FC<ConfirmProps> = ({ stateVar, text, onConfirm, toggle }) => {
   const { t } = useTranslation();
   return (
     <Modal show={stateVar} onHide={toggle}>
@@ -16,7 +22,7 @@ const Confirm = ({ stateVar, text, onConfirm, toggle }) => {
       <Modal.Footer>
         <Button onClick={toggle}>{t('confirm.cancel')}</Button>
         <Button
-          bsStyle="danger"
+          variant="danger"
           onClick={() => {
             onConfirm();
             toggle();
@@ -28,12 +34,5 @@ const Confirm = ({ stateVar, text, onConfirm, toggle }) => {
     </Modal>
   );
 }
-
-Confirm.propTypes = {
-  stateVar: PropTypes.bool.isRequired,
-  text: PropTypes.string.isRequired,
-  onConfirm: PropTypes.func.isRequired,
-  toggle: PropTypes.func.isRequired,
-};
 
 export default Confirm;

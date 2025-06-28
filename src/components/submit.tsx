@@ -2,15 +2,27 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { v4 as uuidv4 } from 'uuid'
-import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
 import * as Actions from '../actions'
 import Score from '../utils/score'
+import { Row } from '../types'
+import { RootState } from '../reducers'
 
-const SubmitButton = props => {
+interface SubmitButtonProps {
+  nextPage: string;
+  rows: Row[];
+  history: Row[][];
+  addScore: (scoreCard: Row[]) => void;
+  removeAlert: (id: string) => void;
+  addAlert: (text: string, style: string, id: string) => void;
+  children: React.ReactNode;
+  className: string;
+}
+
+const SubmitButton: React.FC<SubmitButtonProps> = (props) => {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const handleClick = () => {
@@ -32,14 +44,14 @@ const SubmitButton = props => {
   )
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: RootState) {
   return {
     rows: state.current,
     history: state.scores
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any) {
   return bindActionCreators(
     {
       addScore: Actions.addScore,
@@ -48,31 +60,6 @@ function mapDispatchToProps(dispatch) {
     },
     dispatch
   )
-}
-
-SubmitButton.propTypes = {
-  nextPage: PropTypes.string,
-  rows: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.number,
-      id: PropTypes.number,
-      value: PropTypes.number
-    })
-  ).isRequired,
-  history: PropTypes.arrayOf(
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        key: PropTypes.number,
-        id: PropTypes.number,
-        value: PropTypes.number
-      })
-    )
-  ).isRequired,
-  addScore: PropTypes.func.isRequired,
-  removeAlert: PropTypes.func.isRequired,
-  addAlert: PropTypes.func.isRequired,
-  children: PropTypes.string.isRequired,
-  className: PropTypes.string.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubmitButton)
