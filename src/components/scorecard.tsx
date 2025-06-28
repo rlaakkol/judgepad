@@ -6,7 +6,6 @@ import _ from 'lodash'
 import ScorePicker from './scorepicker'
 import SubmitButton from './submit'
 import Score from '../utils/score'
-import { Row } from '../types'
 import { RootState } from '../reducers'
 import * as Actions from '../actions'
 

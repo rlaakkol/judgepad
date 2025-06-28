@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
@@ -15,17 +15,17 @@ const App: React.FC = () => {
   const alerts = useSelector((state: RootState) => state.alerts)
   const labels = useSelector((state: RootState) => state.labels)
 
-  const dantaiLabels: Labels = {
+  const dantaiLabels: Labels = useMemo(() => ({
     id: 'dantai',
     name: t('dantaiLabels.name'),
     labels: t('dantaiLabels.labels', { returnObjects: true })
-  }
+  }), [t])
 
-  const tenkaiLabels: Labels = {
+  const tenkaiLabels: Labels = useMemo(() => ({
     id: 'tenkai',
     name: t('tenkaiLabels.name'),
     labels: t('tenkaiLabels.labels', { returnObjects: true })
-  }
+  }), [t])
 
   useEffect(() => {
     if (labels.id === 'dantai') {
@@ -33,7 +33,7 @@ const App: React.FC = () => {
     } else {
       dispatch(Actions.changeLabels(tenkaiLabels))
     }
-  }, [i18n.language])
+  }, [i18n.language, dantaiLabels, tenkaiLabels, dispatch, labels.id])
 
   const handleDropdownAction = (key: string | null) => {
     switch (key) {

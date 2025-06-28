@@ -1,5 +1,5 @@
 import { render, screen } from '../../test/test-utils'
-import { describe, it, expect } from 'vitest'
+import { describe, it } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import Scorecard from './scorecard'
 
