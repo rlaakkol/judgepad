@@ -2,21 +2,19 @@ import React, { useEffect } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Alerts from './alerts'
-import { Labels, Alert } from '../types'
+import { Labels } from '../types'
+import { RootState } from '../reducers'
+import * as Actions from '../actions'
 
-interface AppProps {
-  changeLabels: (labels: Labels) => void;
-  alerts: Alert[];
-  labels: Labels;
-  clearScores: () => void;
-  undoLastScore: () => void;
-  removeAlert: (id: string) => void;
-}
-
-const App: React.FC<AppProps> = (props) => {
+const App: React.FC = () => {
   const { t, i18n } = useTranslation()
+  const dispatch = useDispatch()
+  const alerts = useSelector((state: RootState) => state.alerts)
+  const labels = useSelector((state: RootState) => state.labels)
+
   const dantaiLabels: Labels = {
     id: 'dantai',
     name: t('dantaiLabels.name'),
@@ -30,26 +28,26 @@ const App: React.FC<AppProps> = (props) => {
   }
 
   useEffect(() => {
-    if (props.labels.id === 'dantai') {
-      props.changeLabels(dantaiLabels)
+    if (labels.id === 'dantai') {
+      dispatch(Actions.changeLabels(dantaiLabels))
     } else {
-      props.changeLabels(tenkaiLabels)
+      dispatch(Actions.changeLabels(tenkaiLabels))
     }
   }, [i18n.language])
 
   const handleDropdownAction = (key: string | null) => {
     switch (key) {
       case 'dantai':
-        props.changeLabels(dantaiLabels)
+        dispatch(Actions.changeLabels(dantaiLabels))
         break
       case 'tenkai':
-        props.changeLabels(tenkaiLabels)
+        dispatch(Actions.changeLabels(tenkaiLabels))
         break
       case 'cancel':
-        props.undoLastScore()
+        dispatch(Actions.undoLastScore())
         break
       case 'clear':
-        props.clearScores()
+        dispatch(Actions.clearScores())
         break
       default:
         break
@@ -62,14 +60,14 @@ const App: React.FC<AppProps> = (props) => {
 
   return (
     <div>
-      <Alerts alerts={props.alerts} removeAlert={props.removeAlert} />
+      <Alerts alerts={alerts} removeAlert={(id: string) => dispatch(Actions.removeAlert(id))} />
       <div className="container-fluid mt-4 pb-5 mb-5 px-4">
         <Outlet />
       </div>
       <Navbar fixed="bottom" expand="lg" bg="light" variant="light">
         <div className="container-fluid px-4">
           <Navbar.Brand as={NavLink} to="/scorecard">
-            {props.labels.name}
+            {labels.name}
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -117,13 +115,13 @@ const App: React.FC<AppProps> = (props) => {
               >
                 <NavDropdown.Item
                   eventKey={'dantai'}
-                  active={props.labels.id === 'dantai'}
+                  active={labels.id === 'dantai'}
                 >
                   {t('dantaiLabels.name')}
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   eventKey={'tenkai'}
-                  active={props.labels.id === 'tenkai'}
+                  active={labels.id === 'tenkai'}
                 >
                   {t('tenkaiLabels.name')}
                 </NavDropdown.Item>

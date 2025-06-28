@@ -2,8 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Provider, connect } from 'react-redux'
-import { createStore, bindActionCreators } from 'redux'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import { PersistGate } from 'redux-persist/integration/react'
@@ -16,8 +16,6 @@ import ScoreDisplay from './components/display'
 import HistoryTable from './components/historytable'
 import HelpPage from './components/helppage'
 import rootReducer from './reducers'
-import * as Actions from './actions'
-import { RootState } from './reducers'
 
 const persistConfig = {
   key: 'root',
@@ -29,41 +27,6 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 const store = createStore(persistedReducer)
 const persistor = persistStore(store)
 
-const mapStateToProps = (state: RootState) => ({
-  alerts: state.alerts,
-  labels: state.labels,
-})
-
-const mapDispatchToProps = (dispatch: any) =>
-  bindActionCreators(
-    {
-      changeLabels: Actions.changeLabels,
-      undoLastScore: Actions.undoLastScore,
-      clearScores: Actions.clearScores,
-      removeAlert: Actions.removeAlert,
-    },
-    dispatch
-  )
-
-const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App)
-
-const ConnectedScorecard = connect(
-  (state: RootState) => ({
-    rows: state.current,
-    history: state.scores,
-    labels: state.labels,
-  }),
-  (dispatch: any) =>
-    bindActionCreators(
-      {
-        updateCurrent: Actions.updateCurrent,
-        clearCurrent: Actions.clearCurrent,
-        addScore: Actions.addScore,
-      },
-      dispatch
-    )
-)(Scorecard)
-
 const container = document.querySelector('.main')
 if (container) {
   const root = ReactDOM.createRoot(container)
@@ -72,9 +35,9 @@ if (container) {
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<ConnectedApp />}>
-              <Route index element={<ConnectedScorecard />} />
-              <Route path="scorecard" element={<ConnectedScorecard />} />
+            <Route path="/" element={<App />}>
+              <Route index element={<Scorecard />} />
+              <Route path="scorecard" element={<Scorecard />} />
               <Route path="display" element={<ScoreDisplay />} />
               <Route path="history" element={<HistoryTable />} />
               <Route path="help" element={<HelpPage />} />

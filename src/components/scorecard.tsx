@@ -1,32 +1,30 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-
+import { useSelector, useDispatch } from 'react-redux'
 import _ from 'lodash'
 
 import ScorePicker from './scorepicker'
 import SubmitButton from './submit'
 import Score from '../utils/score'
-import { Row, Labels } from '../types'
+import { Row } from '../types'
+import { RootState } from '../reducers'
+import * as Actions from '../actions'
 
-interface ScorecardProps {
-  rows: Row[];
-  history: Row[][];
-  labels: Labels;
-  clearCurrent: () => void;
-  addScore: (scoreCard: Row[]) => void;
-  updateCurrent: (rows: Row[]) => void;
-}
-
-const Scorecard: React.FC<ScorecardProps> = (props) => {
+const Scorecard: React.FC = () => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const rows = useSelector((state: RootState) => state.current)
+  const history = useSelector((state: RootState) => state.scores)
+  const labels = useSelector((state: RootState) => state.labels)
+
   const handleValueChange = (id: number, value: number) => {
-    const rows = _.cloneDeep(props.rows)
-    const i = rows.findIndex(e => e.id === id)
-    rows[i].value = value
-    props.updateCurrent(rows)
+    const newRows = _.cloneDeep(rows)
+    const i = newRows.findIndex(e => e.id === id)
+    newRows[i].value = value
+    dispatch(Actions.updateCurrent(newRows))
   }
 
-  const rows = props.rows
+  const rowElements = rows
     .slice(0, 5)
     .map((rowprops, i) => {
       const { key, ...rest } = rowprops
@@ -34,35 +32,35 @@ const Scorecard: React.FC<ScorecardProps> = (props) => {
         <ScorePicker
           key={key}
           {...rest}
-          label={props.labels.labels[i]}
+          label={labels.labels[i]}
           handleValueChange={handleValueChange}
         />
       )
     })
-  const extraRow = props.rows[5]
+  const extraRow = rows[5]
   const { key, ...rest } = extraRow
   const extraPicker = (
     <ScorePicker
       key={key}
       {...rest}
-      label={props.labels.labels[5]}
+      label={labels.labels[5]}
       handleValueChange={handleValueChange}
       isExtra
     />
   )
-  const total = Score.calcTotal(props.rows)
-  const standing = Score.getStanding(props.history, props.rows)
-  const isTie = Score.isTie(props.history, props.rows)
+  const total = Score.calcTotal(rows)
+  const standing = Score.getStanding(history, rows)
+  const isTie = Score.isTie(history, rows)
   const warningSign = <i className="fa fa-warning" style={{ color: 'red' }} />
   return (
     <div>
       <div className="row">
         <div className="col-12">
-          <strong>{t('scorecard.team')} {props.history.length + 1}</strong>
+          <strong>{t('scorecard.team')} {history.length + 1}</strong>
         </div>
       </div>
       <hr className="my-3" />
-      {rows}
+      {rowElements}
       {extraPicker}
       <hr className="my-3" />
       <div className="row equal">
@@ -80,7 +78,7 @@ const Scorecard: React.FC<ScorecardProps> = (props) => {
       <div className="action-buttons">
         <div className="row justify-content-center gx-5">
           <div className="col-md-3 d-grid">
-            <button className="btn btn-warning" onClick={props.clearCurrent}>
+            <button className="btn btn-warning" onClick={() => dispatch(Actions.clearCurrent())}>
               {t('scorecard.clear')}
             </button>
           </div>

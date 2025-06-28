@@ -1,26 +1,21 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Score from '../utils/score'
 import * as Actions from '../actions'
-import { Row } from '../types'
 import { RootState } from '../reducers'
 
-interface ScoreDisplayProps {
-  scores: Row[][];
-  undoLastScore: () => void;
-  clearCurrent: () => void;
-}
-
-const ScoreDisplay: React.FC<ScoreDisplayProps> = (props) => {
+const ScoreDisplay: React.FC = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const scores = useSelector((state: RootState) => state.scores)
+
   const isNav = searchParams.get('navigation')
-  const rows = props.scores[props.scores.length - 1]
+  const rows = scores[scores.length - 1]
   const score = rows ? Math.round(Score.calcTotal(rows) * 10) / 10 : t('display.notApplicable')
   const buttons = isNav
     ? ''
@@ -30,7 +25,7 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = (props) => {
             <button
               className="btn btn-warning"
               onClick={() => {
-                props.undoLastScore()
+                dispatch(Actions.undoLastScore())
                 navigate('/scorecard')
               }}
             >
@@ -41,7 +36,7 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = (props) => {
             <button
               className="btn btn-success"
               onClick={() => {
-                props.clearCurrent()
+                dispatch(Actions.clearCurrent())
                 navigate('/scorecard')
               }}
             >
@@ -64,20 +59,4 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = (props) => {
   )
 }
 
-function mapStateToProps(state: RootState) {
-  return {
-    scores: state.scores
-  }
-}
-
-function mapDispatchToProps(dispatch: any) {
-  return bindActionCreators(
-    {
-      undoLastScore: Actions.undoLastScore,
-      clearCurrent: Actions.clearCurrent
-    },
-    dispatch
-  )
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ScoreDisplay)
+export default ScoreDisplay
