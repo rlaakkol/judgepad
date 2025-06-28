@@ -2,8 +2,8 @@
   "name": "judgepad",
   "version": "1.0.0",
   "type": "module",
-  "description": "Simple starter package for Redux with React and Babel support",
-  "main": "index.js",
+  "description": "Martial arts scoring app",
+  "main": "index.tsx",
   "repository": "git@github.com:rlaakkol/judgepad.git",
   "scripts": {
     "start": "vite",
@@ -12,7 +12,8 @@
     "test:lint": "ESLINT_USE_FLAT_CONFIG=false eslint ./src --ext .js,.jsx,.ts,.tsx",
     "lint:inspect": "eslint-config-inspector",
     "build": "vite build",
-    "serve": "vite build && vite preview"
+    "serve": "vite build && vite preview",
+    "deploy": "pnpm build && wrangler deploy"
   },
   "author": "",
   "license": "ISC",
