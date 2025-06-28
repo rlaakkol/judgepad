@@ -6,8 +6,8 @@ import {
   UNDO_LAST_SCORE,
   CHANGE_LABELS,
   ADD_ALERT,
-  REMOVE_ALERT
-} from '../actions'
+  REMOVE_ALERT,
+} from "../actions";
 
 export interface Row {
   key: number;

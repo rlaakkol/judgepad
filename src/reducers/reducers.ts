@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from "lodash";
 
 import {
   UPDATE_CURRENT,
@@ -8,9 +8,9 @@ import {
   CHANGE_LABELS,
   UNDO_LAST_SCORE,
   ADD_ALERT,
-  REMOVE_ALERT
-} from '../actions'
-import { AppAction, Row, Labels, Alert } from '../types'
+  REMOVE_ALERT,
+} from "../actions";
+import { AppAction, Row, Labels, Alert } from "../types";
 
 const defaultRows: Row[] = [
   { key: 0, id: 0, value: 0 },
@@ -18,54 +18,57 @@ const defaultRows: Row[] = [
   { key: 2, id: 2, value: 0 },
   { key: 3, id: 3, value: 0 },
   { key: 4, id: 4, value: 0 },
-  { key: 5, id: 5, value: 0 }
-]
+  { key: 5, id: 5, value: 0 },
+];
 
 const defaultLabels: Labels = {
-  id: 'dantai',
-  name: 'Dantai Hokei',
+  id: "dantai",
+  name: "Dantai Hokei",
   labels: [
-    'Form preservation, synchronization',
-    'Technical purity',
-    'Technical difficulty',
-    'Breathing and effectiveness',
-    'Impression',
-    'Additional point'
-  ]
-}
+    "Form preservation, synchronization",
+    "Technical purity",
+    "Technical difficulty",
+    "Breathing and effectiveness",
+    "Impression",
+    "Additional point",
+  ],
+};
 
-const currentCard = (state: Row[] = _.cloneDeep(defaultRows), action: AppAction): Row[] => {
+const currentCard = (
+  state: Row[] = _.cloneDeep(defaultRows),
+  action: AppAction,
+): Row[] => {
   switch (action.type) {
     case UPDATE_CURRENT:
-      return action.rows
+      return action.rows;
     case CLEAR_CURRENT:
-      return _.cloneDeep(defaultRows)
+      return _.cloneDeep(defaultRows);
     default:
-      return state
+      return state;
   }
-}
+};
 
 const scoreCards = (state: Row[][] = [], action: AppAction): Row[][] => {
   switch (action.type) {
     case ADD_SCORE:
-      return [...state, action.scores]
+      return [...state, action.scores];
     case CLEAR_SCORES:
-      return []
+      return [];
     case UNDO_LAST_SCORE:
-      return state.slice(0, -1)
+      return state.slice(0, -1);
     default:
-      return state
+      return state;
   }
-}
+};
 
 const labels = (state: Labels = defaultLabels, action: AppAction): Labels => {
   switch (action.type) {
     case CHANGE_LABELS:
-      return action.labels
+      return action.labels;
     default:
-      return state
+      return state;
   }
-}
+};
 
 const alerts = (state: Alert[] = [], action: AppAction): Alert[] => {
   switch (action.type) {
@@ -75,14 +78,14 @@ const alerts = (state: Alert[] = [], action: AppAction): Alert[] => {
         {
           text: action.text,
           style: action.style,
-          id: action.id
-        }
-      ]
+          id: action.id,
+        },
+      ];
     case REMOVE_ALERT:
-      return state.filter(alert => alert.id !== action.id)
+      return state.filter((alert) => alert.id !== action.id);
     default:
-      return state
+      return state;
   }
-}
+};
 
-export { currentCard, scoreCards, labels, alerts }
+export { currentCard, scoreCards, labels, alerts };

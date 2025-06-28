@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
-import Alert from './alert'
-import { Alert as AlertType } from '../types'
+import Alert from "./alert";
+import { Alert as AlertType } from "../types";
 
 interface AlertsProps {
   alerts: AlertType[];
@@ -9,18 +9,18 @@ interface AlertsProps {
 }
 
 const Alerts: React.FC<AlertsProps> = (props) => {
-  const { alerts, removeAlert } = props
+  const { alerts, removeAlert } = props;
 
   const renderAlerts = () =>
-    alerts.map(alert => (
+    alerts.map((alert) => (
       <Alert alert={alert} key={alert.id} removeAlert={removeAlert} />
-    ))
+    ));
 
   return (
     <div id="messages" data-testid="alerts">
       {renderAlerts()}
     </div>
-  )
-}
+  );
+};
 
-export default Alerts
+export default Alerts;

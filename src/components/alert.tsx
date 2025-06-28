@@ -1,5 +1,5 @@
-import React from 'react'
-import { Alert as AlertType } from '../types'
+import React from "react";
+import { Alert as AlertType } from "../types";
 
 interface AlertProps {
   alert: AlertType;
@@ -21,6 +21,6 @@ export const Alert: React.FC<AlertProps> = (props) => (
       <i className="fa fa-close" />
     </button>
   </div>
-)
+);
 
-export default Alert
+export default Alert;

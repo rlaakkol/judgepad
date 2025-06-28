@@ -1,6 +1,6 @@
-import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { Modal, Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 interface ConfirmProps {
   stateVar: boolean;
@@ -9,18 +9,21 @@ interface ConfirmProps {
   toggle: () => void;
 }
 
-const Confirm: React.FC<ConfirmProps> = ({ stateVar, text, onConfirm, toggle }) => {
+const Confirm: React.FC<ConfirmProps> = ({
+  stateVar,
+  text,
+  onConfirm,
+  toggle,
+}) => {
   const { t } = useTranslation();
   return (
     <Modal show={stateVar} onHide={toggle}>
       <Modal.Header closeButton>
-        <Modal.Title>{t('confirm.areYouSure')}</Modal.Title>
+        <Modal.Title>{t("confirm.areYouSure")}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        {text}
-      </Modal.Body>
+      <Modal.Body>{text}</Modal.Body>
       <Modal.Footer>
-        <Button onClick={toggle}>{t('confirm.cancel')}</Button>
+        <Button onClick={toggle}>{t("confirm.cancel")}</Button>
         <Button
           variant="danger"
           onClick={() => {
@@ -28,11 +31,11 @@ const Confirm: React.FC<ConfirmProps> = ({ stateVar, text, onConfirm, toggle }) 
             toggle();
           }}
         >
-          {t('confirm.confirm')}
+          {t("confirm.confirm")}
         </Button>
       </Modal.Footer>
     </Modal>
   );
-}
+};
 
 export default Confirm;

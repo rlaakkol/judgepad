@@ -1,5 +1,5 @@
 body {
-    font-size: large;
+  font-size: large;
 }
 
 .helptext {
@@ -38,15 +38,15 @@ body {
   }
 }
 
- button.close-btn {
-   background-color: transparent;
-   background-repeat: no-repeat;
-   border: none;
-   cursor: pointer;
-   overflow: hidden;
-   outline: none;
-   float: right;
- }
+button.close-btn {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  float: right;
+}
 
 .equal {
   display: flex;
@@ -55,11 +55,11 @@ body {
 }
 
 .table-nonfluid {
-   width: auto !important;
+  width: auto !important;
 }
 
 .table td {
-   text-align: center;
+  text-align: center;
 }
 
 h1.totaldisp {

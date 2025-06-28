@@ -1,13 +1,13 @@
-import React from 'react'
-import { v4 as uuidv4 } from 'uuid'
-import { useNavigate } from 'react-router-dom'
-import { Button } from 'react-bootstrap'
-import { useTranslation } from 'react-i18next'
-import { useSelector, useDispatch } from 'react-redux'
+import React from "react";
+import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { useSelector, useDispatch } from "react-redux";
 
-import * as Actions from '../actions'
-import Score from '../utils/score'
-import { RootState } from '../reducers'
+import * as Actions from "../actions";
+import Score from "../utils/score";
+import { RootState } from "../reducers";
 
 interface SubmitButtonProps {
   nextPage: string;
@@ -16,20 +16,20 @@ interface SubmitButtonProps {
 }
 
 const SubmitButton: React.FC<SubmitButtonProps> = (props) => {
-  const navigate = useNavigate()
-  const { t } = useTranslation()
-  const dispatch = useDispatch()
-  const rows = useSelector((state: RootState) => state.current)
-  const history = useSelector((state: RootState) => state.scores)
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const rows = useSelector((state: RootState) => state.current);
+  const history = useSelector((state: RootState) => state.scores);
 
   const handleClick = () => {
-    dispatch(Actions.addScore(rows))
-    const id = uuidv4()
-    dispatch(Actions.addAlert(t('submit.saved'), 'alert alert-success', id))
-    setTimeout(() => dispatch(Actions.removeAlert(id)), 2000)
-    navigate(props.nextPage)
-  }
-  const disabled = Score.isTie(history, rows)
+    dispatch(Actions.addScore(rows));
+    const id = uuidv4();
+    dispatch(Actions.addAlert(t("submit.saved"), "alert alert-success", id));
+    setTimeout(() => dispatch(Actions.removeAlert(id)), 2000);
+    navigate(props.nextPage);
+  };
+  const disabled = Score.isTie(history, rows);
   return (
     <Button
       className={props.className}
@@ -38,7 +38,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = (props) => {
     >
       {props.children}
     </Button>
-  )
-}
+  );
+};
 
-export default SubmitButton
+export default SubmitButton;

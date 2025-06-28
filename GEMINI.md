@@ -1,6 +1,7 @@
 # Judgepad
 
 ## Martial arts scoring app
+
 Judgepad is a martial arts scoring app. It is used for scoring a competitor.
 The judge will use judgepad on a tablet using touch UI. It is running only locally,
 with no backend.
