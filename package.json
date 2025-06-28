@@ -7,7 +7,7 @@
   "repository": "git@github.com:rlaakkol/judgepad.git",
   "scripts": {
     "start": "vite",
-    "test": "vitest --config ./vitest.config.ts",
+    "test": "vitest run --config ./vitest.config.ts",
     "test:watch": "vitest --config ./vitest.config.ts",
     "test:lint": "ESLINT_USE_FLAT_CONFIG=false eslint ./src --ext .js --ext .jsx",
     "lint:inspect": "eslint-config-inspector",
@@ -26,6 +26,7 @@
     "@eslint/js": "^9.30.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/dompurify": "^3.2.0",
     "@types/jest": "^30.0.0",
     "@types/lodash": "^4.17.19",

@@ -4,10 +4,12 @@ import { VitePWA } from 'vite-plugin-pwa'
 import { cloudflare } from "@cloudflare/vite-plugin";
 import path from 'path';
 
+const isTest = process.env.VITEST;
+
 export default defineConfig({
   plugins: [
     react(),
-    cloudflare(),
+    !isTest && cloudflare(),
     VitePWA({
       registerType: 'prompt',
       workbox: {

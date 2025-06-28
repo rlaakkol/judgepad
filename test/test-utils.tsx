@@ -7,19 +7,20 @@ import { I18nextProvider } from 'react-i18next'
 import rootReducer from '../src/reducers'
 import i18n from '../src/i18n'
 
-const AllTheProviders = ({ children }) => {
-  const store = createStore(rootReducer)
-  return (
+const customRender = (ui, {
+  preloadedState,
+  store = createStore(rootReducer, preloadedState),
+  ...renderOptions
+} = {}) => {
+  const Wrapper = ({ children }) => (
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>
         <BrowserRouter>{children}</BrowserRouter>
       </I18nextProvider>
     </Provider>
   )
+  return render(ui, { wrapper: Wrapper, ...renderOptions })
 }
-
-const customRender = (ui, options) =>
-  render(ui, { wrapper: AllTheProviders, ...options })
 
 // re-export everything
 export * from '@testing-library/react'
