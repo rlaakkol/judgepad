@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import _ from "lodash";
@@ -15,6 +15,7 @@ const Scorecard: React.FC = () => {
   const rows = useSelector((state: RootState) => state.current);
   const history = useSelector((state: RootState) => state.scores);
   const labels = useSelector((state: RootState) => state.labels);
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleValueChange = (id: number, value: number) => {
     const newRows = _.cloneDeep(rows);
@@ -69,10 +70,15 @@ const Scorecard: React.FC = () => {
         </div>
         <div className="col-md-6">
           <strong>{t("scorecard.currentStanding")}:</strong> {standing}{" "}
-          {isTie ? warningSign : ""}
+          {isTie && !isSaving ? warningSign : ""}
         </div>
       </div>
       <div className="action-buttons">
+        <div className="row justify-content-center mt-2">
+          <div className="col-md-6 text-center">
+            {isTie && !isSaving ? t("scorecard.equalPointsNotPossibleToSave") : ""}
+          </div>
+        </div>
         <div className="row justify-content-center gx-5">
           <div className="col-md-3 d-grid">
             <button
@@ -83,14 +89,13 @@ const Scorecard: React.FC = () => {
             </button>
           </div>
           <div className="col-md-3 d-grid">
-            <SubmitButton className="btn btn-success" nextPage="/display">
+            <SubmitButton
+              className="btn btn-success"
+              nextPage="/display"
+              setIsSaving={setIsSaving}
+            >
               {t("scorecard.saveAndDisplay")}
             </SubmitButton>
-          </div>
-        </div>
-        <div className="row justify-content-center mt-2">
-          <div className="col-md-6 text-center">
-            {isTie ? t("scorecard.equalPointsNotPossibleToSave") : ""}
           </div>
         </div>
       </div>

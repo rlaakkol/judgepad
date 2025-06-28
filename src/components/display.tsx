@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,6 +13,14 @@ const ScoreDisplay: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const scores = useSelector((state: RootState) => state.scores);
+  const [isUndoing, setIsUndoing] = useState(false);
+
+  useEffect(() => {
+    if (isUndoing) {
+      navigate("/scorecard");
+      dispatch(Actions.undoLastScore());
+    }
+  }, [isUndoing, navigate, dispatch]);
 
   const isNav = searchParams.get("navigation");
   const rows = scores[scores.length - 1];
@@ -28,8 +36,7 @@ const ScoreDisplay: React.FC = () => {
           <button
             className="btn btn-warning"
             onClick={() => {
-              dispatch(Actions.undoLastScore());
-              navigate("/scorecard");
+              setIsUndoing(true);
             }}
           >
             {t("display.cancel")}
@@ -52,7 +59,7 @@ const ScoreDisplay: React.FC = () => {
   return (
     <div>
       <div className="container">
-        <h1 className="totaldisp">{score}</h1>
+        <h1 className="totaldisp">{isUndoing ? "" : score}</h1>
       </div>
       <div className="container footer-fixed">{buttons}</div>
     </div>

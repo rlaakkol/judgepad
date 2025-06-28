@@ -8,7 +8,9 @@ import { RootState } from "../reducers";
 
 const HistoryTable: React.FC = () => {
   const { t } = useTranslation();
-  const { scores, current, labels } = useSelector((state: RootState) => state);
+  const scores = useSelector((state: RootState) => state.scores);
+  const current = useSelector((state: RootState) => state.current);
+  const labels = useSelector((state: RootState) => state.labels);
 
   const header = _.range(0, scores.length).map((i) => (
     <th key={i}>

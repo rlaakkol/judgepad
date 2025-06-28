@@ -13,9 +13,15 @@ interface SubmitButtonProps {
   nextPage: string;
   children: React.ReactNode;
   className: string;
+  setIsSaving: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SubmitButton: React.FC<SubmitButtonProps> = (props) => {
+const SubmitButton: React.FC<SubmitButtonProps> = ({
+  nextPage,
+  children,
+  className,
+  setIsSaving,
+}) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -23,20 +29,18 @@ const SubmitButton: React.FC<SubmitButtonProps> = (props) => {
   const history = useSelector((state: RootState) => state.scores);
 
   const handleClick = () => {
+    setIsSaving(true);
     dispatch(Actions.addScore(rows));
     const id = uuidv4();
     dispatch(Actions.addAlert(t("submit.saved"), "alert alert-success", id));
     setTimeout(() => dispatch(Actions.removeAlert(id)), 2000);
-    navigate(props.nextPage);
+    navigate(nextPage);
   };
+
   const disabled = Score.isTie(history, rows);
   return (
-    <Button
-      className={props.className}
-      onClick={handleClick}
-      disabled={disabled}
-    >
-      {props.children}
+    <Button className={className} onClick={handleClick} disabled={disabled}>
+      {children}
     </Button>
   );
 };
