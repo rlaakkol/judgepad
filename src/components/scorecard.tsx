@@ -52,7 +52,7 @@ const Scorecard: React.FC = () => {
   const warningSign = <i className="fa fa-warning" style={{ color: "red" }} />;
   return (
     <div className="d-flex flex-column h-100">
-      <div className="container py-3 flex-grow-1 overflow-auto">
+      <div className="px-3 py-3 flex-grow-1 overflow-auto">
         <div className="row">
           <div className="col-12">
             <strong>
@@ -75,7 +75,7 @@ const Scorecard: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="action-buttons container py-3">
+      <div className="action-buttons px-3 py-3">
         <div className="row justify-content-center mt-2">
           <div className="col-md-6 text-center">
             {isTie && !isSaving

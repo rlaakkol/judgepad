@@ -36,12 +36,8 @@ const ScorePicker: React.FC<ScorePickerProps> = (props) => {
             <Form.Label>{props.label}</Form.Label>
           </form>
         </div>
-        <div className="col-lg-8">
-          <div className="row">
-            <div className="col-12 d-grid">
-              <ButtonGroup>{buttons}</ButtonGroup>
-            </div>
-          </div>
+        <div className="col-lg-8 d-grid">
+          <ButtonGroup>{buttons}</ButtonGroup>
         </div>
       </div>
     );

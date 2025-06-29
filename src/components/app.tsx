@@ -70,7 +70,7 @@ const App: React.FC = () => {
         alerts={alerts}
         removeAlert={(id: string) => dispatch(Actions.removeAlert(id))}
       />
-      <div className="flex-grow-1 overflow-auto">
+      <div className="container-fluid px-5 flex-grow-1 overflow-auto">
         <Outlet />
       </div>
       <Navbar expand="lg" bg="light" variant="light">
