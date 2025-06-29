@@ -18,9 +18,9 @@ const Scorecard: React.FC = () => {
   const [isSaving, setIsSaving] = useState(false);
 
   const handleValueChange = (id: number, value: number) => {
-    const newRows = _.cloneDeep(rows);
-    const i = newRows.findIndex((e) => e.id === id);
-    newRows[i].value = value;
+    const newRows = rows.map((row) =>
+      row.id === id ? { ...row, value } : row,
+    );
     dispatch(Actions.updateCurrent(newRows));
   };
 
