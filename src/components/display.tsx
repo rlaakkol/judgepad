@@ -57,11 +57,11 @@ const ScoreDisplay: React.FC = () => {
     </div>
   );
   return (
-    <div>
-      <div className="container">
+    <div className="d-flex flex-column h-100">
+      <div className="container flex-grow-1 d-flex justify-content-center align-items-center">
         <h1 className="totaldisp">{isUndoing ? "" : score}</h1>
       </div>
-      <div className="container footer-fixed">{buttons}</div>
+      <div className="container py-3">{buttons}</div>
     </div>
   );
 };

@@ -51,32 +51,36 @@ const Scorecard: React.FC = () => {
   const isTie = Score.isTie(history, rows);
   const warningSign = <i className="fa fa-warning" style={{ color: "red" }} />;
   return (
-    <div>
-      <div className="row">
-        <div className="col-12">
-          <strong>
-            {t("scorecard.team")} {history.length + 1}
-          </strong>
+    <div className="d-flex flex-column h-100">
+      <div className="container py-3 flex-grow-1 overflow-auto">
+        <div className="row">
+          <div className="col-12">
+            <strong>
+              {t("scorecard.team")} {history.length + 1}
+            </strong>
+          </div>
+        </div>
+        <hr className="my-3" />
+        {rowElements}
+        {extraPicker}
+        <hr className="my-3" />
+        <div className="row equal">
+          <div className="col-md-6">
+            <strong>{t("scorecard.totalScore")}:</strong>{" "}
+            {Math.round(total * 10) / 10}
+          </div>
+          <div className="col-md-6">
+            <strong>{t("scorecard.currentStanding")}:</strong> {standing}{" "}
+            {isTie && !isSaving ? warningSign : ""}
+          </div>
         </div>
       </div>
-      <hr className="my-3" />
-      {rowElements}
-      {extraPicker}
-      <hr className="my-3" />
-      <div className="row equal">
-        <div className="col-md-6">
-          <strong>{t("scorecard.totalScore")}:</strong>{" "}
-          {Math.round(total * 10) / 10}
-        </div>
-        <div className="col-md-6">
-          <strong>{t("scorecard.currentStanding")}:</strong> {standing}{" "}
-          {isTie && !isSaving ? warningSign : ""}
-        </div>
-      </div>
-      <div className="action-buttons">
+      <div className="action-buttons container py-3">
         <div className="row justify-content-center mt-2">
           <div className="col-md-6 text-center">
-            {isTie && !isSaving ? t("scorecard.equalPointsNotPossibleToSave") : ""}
+            {isTie && !isSaving
+              ? t("scorecard.equalPointsNotPossibleToSave")
+              : ""}
           </div>
         </div>
         <div className="row justify-content-center gx-5">

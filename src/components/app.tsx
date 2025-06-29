@@ -65,15 +65,15 @@ const App: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="d-flex flex-column vh-100">
       <Alerts
         alerts={alerts}
         removeAlert={(id: string) => dispatch(Actions.removeAlert(id))}
       />
-      <div className="container-fluid mt-4 pb-5 mb-5 px-4">
+      <div className="flex-grow-1 overflow-auto">
         <Outlet />
       </div>
-      <Navbar fixed="bottom" expand="lg" bg="light" variant="light">
+      <Navbar expand="lg" bg="light" variant="light">
         <div className="container-fluid px-4">
           <Navbar.Brand as={NavLink} to="/scorecard">
             {labels.name}
